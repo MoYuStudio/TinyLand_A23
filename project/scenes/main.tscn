@@ -142,10 +142,11 @@ func generate_noise_map():
 				set_cell(land_layer, Vector2(x, y), water_tile, Vector2(0, 0), 0)
 				
 
-func _on_button_pressed():
+func _on_land_button_pressed():
 	mode = \"Land\"
 
-func _on_button_2_pressed():
+
+func _on_building_button_pressed():
 	mode = \"Building\"
 "
 
@@ -209,21 +210,31 @@ script = SubResource("GDScript_is30g")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-offset_left = 80.0
-offset_top = 448.0
-offset_right = 168.0
-offset_bottom = 480.0
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -128.0
+offset_right = 128.0
+grow_vertical = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Land" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 theme = ExtResource("5_lpvr8")
 text = "地面层"
 
-[node name="Button2" type="Button" parent="CanvasLayer"]
-offset_left = 80.0
-offset_top = 520.0
-offset_right = 168.0
-offset_bottom = 552.0
+[node name="Building" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 theme = ExtResource("5_lpvr8")
 text = "建筑层"
 
-[connection signal="pressed" from="CanvasLayer/Button" to="TileMap" method="_on_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Button2" to="TileMap" method="_on_button_2_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Land" to="TileMap" method="_on_land_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Building" to="TileMap" method="_on_building_button_pressed"]
