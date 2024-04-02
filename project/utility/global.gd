@@ -6,7 +6,7 @@ func _ready():
 	
 	Engine.set_max_fps(60)
 	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
-	DisplayServer.window_set_size(Vector2(1920,1080))
+	DisplayServer.window_set_size(Vector2(1280,720))
 	# DisplayServer.window_set_position(Vector2(100,200))
 
 func save_data(slot_name,data):

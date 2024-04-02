@@ -106,7 +106,9 @@ var mode = \"Building\"
 func _ready():
 	randomize()
 	noise.seed = seed
-	noise.frequency = 0.03
+	noise.noise_type = 3
+	noise.frequency = 0.025
+	noise.fractal_lacunarity = 2.0
 	
 	generate_noise_map()
 	
@@ -133,9 +135,9 @@ func generate_noise_map():
 			var noise_value = (noise.get_noise_2d(x, y)+1)*10
 				
 			# 陆地
-			if noise_value > 11:
+			if noise_value > 13:
 				set_cell(land_layer, Vector2(x, y), grass_tile, Vector2(0, 0), 0)
-			elif noise_value > 10:
+			elif noise_value > 12:
 				set_cell(land_layer, Vector2(x, y), sand_tile, Vector2(0, 0), 0)
 			# 海洋
 			else:
