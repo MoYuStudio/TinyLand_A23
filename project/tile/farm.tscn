@@ -18,6 +18,8 @@ func _ready():
 	animation_player.play(\"animation\")
 
 func _on_growing_timer_timeout():
+	if sprite.frame >= 5:
+		sprite.frame = 0
 	sprite.frame += 1
 "
 

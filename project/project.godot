@@ -18,6 +18,11 @@ boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://icon/icon.png"
 
+[autoload]
+
+Global="*res://utility/global.gd"
+GlobalSteam="*res://utility/steam.gd"
+
 [input]
 
 move_up={
