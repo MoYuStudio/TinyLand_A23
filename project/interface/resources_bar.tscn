@@ -1,0 +1,68 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqatkw3r5u63j"]
+
+[ext_resource type="Texture2D" uid="uid://ce5j2ofes6ys8" path="res://icon/resource/money.png" id="1_nwsf8"]
+[ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_csdwj"]
+[ext_resource type="Texture2D" uid="uid://8pv780mlgjx5" path="res://icon/resource/food.png" id="3_j6pmn"]
+
+[node name="ResourcesBar" type="MarginContainer"]
+offset_right = 256.0
+offset_bottom = 256.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Money" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="MarginContainer" parent="Container/Money"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Money/Icon"]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_nwsf8")
+offset = Vector2(10, 10)
+
+[node name="Num" type="MarginContainer" parent="Container/Money"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Money/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+text = "0"
+
+[node name="Food" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="MarginContainer" parent="Container/Food"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Food/Icon"]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("3_j6pmn")
+offset = Vector2(10, 10)
+
+[node name="Num" type="MarginContainer" parent="Container/Food"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Food/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+text = "0"

@@ -22,6 +22,8 @@ config/icon="res://icon/icon.png"
 
 Global="*res://utility/global.gd"
 GlobalSteam="*res://utility/steam.gd"
+RuningData="*res://utility/runing_data.gd"
+TilesData="*res://utility/tiles_data.gd"
 
 [display]
 

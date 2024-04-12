@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c4i274kh3fecs"]
+[gd_scene load_steps=32 format=3 uid="uid://c4i274kh3fecs"]
 
 [ext_resource type="Resource" uid="uid://4qm45cmei5f2" path="res://data/player_data_slot_0.tres" id="1_au5ao"]
 [ext_resource type="Texture2D" uid="uid://yw8tnl3bx5dg" path="res://tile/png/0.png" id="1_eohhp"]
@@ -10,22 +10,23 @@
 [ext_resource type="Texture2D" uid="uid://we18t0s2ob2r" path="res://tile/png/5a1.png" id="7_0ycd3"]
 [ext_resource type="Texture2D" uid="uid://cicabngtdppgo" path="res://tile/png/254.png" id="8_d4rgs"]
 [ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="9_c86v8"]
-[ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="10_tjws6"]
-[ext_resource type="Texture2D" uid="uid://c16yiulcboja4" path="res://tile/png/255.png" id="11_nrgvi"]
-[ext_resource type="Texture2D" uid="uid://duvmtgy0ub7y3" path="res://tile/png/261.png" id="11_oot25"]
+[ext_resource type="PackedScene" uid="uid://cqatkw3r5u63j" path="res://interface/resources_bar.tscn" id="11_ed847"]
+[ext_resource type="PackedScene" uid="uid://be3rafvp3s3pe" path="res://interface/tiles_bar.tscn" id="12_ewp7h"]
 [ext_resource type="AudioStream" uid="uid://bhiiqmxpslqy5" path="res://music/1996.mp3" id="12_s8qj7"]
+[ext_resource type="PackedScene" uid="uid://catj35d1cnagp" path="res://interface/tiles_bar_tile.tscn" id="13_si5w3"]
+[ext_resource type="Texture2D" uid="uid://c16yiulcboja4" path="res://tile/png/255.png" id="14_x22t7"]
 
 [sub_resource type="GDScript" id="GDScript_5qd7c"]
 script/source = "
 extends Node2D
 
-@onready var resource_bar = $CanvasLayer/ResourceBar/Container
+@onready var resources_bar = $CanvasLayer/ResourcesBar/Container
 
 @export var player_data : PlayerData
 
 func _physics_process(delta):
-	resource_bar.get_node(\"Money/Num/Label\").text = str(player_data.money)
-	resource_bar.get_node(\"Food/Num/Label\").text = str(player_data.food)
+	resources_bar.get_node(\"Money/Num/Label\").text = str(player_data.money)
+	resources_bar.get_node(\"Food/Num/Label\").text = str(player_data.food)
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn43b"]
@@ -38,6 +39,9 @@ texture = ExtResource("2_rswqe")
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_hjayu"]
+scenes/1/scene = ExtResource("4_kta7o")
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nv0ff"]
 texture = ExtResource("3_dd6hf")
 0:0/0 = 0
@@ -47,9 +51,6 @@ texture = ExtResource("3_dd6hf")
 0:1/0 = 0
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
-
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_hjayu"]
-scenes/1/scene = ExtResource("4_kta7o")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05rjl"]
 texture = ExtResource("5_x1riv")
@@ -92,7 +93,7 @@ sources/2 = SubResource("TileSetAtlasSource_nv0ff")
 sources/3 = SubResource("TileSetAtlasSource_05rjl")
 sources/4 = SubResource("TileSetAtlasSource_0u5g7")
 sources/5 = SubResource("TileSetAtlasSource_op77s")
-sources/256 = SubResource("TileSetScenesCollectionSource_hjayu")
+sources/10001 = SubResource("TileSetScenesCollectionSource_hjayu")
 
 [sub_resource type="GDScript" id="GDScript_i2d70"]
 script/source = "
@@ -104,16 +105,7 @@ extends TileMap
 var building_layer = 0
 var land_layer = 1
 
-# Tile IDs
-var air_tile = 0
-var grass_tile = 1
-var dirt_tile = 2
-var sand_tile = 3
-var water_tile = 5
-
-var farm_tile = 256
-
-var mode = \"Building\"
+# RuningData.choose_tile_name
 
 func _ready():
 	pass
@@ -127,20 +119,21 @@ func _physics_process(delta):
 	var building_pos = local_to_map(mouse_pos)
 	
 	if Input.is_action_pressed(\"build\"):
-		if mode == \"Building\":
-			if get_cell_source_id(1, land_pos) == grass_tile or \\
-				get_cell_source_id(1, land_pos) == dirt_tile :
-				set_cell(building_layer, building_pos, farm_tile, Vector2(0, 0), 1)
+		var tile_to_build = TilesData.tile_id_list[RuningData.choose_tile_name]
+		if tile_to_build > 10000:
+			if get_cell_source_id(land_layer, land_pos) != -1 and \\
+			get_cell_source_id(land_layer, land_pos) != 0 :
+				if get_cell_source_id(building_layer, land_pos) == -1 or\\
+				get_cell_source_id(building_layer, land_pos) == 0:
+					set_cell(building_layer, building_pos,
+					tile_to_build, Vector2(0, 0), 1)
 				
-		if mode == \"Land\":
-			set_cell(land_layer, land_pos, dirt_tile, Vector2(0, 0), 0)
+		elif tile_to_build < 10000:
+			set_cell(land_layer, land_pos, tile_to_build, Vector2(0, 0), 0)
 			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
-
-func _on_land_button_pressed():
-	mode = \"Land\"
-
-func _on_building_button_pressed():
-	mode = \"Building\"
+			
+		elif tile_to_build == 10000:
+			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
 "
 
 [sub_resource type="GDScript" id="GDScript_is30g"]
@@ -245,104 +238,20 @@ process_material = SubResource("ParticleProcessMaterial_okxbh")
 texture = ExtResource("9_c86v8")
 lifetime = 6.0
 
-[node name="ResourceBar" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -256.0
-offset_bottom = 256.0
-grow_horizontal = 0
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+[node name="ResourcesBar" parent="CanvasLayer" instance=ExtResource("11_ed847")]
 
-[node name="Container" type="VBoxContainer" parent="CanvasLayer/ResourceBar"]
-layout_mode = 2
+[node name="TilesBar" parent="CanvasLayer" instance=ExtResource("12_ewp7h")]
 
-[node name="Money" type="HBoxContainer" parent="CanvasLayer/ResourceBar/Container"]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="Icon" type="MarginContainer" parent="CanvasLayer/ResourceBar/Container/Money"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Sprite" type="Sprite2D" parent="CanvasLayer/ResourceBar/Container/Money/Icon"]
-texture_filter = 1
-scale = Vector2(2, 2)
-texture = ExtResource("11_nrgvi")
-offset = Vector2(8, 8)
-
-[node name="Num" type="MarginContainer" parent="CanvasLayer/ResourceBar/Container/Money"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/ResourceBar/Container/Money/Num"]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("10_tjws6")
-text = "0"
-
-[node name="Food" type="HBoxContainer" parent="CanvasLayer/ResourceBar/Container"]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="Icon" type="MarginContainer" parent="CanvasLayer/ResourceBar/Container/Food"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Sprite" type="Sprite2D" parent="CanvasLayer/ResourceBar/Container/Food/Icon"]
-texture_filter = 1
-scale = Vector2(2, 2)
-texture = ExtResource("11_oot25")
-offset = Vector2(8, 8)
-
-[node name="Num" type="MarginContainer" parent="CanvasLayer/ResourceBar/Container/Food"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/ResourceBar/Container/Food/Num"]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("10_tjws6")
-text = "0"
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -128.0
-offset_right = 256.0
-grow_vertical = 0
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 16
-
-[node name="Land" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("10_tjws6")
-text = "地面层"
-
-[node name="Building" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("10_tjws6")
-text = "建筑层"
+[node name="Tile" parent="CanvasLayer" instance=ExtResource("13_si5w3")]
+offset_left = 1176.0
+offset_top = 634.0
+offset_right = 1240.0
+offset_bottom = 698.0
+tile_name = "building_air"
+tile_texture = ExtResource("14_x22t7")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_s8qj7")
 volume_db = -24.0
 autoplay = true
 bus = &"BGM"
-
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Land" to="TileMap" method="_on_land_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Building" to="TileMap" method="_on_building_button_pressed"]

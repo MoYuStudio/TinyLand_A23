@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_fiqdw")
-money = 0
+money = 100
 food = 100
