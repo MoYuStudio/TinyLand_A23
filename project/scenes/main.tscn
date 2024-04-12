@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c4i274kh3fecs"]
+[gd_scene load_steps=26 format=3 uid="uid://c4i274kh3fecs"]
 
 [ext_resource type="Texture2D" uid="uid://d4hwlbsghmx6t" path="res://tile/png/1.png" id="1_0if6l"]
 [ext_resource type="Texture2D" uid="uid://yw8tnl3bx5dg" path="res://tile/png/0.png" id="1_1p5fi"]
@@ -9,6 +9,31 @@
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="5_lpvr8"]
 [ext_resource type="Texture2D" uid="uid://0otwsrs2ureo" path="res://tile/png/3.png" id="5_of6ap"]
 [ext_resource type="Texture2D" uid="uid://5hr2xdlm6pk7" path="res://tile/png/4.png" id="6_q0po1"]
+[ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="10_gy11h"]
+
+[sub_resource type="Gradient" id="Gradient_bq7ym"]
+offsets = PackedFloat32Array(0, 0.303279, 0.647541, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fnnfy"]
+gradient = SubResource("Gradient_bq7ym")
+
+[sub_resource type="Curve" id="Curve_m2n7m"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.72, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nf2qn"]
+curve = SubResource("Curve_m2n7m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_okxbh"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(128, 128, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_nf2qn")
+color_ramp = SubResource("GradientTexture1D_fnnfy")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn43b"]
 texture = ExtResource("1_1p5fi")
@@ -82,9 +107,6 @@ extends TileMap
 
 @onready var preview = $PreView
 
-var noise = FastNoiseLite.new()
-var seed = randi()
-
 # Layers IDs
 var building_layer = 0
 var land_layer = 1
@@ -98,19 +120,10 @@ var water_tile = 5
 
 var farm_tile = 256
 
-
-var size = 128
-
 var mode = \"Building\"
 
 func _ready():
-	randomize()
-	noise.seed = seed
-	noise.noise_type = 3
-	noise.frequency = 0.025
-	noise.fractal_lacunarity = 2.0
-	
-	# generate_noise_map()
+	pass
 	
 func _physics_process(delta):
 	var mouse_pos = get_global_mouse_position()
@@ -122,27 +135,13 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed(\"build\"):
 		if mode == \"Building\":
-			if get_cell_source_id(1, land_pos) == grass_tile:
+			if get_cell_source_id(1, land_pos) == grass_tile or \\
+				get_cell_source_id(1, land_pos) == dirt_tile :
 				set_cell(building_layer, building_pos, farm_tile, Vector2(0, 0), 1)
 				
 		if mode == \"Land\":
-			set_cell(land_layer, land_pos, water_tile, Vector2(0, 0), 0)
+			set_cell(land_layer, land_pos, dirt_tile, Vector2(0, 0), 0)
 			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
-		
-func generate_noise_map():
-	for x in range(-size/2,size/2):
-		for y in range(-size,size):
-			var noise_value = (noise.get_noise_2d(x, y)+1)*10
-				
-			# 陆地
-			if noise_value > 13:
-				set_cell(land_layer, Vector2(x, y), grass_tile, Vector2(0, 0), 0)
-			elif noise_value > 12:
-				set_cell(land_layer, Vector2(x, y), sand_tile, Vector2(0, 0), 0)
-			# 海洋
-			else:
-				set_cell(land_layer, Vector2(x, y), water_tile, Vector2(0, 0), 0)
-				
 
 func _on_land_button_pressed():
 	mode = \"Land\"
@@ -185,6 +184,20 @@ func _process(delta):
 
 [node name="Main" type="Node2D"]
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+follow_viewport_enabled = true
+scroll_ignore_camera_zoom = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(128, 128)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParallaxBackground/ParallaxLayer"]
+texture_filter = 1
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_okxbh")
+texture = ExtResource("10_gy11h")
+lifetime = 6.0
+
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
 texture_filter = 1
@@ -195,7 +208,7 @@ layer_0/y_sort_enabled = true
 layer_0/z_index = 1
 layer_1/name = "Land"
 layer_1/y_sort_enabled = true
-layer_1/tile_data = PackedInt32Array(196607, 3, 0, 131072, 3, 0, 65535, 3, 0, 0, 3, 0, 131070, 3, 0, 65536, 3, 0, -1, 3, 0, -131073, 1, 0, -131072, 1, 0, -65536, 1, 0, 1, 1, 0, 65537, 1, 0, 131073, 1, 0, 196608, 1, 0, 262144, 1, 0, 393215, 1, 0, 327679, 1, 0, 262142, 1, 0, 196606, 1, 0, 131069, 1, 0, 65534, 1, 0, -2, 1, 0, -65537, 1, 0, 262143, 3, 0, 131071, 5, 0)
+layer_1/tile_data = PackedInt32Array(196607, 2, 0, 131072, 2, 0, 65535, 2, 0, 0, 2, 0, 131070, 2, 0, 65536, 2, 0, -1, 2, 0, 262143, 2, 0, 131071, 2, 0)
 script = SubResource("GDScript_i2d70")
 
 [node name="PreView" type="Sprite2D" parent="TileMap"]
@@ -206,7 +219,7 @@ texture_filter = 1
 texture = ExtResource("3_g10wp")
 
 [node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+zoom = Vector2(6, 6)
 script = SubResource("GDScript_is30g")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
