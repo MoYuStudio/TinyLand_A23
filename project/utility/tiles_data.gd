@@ -18,6 +18,7 @@ var tile_id_list = {
 	"grass":1, # 草地
 	"dirt":2, # 泥土
 	"sand":3, # 沙子
+	"stone":4, # 岩石
 	"water":5, # 水
 	
 	"building_air":10000,

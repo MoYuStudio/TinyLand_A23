@@ -1,12 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://be3rafvp3s3pe"]
+[gd_scene load_steps=12 format=3 uid="uid://be3rafvp3s3pe"]
 
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="1_7ui4f"]
 [ext_resource type="Texture2D" uid="uid://srsh0c5vlsrn" path="res://tile/png/2.png" id="2_fp0e5"]
 [ext_resource type="PackedScene" uid="uid://catj35d1cnagp" path="res://interface/tiles_bar_tile.tscn" id="2_k5ees"]
 [ext_resource type="Texture2D" uid="uid://duvmtgy0ub7y3" path="res://tile/png/261.png" id="3_lk0h7"]
 [ext_resource type="Texture2D" uid="uid://d4hwlbsghmx6t" path="res://tile/png/1.png" id="4_mk68r"]
+[ext_resource type="Texture2D" uid="uid://0otwsrs2ureo" path="res://tile/png/3.png" id="5_0oqrq"]
 [ext_resource type="Texture2D" uid="uid://bgg68vgrvmcu8" path="res://tile/png/512.png" id="6_6a21l"]
+[ext_resource type="Texture2D" uid="uid://5hr2xdlm6pk7" path="res://tile/png/4.png" id="6_gunf2"]
 [ext_resource type="Texture2D" uid="uid://56tumnnhcb42" path="res://tile/png/262.png" id="6_tb44o"]
+[ext_resource type="Texture2D" uid="uid://djfso8r2bed71" path="res://tile/png/5.png" id="7_au4gn"]
 [ext_resource type="Texture2D" uid="uid://cnoj1gxgwn7fe" path="res://tile/png/769.png" id="7_l1qb5"]
 
 [node name="TilesBar" type="MarginContainer"]
@@ -57,6 +60,21 @@ tile_texture = ExtResource("2_fp0e5")
 layout_mode = 2
 tile_name = "grass"
 tile_texture = ExtResource("4_mk68r")
+
+[node name="Tile3" parent="TabContainer/土地/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
+layout_mode = 2
+tile_name = "sand"
+tile_texture = ExtResource("5_0oqrq")
+
+[node name="Tile4" parent="TabContainer/土地/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
+layout_mode = 2
+tile_name = "stone"
+tile_texture = ExtResource("6_gunf2")
+
+[node name="Tile5" parent="TabContainer/土地/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
+layout_mode = 2
+tile_name = "water"
+tile_texture = ExtResource("7_au4gn")
 
 [node name="农业" type="TabBar" parent="TabContainer"]
 visible = false
