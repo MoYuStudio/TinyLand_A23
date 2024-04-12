@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://o32sdvgym6n6"]
+[gd_scene load_steps=6 format=3 uid="uid://o32sdvgym6n6"]
 
 [ext_resource type="Texture2D" uid="uid://bocv6p2u6x22s" path="res://tile/png/256a1.png" id="1_klrmf"]
+[ext_resource type="Resource" uid="uid://4qm45cmei5f2" path="res://data/player_data_slot_0.tres" id="1_xpgsa"]
 
 [sub_resource type="GDScript" id="GDScript_aqvtr"]
 script/source = "
@@ -8,6 +9,8 @@ extends Node2D
 
 @onready var sprite = $Sprite
 @onready var animation_player = $AnimationPlayer
+
+@export var player_data : PlayerData
 
 @export var price = 10
 @export var sprite_texture : Texture2D
@@ -20,6 +23,7 @@ func _ready():
 func _on_growing_timer_timeout():
 	if sprite.frame >= 5:
 		sprite.frame = 0
+		player_data.food += 10
 	sprite.frame += 1
 "
 
@@ -58,6 +62,7 @@ _data = {
 
 [node name="Farm" type="Node2D"]
 script = SubResource("GDScript_aqvtr")
+player_data = ExtResource("1_xpgsa")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 1
