@@ -84,7 +84,7 @@ tile_texture = ExtResource("3_lk0h7")
 
 [node name="Tile2" parent="TabContainer/农业/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
 layout_mode = 2
-tile_name = "farm_tile"
+tile_name = "farm"
 tile_texture = ExtResource("6_tb44o")
 
 [node name="工业" type="TabBar" parent="TabContainer"]
@@ -108,7 +108,7 @@ theme_override_constants/separation = 8
 
 [node name="Tile" parent="TabContainer/工业/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
 layout_mode = 2
-tile_name = "farm_tile"
+tile_name = "farm"
 tile_texture = ExtResource("6_6a21l")
 
 [node name="商业" type="TabBar" parent="TabContainer"]
@@ -138,7 +138,7 @@ theme_override_constants/separation = 8
 
 [node name="Tile" parent="TabContainer/科技/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
 layout_mode = 2
-tile_name = "farm_tile"
+tile_name = "farm"
 tile_texture = ExtResource("7_l1qb5")
 
 [node name="奇观" type="TabBar" parent="TabContainer"]
