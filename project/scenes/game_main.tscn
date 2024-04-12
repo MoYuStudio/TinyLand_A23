@@ -1,0 +1,348 @@
+[gd_scene load_steps=31 format=3 uid="uid://c4i274kh3fecs"]
+
+[ext_resource type="Resource" uid="uid://4qm45cmei5f2" path="res://data/player_data_slot_0.tres" id="1_au5ao"]
+[ext_resource type="Texture2D" uid="uid://yw8tnl3bx5dg" path="res://tile/png/0.png" id="1_eohhp"]
+[ext_resource type="Texture2D" uid="uid://d4hwlbsghmx6t" path="res://tile/png/1.png" id="2_rswqe"]
+[ext_resource type="Texture2D" uid="uid://srsh0c5vlsrn" path="res://tile/png/2.png" id="3_dd6hf"]
+[ext_resource type="PackedScene" uid="uid://o32sdvgym6n6" path="res://tile/farm.tscn" id="4_kta7o"]
+[ext_resource type="Texture2D" uid="uid://0otwsrs2ureo" path="res://tile/png/3.png" id="5_x1riv"]
+[ext_resource type="Texture2D" uid="uid://5hr2xdlm6pk7" path="res://tile/png/4.png" id="6_72ph8"]
+[ext_resource type="Texture2D" uid="uid://we18t0s2ob2r" path="res://tile/png/5a1.png" id="7_0ycd3"]
+[ext_resource type="Texture2D" uid="uid://cicabngtdppgo" path="res://tile/png/254.png" id="8_d4rgs"]
+[ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="9_c86v8"]
+[ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="10_tjws6"]
+[ext_resource type="Texture2D" uid="uid://c16yiulcboja4" path="res://tile/png/255.png" id="11_nrgvi"]
+[ext_resource type="Texture2D" uid="uid://duvmtgy0ub7y3" path="res://tile/png/261.png" id="11_oot25"]
+[ext_resource type="AudioStream" uid="uid://bhiiqmxpslqy5" path="res://music/1996.mp3" id="12_s8qj7"]
+
+[sub_resource type="GDScript" id="GDScript_5qd7c"]
+script/source = "
+extends Node2D
+
+@onready var resource_bar = $CanvasLayer/ResourceBar/Container
+
+@export var player_data : PlayerData
+
+func _ready():
+	resource_bar.get_node(\"Money/Num/Label\").text = str(player_data.money)
+	resource_bar.get_node(\"Food/Num/Label\").text = str(player_data.food)
+"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn43b"]
+texture = ExtResource("1_eohhp")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rw2b5"]
+texture = ExtResource("2_rswqe")
+0:0/0 = 0
+0:0/0/y_sort_origin = -4
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nv0ff"]
+texture = ExtResource("3_dd6hf")
+0:0/0 = 0
+0:0/0/y_sort_origin = -4
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_hjayu"]
+scenes/1/scene = ExtResource("4_kta7o")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05rjl"]
+texture = ExtResource("5_x1riv")
+0:0/0 = 0
+0:0/0/y_sort_origin = -4
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0u5g7"]
+texture = ExtResource("6_72ph8")
+0:0/0 = 0
+0:0/0/y_sort_origin = -4
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_op77s"]
+texture = ExtResource("7_0ycd3")
+0:0/animation_columns = 2
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 0.3
+0:0/animation_frame_1/duration = 0.3
+0:0/0 = 0
+0:0/0/y_sort_origin = -4
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_gul10"]
+tile_shape = 1
+tile_size = Vector2i(16, 8)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_rw2b5")
+sources/0 = SubResource("TileSetAtlasSource_nn43b")
+sources/2 = SubResource("TileSetAtlasSource_nv0ff")
+sources/3 = SubResource("TileSetAtlasSource_05rjl")
+sources/4 = SubResource("TileSetAtlasSource_0u5g7")
+sources/5 = SubResource("TileSetAtlasSource_op77s")
+sources/256 = SubResource("TileSetScenesCollectionSource_hjayu")
+
+[sub_resource type="GDScript" id="GDScript_i2d70"]
+script/source = "
+extends TileMap
+
+@onready var preview = $PreView
+
+# Layers IDs
+var building_layer = 0
+var land_layer = 1
+
+# Tile IDs
+var air_tile = 0
+var grass_tile = 1
+var dirt_tile = 2
+var sand_tile = 3
+var water_tile = 5
+
+var farm_tile = 256
+
+var mode = \"Building\"
+
+func _ready():
+	pass
+	
+func _physics_process(delta):
+	var mouse_pos = get_global_mouse_position()
+	mouse_pos.y -= 4
+	preview.position = map_to_local(local_to_map(mouse_pos))
+	var land_pos = local_to_map(mouse_pos)
+	land_pos.y += 2
+	var building_pos = local_to_map(mouse_pos)
+	
+	if Input.is_action_pressed(\"build\"):
+		if mode == \"Building\":
+			if get_cell_source_id(1, land_pos) == grass_tile or \\
+				get_cell_source_id(1, land_pos) == dirt_tile :
+				set_cell(building_layer, building_pos, farm_tile, Vector2(0, 0), 1)
+				
+		if mode == \"Land\":
+			set_cell(land_layer, land_pos, dirt_tile, Vector2(0, 0), 0)
+			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
+
+func _on_land_button_pressed():
+	mode = \"Land\"
+
+func _on_building_button_pressed():
+	mode = \"Building\"
+"
+
+[sub_resource type="GDScript" id="GDScript_is30g"]
+script/source = "
+extends Camera2D
+
+var move_speed = 1
+var zoom_speed = 0.03
+# 最大和最小缩放值
+var max_zoom = Vector2(9, 9)
+var min_zoom = Vector2(1, 1)
+
+func _ready():
+	pass
+
+func _process(delta):
+	if Input.is_action_pressed(\"move_up\"):
+		position.y -= move_speed
+	if Input.is_action_pressed(\"move_down\"):
+		position.y += move_speed
+	if Input.is_action_pressed(\"move_left\"):
+		position.x -= move_speed
+	if Input.is_action_pressed(\"move_right\"):
+		position.x += move_speed
+	if Input.is_action_pressed(\"zoom_in\"):
+		if zoom.x <= max_zoom.x:
+			zoom.x += zoom_speed
+			zoom.y += zoom_speed
+	if Input.is_action_pressed(\"zoom_out\"):
+		if zoom.x >= min_zoom.x:
+			zoom.x -= zoom_speed
+			zoom.y -= zoom_speed
+"
+
+[sub_resource type="Gradient" id="Gradient_bq7ym"]
+offsets = PackedFloat32Array(0, 0.303279, 0.647541, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fnnfy"]
+gradient = SubResource("Gradient_bq7ym")
+
+[sub_resource type="Curve" id="Curve_m2n7m"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.72, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nf2qn"]
+curve = SubResource("Curve_m2n7m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_okxbh"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(128, 128, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_nf2qn")
+color_ramp = SubResource("GradientTexture1D_fnnfy")
+
+[node name="GameMain" type="Node2D"]
+script = SubResource("GDScript_5qd7c")
+player_data = ExtResource("1_au5ao")
+
+[node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
+texture_filter = 1
+tile_set = SubResource("TileSet_gul10")
+format = 2
+layer_0/name = "Building"
+layer_0/y_sort_enabled = true
+layer_0/z_index = 1
+layer_1/name = "Land"
+layer_1/y_sort_enabled = true
+layer_1/tile_data = PackedInt32Array(196607, 2, 0, 131072, 2, 0, 65535, 2, 0, 0, 2, 0, 131070, 2, 0, 65536, 2, 0, -1, 2, 0, 262143, 2, 0, 131071, 2, 0)
+script = SubResource("GDScript_i2d70")
+
+[node name="PreView" type="Sprite2D" parent="TileMap"]
+modulate = Color(1, 1, 1, 0.501961)
+z_index = 9
+y_sort_enabled = true
+texture_filter = 1
+texture = ExtResource("8_d4rgs")
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(6, 6)
+script = SubResource("GDScript_is30g")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
+follow_viewport_enabled = true
+follow_viewport_scale = 0.9
+scroll_ignore_camera_zoom = true
+
+[node name="Star" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
+motion_scale = Vector2(0.9, 0.9)
+motion_mirroring = Vector2(256, 256)
+
+[node name="Particles" type="GPUParticles2D" parent="CanvasLayer/ParallaxBackground/Star"]
+texture_filter = 1
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_okxbh")
+texture = ExtResource("9_c86v8")
+lifetime = 6.0
+
+[node name="ResourceBar" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -256.0
+offset_bottom = 256.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Container" type="VBoxContainer" parent="CanvasLayer/ResourceBar"]
+layout_mode = 2
+
+[node name="Money" type="HBoxContainer" parent="CanvasLayer/ResourceBar/Container"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="MarginContainer" parent="CanvasLayer/ResourceBar/Container/Money"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/ResourceBar/Container/Money/Icon"]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("11_nrgvi")
+offset = Vector2(8, 8)
+
+[node name="Num" type="MarginContainer" parent="CanvasLayer/ResourceBar/Container/Money"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ResourceBar/Container/Money/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("10_tjws6")
+text = "0"
+
+[node name="Food" type="HBoxContainer" parent="CanvasLayer/ResourceBar/Container"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="MarginContainer" parent="CanvasLayer/ResourceBar/Container/Food"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/ResourceBar/Container/Food/Icon"]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("11_oot25")
+offset = Vector2(8, 8)
+
+[node name="Num" type="MarginContainer" parent="CanvasLayer/ResourceBar/Container/Food"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ResourceBar/Container/Food/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("10_tjws6")
+text = "0"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -128.0
+offset_right = 256.0
+grow_vertical = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Land" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("10_tjws6")
+text = "地面层"
+
+[node name="Building" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("10_tjws6")
+text = "建筑层"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_s8qj7")
+volume_db = -24.0
+autoplay = true
+bus = &"BGM"
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Land" to="TileMap" method="_on_land_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/Building" to="TileMap" method="_on_building_button_pressed"]

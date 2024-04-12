@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://b1f5fso0ajmoi"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://b1f5fso0ajmoi"]
 
 [ext_resource type="FontFile" uid="uid://dwo3w3m0bti6d" path="res://fonts/YouSheBiaoTiHei.ttf" id="1_wfh00"]
 
@@ -66,6 +66,8 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0r3qe"]
+
 [resource]
 Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
@@ -83,10 +85,21 @@ Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
 Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
-Button/font_sizes/font_size = 16
+Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("1_wfh00")
 Button/styles/disabled = SubResource("StyleBoxFlat_gbvpj")
 Button/styles/focus = SubResource("StyleBoxFlat_mbc8g")
 Button/styles/hover = SubResource("StyleBoxFlat_tqo1g")
 Button/styles/normal = SubResource("StyleBoxFlat_b2xo1")
 Button/styles/pressed = SubResource("StyleBoxFlat_5h511")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 0)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("1_wfh00")
+Label/styles/normal = SubResource("StyleBoxEmpty_0r3qe")

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PlayerData" load_steps=2 format=3 uid="uid://4qm45cmei5f2"]
+
+[ext_resource type="Script" path="res://utility/player_data.gd" id="1_fiqdw"]
+
+[resource]
+script = ExtResource("1_fiqdw")
+money = 0
+food = 100
