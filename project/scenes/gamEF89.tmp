@@ -22,7 +22,7 @@ extends Node2D
 
 @onready var resources_bar = $CanvasLayer/ResourcesBar/Container
 
-@export var player_data : MoYuPlayerData
+@export var player_data : PlayerData
 
 func _physics_process(delta):
 	resources_bar.get_node(\"Money/Num/Label\").text = str(player_data.money)

@@ -1,7 +1,7 @@
 
 extends Resource
 
-class_name PlayerData
+class_name MoYuPlayerData
 ## [MoYu] 玩家数据存储资源
 
 @export var money : int = 0
