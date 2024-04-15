@@ -1,0 +1,209 @@
+[gd_scene load_steps=18 format=3 uid="uid://doa5wf4d35e56"]
+
+[ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="1_3urhm"]
+[ext_resource type="Shader" path="res://shader/2DPerspective.gdshader" id="1_4wrud"]
+[ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="1_gmgff"]
+[ext_resource type="Texture2D" uid="uid://dd8yp404wqfwj" path="res://icon/icon.png" id="2_rutd4"]
+
+[sub_resource type="Environment" id="Environment_jm716"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 0.02
+glow_blend_mode = 0
+glow_hdr_threshold = 0.66
+glow_hdr_scale = 1.2
+glow_hdr_luminance_cap = 6.0
+
+[sub_resource type="Gradient" id="Gradient_s51f6"]
+offsets = PackedFloat32Array(0, 0.303279, 0.647541, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fnnfy"]
+gradient = SubResource("Gradient_s51f6")
+
+[sub_resource type="Curve" id="Curve_dm3di"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.72, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nf2qn"]
+curve = SubResource("Curve_dm3di")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ykep3"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(128, 128, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_nf2qn")
+color_ramp = SubResource("GradientTexture1D_fnnfy")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xoyke"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4x5kk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_itqrf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jjn3v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_krpol"]
+
+[sub_resource type="GDScript" id="GDScript_u1nqg"]
+script/source = "
+extends Button
+
+@onready var texture_rect = $TextureRect
+
+
+var angle_x_max: float = 15.0
+var angle_y_max: float = 15.0
+
+var following_mouse: bool = false
+
+var tween_rot: Tween
+var tween_hover: Tween
+var tween_destroy: Tween
+var tween_handle: Tween
+
+func _ready():
+	angle_x_max = deg_to_rad(angle_x_max)
+	angle_y_max = deg_to_rad(angle_y_max)
+	
+			
+func follow_mouse(delta):
+	if not following_mouse: return
+	var mouse_pos: Vector2 = get_global_mouse_position()
+	global_position = mouse_pos - (size/2.0)
+
+func handle_mouse_click(event):
+	if not event is InputEventMouseButton: return
+	if event.button_index != MOUSE_BUTTON_LEFT: return
+	
+	if event.is_pressed():
+		following_mouse = true
+
+func _on_gui_input(event):
+	
+	handle_mouse_click(event)
+	
+	# Don't compute rotation when moving the card
+	if following_mouse: return
+	if not event is InputEventMouseMotion: return
+	
+	# Handles rotation
+	# Get local mouse pos
+	var mouse_pos: Vector2 = get_local_mouse_position()
+	var diff: Vector2 = (position + size) - mouse_pos
+
+	var lerp_val_x: float = remap(mouse_pos.x, 0.0, size.x, 0, 1)
+	var lerp_val_y: float = remap(mouse_pos.y, 0.0, size.y, 0, 1)
+
+	var rot_x: float = rad_to_deg(lerp_angle(-angle_x_max, angle_x_max, lerp_val_x))
+	var rot_y: float = rad_to_deg(lerp_angle(angle_y_max, -angle_y_max, lerp_val_y))
+	
+	texture_rect.material.set_shader_parameter(\"x_rot\", rot_y)
+	texture_rect.material.set_shader_parameter(\"y_rot\", rot_x)
+
+func _on_pressed():
+	SceneTransition.change_scene('black','res://scenes/game_main.tscn')
+	
+func _on_mouse_entered():
+	if tween_hover and tween_hover.is_running():
+		tween_hover.kill()
+	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	tween_hover.tween_property(self, \"scale\", Vector2(1.1, 1.1), 0.5)
+
+func _on_mouse_exited():
+	# Reset rotation
+	if tween_rot and tween_rot.is_running():
+		tween_rot.kill()
+	tween_rot = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	tween_rot.tween_property(texture_rect.material, \"shader_parameter/x_rot\", 0.0, 0.5)
+	tween_rot.tween_property(texture_rect.material, \"shader_parameter/y_rot\", 0.0, 0.5)
+	
+	# Reset scale
+	if tween_hover and tween_hover.is_running():
+		tween_hover.kill()
+	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	tween_hover.tween_property(self, \"scale\", Vector2.ONE, 0.55)
+	
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_puyit"]
+resource_local_to_scene = true
+shader = ExtResource("1_4wrud")
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[node name="MenuMain" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_jm716")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+follow_viewport_enabled = true
+follow_viewport_scale = 0.9
+scroll_ignore_camera_zoom = true
+
+[node name="Star" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(100, 100, 100, 1)
+motion_scale = Vector2(0.9, 0.9)
+motion_mirroring = Vector2(256, 256)
+
+[node name="Particles" type="GPUParticles2D" parent="ParallaxBackground/Star"]
+texture_filter = 1
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_ykep3")
+texture = ExtResource("1_gmgff")
+lifetime = 6.0
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(6, 6)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -124.0
+offset_right = 96.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(96, 96)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xoyke")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4x5kk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_itqrf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jjn3v")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_krpol")
+flat = true
+script = SubResource("GDScript_u1nqg")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Button"]
+material = SubResource("ShaderMaterial_puyit")
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 224.0
+offset_bottom = 224.0
+texture = ExtResource("2_rutd4")
+
+[node name="Label" type="Label" parent="CanvasLayer/Button"]
+texture_filter = 1
+offset_left = -24.0
+offset_top = 192.0
+offset_right = 222.0
+offset_bottom = 234.0
+theme = ExtResource("1_3urhm")
+text = "TinyLand.moyu"
+
+[connection signal="gui_input" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_pressed"]

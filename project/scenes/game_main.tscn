@@ -38,18 +38,21 @@ func _physics_process(delta):
 	resources_bar.get_node(\"Food/Num/Label\").text = str(player_data.price[\"food\"])
 
 func _process(delta):
-	var center: Vector2 = get_viewport_rect().size / 2.0
-	var dist: Vector2 = get_global_mouse_position() - center
-	var offset: Vector2 = dist / center
-	
-	var new_pos: Vector2
-	
-	new_pos.x = lerp(max_offset.x, -max_offset.x, offset.x)
-	new_pos.y = lerp(max_offset.y, -max_offset.y, offset.y)
-	
-	camera.position.x = lerp(camera.position.x, new_pos.x, smoothing * delta)
-	camera.position.y = lerp(camera.position.y, new_pos.y, smoothing * delta)
+	#var center: Vector2 = get_viewport_rect().size / 2.0
+	#var dist: Vector2 = get_global_mouse_position() - center
+	#var offset: Vector2 = dist / center
+	#
+	#var new_pos: Vector2
+	#
+	#new_pos.x = lerp(max_offset.x, -max_offset.x, offset.x)
+	#new_pos.y = lerp(max_offset.y, -max_offset.y, offset.y)
+	#
+	#camera.position.x = lerp(camera.position.x, new_pos.x, smoothing * delta)
+	#camera.position.y = lerp(camera.position.y, new_pos.y, smoothing * delta)
 
+	if Input.is_action_just_pressed(\"reset\"):
+		camera.position = Vector2(0,0)
+		
 func _on_tiles_bar_mouse_entered():
 	tilemap.preview.hide()
 "
@@ -89,14 +92,14 @@ _data = {
 offsets = PackedFloat32Array(0, 0.303279, 0.647541, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_fnnfy"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bqjk5"]
 gradient = SubResource("Gradient_bq7ym")
 
 [sub_resource type="Curve" id="Curve_m2n7m"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.72, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_nf2qn"]
+[sub_resource type="CurveTexture" id="CurveTexture_uukse"]
 curve = SubResource("Curve_m2n7m")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_okxbh"]
@@ -106,8 +109,8 @@ emission_box_extents = Vector3(128, 128, 1)
 gravity = Vector3(0, 0, 0)
 scale_min = 0.3
 scale_max = 0.6
-scale_curve = SubResource("CurveTexture_nf2qn")
-color_ramp = SubResource("GradientTexture1D_fnnfy")
+scale_curve = SubResource("CurveTexture_uukse")
+color_ramp = SubResource("GradientTexture1D_bqjk5")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn43b"]
 texture = ExtResource("1_eohhp")
@@ -327,6 +330,10 @@ texture = ExtResource("8_d4rgs")
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(6, 6)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 6.0
 script = SubResource("GDScript_is30g")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
