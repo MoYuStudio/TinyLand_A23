@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://doa5wf4d35e56"]
+[gd_scene load_steps=19 format=3 uid="uid://doa5wf4d35e56"]
 
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="1_3urhm"]
 [ext_resource type="Shader" path="res://shader/2DPerspective.gdshader" id="1_4wrud"]
 [ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="1_gmgff"]
 [ext_resource type="Texture2D" uid="uid://dd8yp404wqfwj" path="res://icon/icon.png" id="2_rutd4"]
+[ext_resource type="FontFile" uid="uid://bxkcgrk5xuhuc" path="res://fonts/kenney_mini.ttf" id="5_hy4mo"]
 
 [sub_resource type="Environment" id="Environment_jm716"]
 background_mode = 3
@@ -187,6 +188,7 @@ flat = true
 script = SubResource("GDScript_u1nqg")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Button"]
+texture_filter = 1
 material = SubResource("ShaderMaterial_puyit")
 offset_left = -32.0
 offset_top = -32.0
@@ -196,12 +198,31 @@ texture = ExtResource("2_rutd4")
 
 [node name="Label" type="Label" parent="CanvasLayer/Button"]
 texture_filter = 1
-offset_left = -24.0
-offset_top = 192.0
-offset_right = 222.0
-offset_bottom = 234.0
+offset_left = -78.0
+offset_top = 204.0
+offset_right = 270.0
+offset_bottom = 264.0
 theme = ExtResource("1_3urhm")
+theme_override_fonts/font = ExtResource("5_hy4mo")
+theme_override_font_sizes/font_size = 48
 text = "TinyLand.moyu"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.501961)
+texture_filter = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -40.0
+offset_right = 111.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_hy4mo")
+theme_override_font_sizes/font_size = 16
+text = "TinyLand A23 Dv2024041501"
 
 [connection signal="gui_input" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_gui_input"]
 [connection signal="mouse_entered" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_mouse_entered"]
