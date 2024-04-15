@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://c4i274kh3fecs"]
+[gd_scene load_steps=33 format=3 uid="uid://c4i274kh3fecs"]
 
 [ext_resource type="Resource" uid="uid://4qm45cmei5f2" path="res://data/player_data_slot_0.tres" id="1_au5ao"]
 [ext_resource type="Texture2D" uid="uid://yw8tnl3bx5dg" path="res://tile/png/0.png" id="1_eohhp"]
@@ -49,6 +49,39 @@ func _process(delta):
 func _on_tiles_bar_mouse_entered():
 	tilemap.preview.hide()
 "
+
+[sub_resource type="Environment" id="Environment_r2gak"]
+background_mode = 3
+glow_enabled = true
+glow_bloom = 0.02
+glow_blend_mode = 0
+glow_hdr_threshold = 0.66
+glow_hdr_scale = 1.2
+glow_hdr_luminance_cap = 6.0
+
+[sub_resource type="Gradient" id="Gradient_bq7ym"]
+offsets = PackedFloat32Array(0, 0.303279, 0.647541, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fnnfy"]
+gradient = SubResource("Gradient_bq7ym")
+
+[sub_resource type="Curve" id="Curve_m2n7m"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.72, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nf2qn"]
+curve = SubResource("Curve_m2n7m")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_okxbh"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(128, 128, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_nf2qn")
+color_ramp = SubResource("GradientTexture1D_fnnfy")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn43b"]
 texture = ExtResource("1_eohhp")
@@ -189,33 +222,41 @@ func _process(delta):
 			zoom.y -= zoom_speed
 "
 
-[sub_resource type="Gradient" id="Gradient_bq7ym"]
-offsets = PackedFloat32Array(0, 0.303279, 0.647541, 1)
-colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_fnnfy"]
-gradient = SubResource("Gradient_bq7ym")
-
-[sub_resource type="Curve" id="Curve_m2n7m"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.72, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_nf2qn"]
-curve = SubResource("Curve_m2n7m")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_okxbh"]
-particle_flag_disable_z = true
-emission_shape = 3
-emission_box_extents = Vector3(128, 128, 1)
-gravity = Vector3(0, 0, 0)
-scale_min = 0.3
-scale_max = 0.6
-scale_curve = SubResource("CurveTexture_nf2qn")
-color_ramp = SubResource("GradientTexture1D_fnnfy")
-
 [node name="GameMain" type="Node2D"]
 script = SubResource("GDScript_5qd7c")
 player_data = ExtResource("1_au5ao")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_r2gak")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_s8qj7")
+volume_db = -24.0
+autoplay = true
+bus = &"BGM"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
+[node name="DirectionalLight" type="DirectionalLight2D" parent="."]
+energy = 0.6
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+follow_viewport_enabled = true
+follow_viewport_scale = 0.9
+scroll_ignore_camera_zoom = true
+
+[node name="Star" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(100, 100, 100, 1)
+motion_scale = Vector2(0.9, 0.9)
+motion_mirroring = Vector2(256, 256)
+
+[node name="Particles" type="GPUParticles2D" parent="ParallaxBackground/Star"]
+texture_filter = 1
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_okxbh")
+texture = ExtResource("9_c86v8")
+lifetime = 6.0
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -243,22 +284,6 @@ script = SubResource("GDScript_is30g")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer"]
-follow_viewport_enabled = true
-follow_viewport_scale = 0.9
-scroll_ignore_camera_zoom = true
-
-[node name="Star" type="ParallaxLayer" parent="CanvasLayer/ParallaxBackground"]
-motion_scale = Vector2(0.9, 0.9)
-motion_mirroring = Vector2(256, 256)
-
-[node name="Particles" type="GPUParticles2D" parent="CanvasLayer/ParallaxBackground/Star"]
-texture_filter = 1
-amount = 64
-process_material = SubResource("ParticleProcessMaterial_okxbh")
-texture = ExtResource("9_c86v8")
-lifetime = 6.0
-
 [node name="ResourcesBar" parent="CanvasLayer" instance=ExtResource("11_ed847")]
 
 [node name="TilesBar" parent="CanvasLayer" instance=ExtResource("12_ewp7h")]
@@ -283,11 +308,5 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 tile_name = "building_air"
 tile_texture = ExtResource("14_x22t7")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_s8qj7")
-volume_db = -24.0
-autoplay = true
-bus = &"BGM"
 
 [connection signal="mouse_entered" from="CanvasLayer/TilesBar" to="." method="_on_tiles_bar_mouse_entered"]
