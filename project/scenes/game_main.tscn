@@ -21,12 +21,33 @@ script/source = "
 extends Node2D
 
 @onready var resources_bar = $CanvasLayer/ResourcesBar/Container
+@onready var camera = $Camera
+@onready var tilemap = $TileMap
 
 @export var player_data : MoYuPlayerData
+
+@export var max_offset: Vector2
+@export var smoothing: float = 2.0
 
 func _physics_process(delta):
 	resources_bar.get_node(\"Money/Num/Label\").text = str(player_data.money)
 	resources_bar.get_node(\"Food/Num/Label\").text = str(player_data.food)
+
+func _process(delta):
+	var center: Vector2 = get_viewport_rect().size / 2.0
+	var dist: Vector2 = get_global_mouse_position() - center
+	var offset: Vector2 = dist / center
+	
+	var new_pos: Vector2
+	
+	new_pos.x = lerp(max_offset.x, -max_offset.x, offset.x)
+	new_pos.y = lerp(max_offset.y, -max_offset.y, offset.y)
+	
+	camera.position.x = lerp(camera.position.x, new_pos.x, smoothing * delta)
+	camera.position.y = lerp(camera.position.y, new_pos.y, smoothing * delta)
+
+func _on_tiles_bar_mouse_entered():
+	tilemap.preview.hide()
 "
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn43b"]
@@ -112,10 +133,14 @@ func _physics_process(delta):
 	var mouse_pos = get_global_mouse_position()
 	mouse_pos.y -= 4
 	preview.position = map_to_local(local_to_map(mouse_pos))
+
+func _unhandled_input(event):
+	preview.show()
+	var mouse_pos = get_global_mouse_position()
+	mouse_pos.y -= 4
 	var land_pos = local_to_map(mouse_pos)
 	land_pos.y += 2
 	var building_pos = local_to_map(mouse_pos)
-	
 	if Input.is_action_pressed(\"build\"):
 		var tile_to_build = TilesData.tile_id_list[RuningData.choose_tile_name]
 		if tile_to_build > 10000:
@@ -129,6 +154,7 @@ func _physics_process(delta):
 			
 		elif tile_to_build == 10000:
 			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
+	
 "
 
 [sub_resource type="GDScript" id="GDScript_is30g"]
@@ -247,6 +273,7 @@ offset_left = -64.0
 offset_top = -64.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
@@ -262,3 +289,5 @@ stream = ExtResource("12_s8qj7")
 volume_db = -24.0
 autoplay = true
 bus = &"BGM"
+
+[connection signal="mouse_entered" from="CanvasLayer/TilesBar" to="." method="_on_tiles_bar_mouse_entered"]
