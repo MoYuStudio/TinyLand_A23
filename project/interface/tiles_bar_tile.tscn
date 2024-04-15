@@ -29,19 +29,19 @@ func _ready():
 	angle_x_max = deg_to_rad(angle_x_max)
 	angle_y_max = deg_to_rad(angle_y_max)
 	
-func follow_mouse(delta: float) -> void:
+func follow_mouse(delta):
 	if not following_mouse: return
 	var mouse_pos: Vector2 = get_global_mouse_position()
 	global_position = mouse_pos - (size/2.0)
 
-func handle_mouse_click(event: InputEvent) -> void:
+func handle_mouse_click(event):
 	if not event is InputEventMouseButton: return
 	if event.button_index != MOUSE_BUTTON_LEFT: return
 	
 	if event.is_pressed():
 		following_mouse = true
 
-func _on_gui_input(event: InputEvent) -> void:
+func _on_gui_input(event):
 	
 	handle_mouse_click(event)
 	
@@ -66,13 +66,13 @@ func _on_gui_input(event: InputEvent) -> void:
 func _on_pressed():
 	RuningData.choose_tile_name = tile_name
 	
-func _on_mouse_entered() -> void:
+func _on_mouse_entered():
 	if tween_hover and tween_hover.is_running():
 		tween_hover.kill()
 	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
-	tween_hover.tween_property(self, \"scale\", Vector2(1.2, 1.2), 0.5)
+	tween_hover.tween_property(self, \"scale\", Vector2(1.1, 1.1), 0.5)
 
-func _on_mouse_exited() -> void:
+func _on_mouse_exited():
 	# Reset rotation
 	if tween_rot and tween_rot.is_running():
 		tween_rot.kill()

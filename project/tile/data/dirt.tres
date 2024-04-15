@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="MoYuTileData" load_steps=3 format=3 uid="uid://t7qn7g20kdvp"]
+
+[ext_resource type="Script" path="res://utility/tile_data.gd" id="1_t5sfw"]
+[ext_resource type="Texture2D" uid="uid://srsh0c5vlsrn" path="res://tile/png/2.png" id="2_yayht"]
+
+[resource]
+script = ExtResource("1_t5sfw")
+tile_id = 2
+tile_name = "dirt"
+tile_texture = ExtResource("2_yayht")
+price = {
+"food": 10,
+"metal": 0,
+"money": 1,
+"quartz": 0,
+"sand": 0,
+"stone": 0,
+"wood": 0
+}
+can_build_on = [-1, 1]

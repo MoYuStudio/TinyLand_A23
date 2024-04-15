@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="MoYuTileData" load_steps=2 format=3 uid="uid://bjauq32da5bdh"]
+
+[ext_resource type="Script" path="res://utility/tile_data.gd" id="1_0meyw"]
+
+[resource]
+script = ExtResource("1_0meyw")
+tile_id = 10000
+tile_name = "air"
+price = {
+"food": 0,
+"metal": 0,
+"money": 0,
+"quartz": 0,
+"sand": 0,
+"stone": 0,
+"wood": 0
+}
+can_build_on = []
