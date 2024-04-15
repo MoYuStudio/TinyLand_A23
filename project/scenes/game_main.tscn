@@ -23,15 +23,19 @@ extends Node2D
 @onready var resources_bar = $CanvasLayer/ResourcesBar/Container
 @onready var camera = $Camera
 @onready var tilemap = $TileMap
+@onready var animation_player = $AnimationPlayer
 
 @export var player_data : MoYuPlayerData
 
 @export var max_offset: Vector2
 @export var smoothing: float = 2.0
 
+func _ready():
+	animation_player.play(\"Sun\")
+
 func _physics_process(delta):
-	resources_bar.get_node(\"Money/Num/Label\").text = str(player_data.money)
-	resources_bar.get_node(\"Food/Num/Label\").text = str(player_data.food)
+	resources_bar.get_node(\"Money/Num/Label\").text = str(player_data.price[\"money\"])
+	resources_bar.get_node(\"Food/Num/Label\").text = str(player_data.price[\"food\"])
 
 func _process(delta):
 	var center: Vector2 = get_viewport_rect().size / 2.0
@@ -199,19 +203,33 @@ func _unhandled_input(event):
 	if Input.is_action_pressed(\"build\"):
 		var tile_to_build = load(\"res://tile/data/\"+
 			RuningData.choose_tile_name+\".tres\")
-
+			
 		if tile_to_build.tile_id > 10000:
 			if get_cell_source_id(land_layer, land_pos) != -1:
-				set_cell(building_layer, building_pos, 
-				tile_to_build.tile_id, Vector2(0, 0), 1)
+				if get_cell_source_id(building_layer, building_pos) != -1:
+					if pay(tile_to_build):
+						set_cell(building_layer, building_pos, 
+						tile_to_build.tile_id, Vector2(0, 0), 1)
 				
 		elif tile_to_build.tile_id < 10000:
-			set_cell(land_layer, land_pos, tile_to_build.tile_id, Vector2(0, 0), 0)
-			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
+			if get_cell_source_id(land_layer, land_pos) != tile_to_build.tile_id:
+				if pay(tile_to_build):
+					set_cell(land_layer, land_pos, tile_to_build.tile_id, Vector2(0, 0), 0)
+					set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
 			
 		elif tile_to_build.tile_id == 10000:
 			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
 	
+func pay(tile_to_build):
+	var player_data = load(\"res://data/player_data_slot_0.tres\")
+	
+	for pay in tile_to_build.price:
+		if player_data.price[pay] >= tile_to_build.price[pay]:
+			player_data.price[pay] -= tile_to_build.price[pay]
+		else:
+			return false
+		
+	return true
 "
 
 [sub_resource type="GDScript" id="GDScript_is30g"]
@@ -263,6 +281,7 @@ bus = &"BGM"
 color = Color(0, 0, 0, 1)
 
 [node name="DirectionalLight" type="DirectionalLight2D" parent="."]
+shadow_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
