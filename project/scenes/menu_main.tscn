@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://doa5wf4d35e56"]
+[gd_scene load_steps=20 format=3 uid="uid://doa5wf4d35e56"]
 
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="1_3urhm"]
 [ext_resource type="Shader" path="res://shader/2DPerspective.gdshader" id="1_4wrud"]
 [ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="1_gmgff"]
 [ext_resource type="Texture2D" uid="uid://dd8yp404wqfwj" path="res://icon/icon.png" id="2_rutd4"]
 [ext_resource type="FontFile" uid="uid://bxkcgrk5xuhuc" path="res://fonts/kenney_mini.ttf" id="5_hy4mo"]
+[ext_resource type="AudioStream" uid="uid://cr576ex6pmmpy" path="res://sound/switch_001.ogg" id="6_ilosl"]
 
 [sub_resource type="Environment" id="Environment_jm716"]
 background_mode = 3
@@ -54,6 +55,7 @@ script/source = "
 extends Button
 
 @onready var texture_rect = $TextureRect
+@onready var audio_player = $AudioStreamPlayer
 
 
 var angle_x_max: float = 15.0
@@ -106,6 +108,9 @@ func _on_gui_input(event):
 	texture_rect.material.set_shader_parameter(\"y_rot\", rot_x)
 
 func _on_pressed():
+	audio_player.play()
+	_on_mouse_exited()
+	await audio_player.finished
 	SceneTransition.change_scene('black','res://scenes/game_main.tscn')
 	
 func _on_mouse_entered():
@@ -190,6 +195,7 @@ script = SubResource("GDScript_u1nqg")
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Button"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_puyit")
+layout_mode = 0
 offset_left = -32.0
 offset_top = -32.0
 offset_right = 224.0
@@ -198,6 +204,7 @@ texture = ExtResource("2_rutd4")
 
 [node name="Label" type="Label" parent="CanvasLayer/Button"]
 texture_filter = 1
+layout_mode = 0
 offset_left = -78.0
 offset_top = 204.0
 offset_right = 270.0
@@ -206,6 +213,9 @@ theme = ExtResource("1_3urhm")
 theme_override_fonts/font = ExtResource("5_hy4mo")
 theme_override_font_sizes/font_size = 48
 text = "TinyLand.moyu"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/Button"]
+stream = ExtResource("6_ilosl")
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0.501961)
