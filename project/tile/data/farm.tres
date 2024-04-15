@@ -7,7 +7,7 @@ script = ExtResource("1_s8t6s")
 tile_id = 10001
 tile_name = "farm"
 price = {
-"food": 0,
+"food": 1,
 "metal": 0,
 "money": 0,
 "quartz": 0,

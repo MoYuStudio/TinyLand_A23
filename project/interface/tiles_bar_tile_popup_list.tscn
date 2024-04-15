@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://buils2bqapjc3"]
+
+[ext_resource type="Texture2D" uid="uid://ce5j2ofes6ys8" path="res://icon/resource/money.png" id="1_q5ih0"]
+[ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="1_tgewd"]
+
+[sub_resource type="GDScript" id="GDScript_sn4y1"]
+script/source = "
+extends HBoxContainer
+
+@onready var self_icon = $Icon/Sprite
+@onready var self_num = $Num/Label
+
+@export var icon : Texture
+@export var num : String
+
+func _ready():
+	self_icon.texture = icon
+	self_num.text = num
+
+func _process(delta):
+	pass
+"
+
+[node name="HBoxContainer" type="HBoxContainer"]
+texture_filter = 1
+theme = ExtResource("1_tgewd")
+theme_override_constants/separation = 16
+alignment = 1
+script = SubResource("GDScript_sn4y1")
+
+[node name="Icon" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Sprite" type="Sprite2D" parent="Icon"]
+position = Vector2(0, 10)
+texture = ExtResource("1_q5ih0")
+
+[node name="Num" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Num"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "999"

@@ -24,7 +24,7 @@ func _ready():
 func _on_growing_timer_timeout():
 	if sprite.frame >= 5:
 		sprite.frame = 0
-		player_data.food += 10
+		player_data.price[\"food\"] += 10
 	sprite.frame += 1
 "
 
@@ -81,9 +81,9 @@ libraries = {
 "": SubResource("AnimationLibrary_1rxtf")
 }
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight" type="PointLight2D" parent="."]
 position = Vector2(0, 4)
-energy = 0.2
+energy = 0.0
 texture = ExtResource("3_ava5w")
 
 [connection signal="timeout" from="GrowingTimer" to="." method="_on_growing_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://catj35d1cnagp"]
+[gd_scene load_steps=7 format=3 uid="uid://catj35d1cnagp"]
 
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="1_6w3eh"]
 [ext_resource type="Shader" path="res://shader/2DPerspective.gdshader" id="1_hhkvq"]
@@ -8,7 +8,11 @@
 script/source = "
 extends Button
 
+@onready var tiles_bar_tile_popup_list = preload(\"res://interface/tiles_bar_tile_popup_list.tscn\")
+
 @onready var texture_rect = $TextureRect
+@onready var popup = $PopupPanel
+@onready var popup_container = $PopupPanel/MarginContainer/VBoxContainer
 
 @export var tile_name : String
 @export var tile_texture : Texture2D
@@ -29,6 +33,16 @@ func _ready():
 	angle_x_max = deg_to_rad(angle_x_max)
 	angle_y_max = deg_to_rad(angle_y_max)
 	
+	popup.hide()
+	
+	var tile_data = load(\"res://tile/data/\"+tile_name+\".tres\")
+	for cost in tile_data.price:
+		if tile_data.price[cost] > 0:
+			var popup_list = tiles_bar_tile_popup_list.instantiate()
+			popup_list.icon = load(\"res://icon/resource/\"+cost+\".png\")
+			popup_list.num = str(tile_data.price[cost])
+			popup_container.add_child(popup_list)
+			
 func follow_mouse(delta):
 	if not following_mouse: return
 	var mouse_pos: Vector2 = get_global_mouse_position()
@@ -71,6 +85,8 @@ func _on_mouse_entered():
 		tween_hover.kill()
 	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween_hover.tween_property(self, \"scale\", Vector2(1.1, 1.1), 0.5)
+	
+	popup.show()
 
 func _on_mouse_exited():
 	# Reset rotation
@@ -85,6 +101,8 @@ func _on_mouse_exited():
 		tween_hover.kill()
 	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween_hover.tween_property(self, \"scale\", Vector2.ONE, 0.55)
+	
+	popup.hide()
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r35ih"]
@@ -95,6 +113,13 @@ shader_parameter/cull_back = true
 shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lu3j3"]
+bg_color = Color(1, 1, 1, 0.25098)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [node name="Tile" type="Button"]
 texture_filter = 1
@@ -121,6 +146,29 @@ layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 texture = ExtResource("2_wtupq")
+
+[node name="PopupPanel" type="Panel" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = -32.0
+offset_top = -136.0
+offset_right = 96.0
+offset_bottom = -8.0
+theme = ExtResource("1_6w3eh")
+theme_override_styles/panel = SubResource("StyleBoxFlat_lu3j3")
+
+[node name="MarginContainer" type="MarginContainer" parent="PopupPanel"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/MarginContainer"]
+layout_mode = 2
+alignment = 1
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=34 format=3 uid="uid://b1f5fso0ajmoi"]
+[gd_resource type="Theme" load_steps=35 format=3 uid="uid://b1f5fso0ajmoi"]
 
 [ext_resource type="FontFile" uid="uid://dwo3w3m0bti6d" path="res://fonts/YouSheBiaoTiHei.ttf" id="1_wfh00"]
 
@@ -78,6 +78,18 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2au2h"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.101961, 0.101961, 0.101961, 0.25098)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0)
 
 [sub_resource type="Image" id="Image_iy7l8"]
 data = {
@@ -313,6 +325,7 @@ Label/font_sizes/font_size = 32
 Label/fonts/font = ExtResource("1_wfh00")
 Label/styles/normal = SubResource("StyleBoxEmpty_0r3qe")
 Panel/styles/panel = SubResource("StyleBoxFlat_i5gki")
+PopupPanel/styles/panel = SubResource("StyleBoxFlat_2au2h")
 TabBar/colors/drop_mark_color = Color(1, 1, 1, 1)
 TabBar/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 TabBar/colors/font_hovered_color = Color(0.95, 0.95, 0.95, 1)
