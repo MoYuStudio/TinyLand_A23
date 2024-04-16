@@ -29,6 +29,7 @@ SceneTransition="*res://utility/scene_transition.tscn"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+mouse_cursor/custom_image="res://interface/mouse_x2.png"
 
 [input]
 

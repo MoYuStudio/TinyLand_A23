@@ -6,6 +6,7 @@ class_name MoYuPlayerData
 
 @export var price : Dictionary = {
 	"money":0, # 金币
+	"manpower":0, # 人力
 	"food":0, # 食物
 	"wood":0, # 木材
 	"stone":0, # 岩石
