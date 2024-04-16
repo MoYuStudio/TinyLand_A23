@@ -9,8 +9,8 @@ class_name MoYuPlayerData
 	"food":0, # 食物
 	"wood":0, # 木材
 	"stone":0, # 岩石
-	"sand":0, # 沙子
 	"metal":0, # 金属
-	"quartz":0, # 石英
+	"quar":0, # 砂岩
+	"glass":0, # 玻璃
 }
 
