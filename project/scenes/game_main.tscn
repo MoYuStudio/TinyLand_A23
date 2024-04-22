@@ -305,7 +305,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_u15gb")
-split_offset = 500
+split_offset = 360
 
 [node name="ResourcesBar" parent="CanvasLayer/HSplitContainer" instance=ExtResource("11_ed847")]
 texture_filter = 1
@@ -326,7 +326,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(772, 720)
+size = Vector2i(912, 720)
 render_target_update_mode = 4
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]

@@ -10,11 +10,6 @@ tile_name = "dirt"
 tile_texture = ExtResource("2_yayht")
 price = {
 "food": 10,
-"metal": 0,
-"money": 1,
-"quartz": 0,
-"sand": 0,
-"stone": 0,
-"wood": 0
+"money": 1
 }
 can_build_on = [-1, 1]

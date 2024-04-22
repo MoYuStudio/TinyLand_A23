@@ -7,12 +7,6 @@ script = ExtResource("1_s8t6s")
 tile_id = 10001
 tile_name = "farm"
 price = {
-"food": 1,
-"metal": 0,
-"money": 0,
-"quartz": 0,
-"sand": 0,
-"stone": 0,
-"wood": 0
+"food": 1
 }
 can_build_on = []

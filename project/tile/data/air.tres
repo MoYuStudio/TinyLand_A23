@@ -8,13 +8,5 @@ script = ExtResource("1_q72qs")
 tile_id = 0
 tile_name = "air"
 tile_texture = ExtResource("2_c47cy")
-price = {
-"food": 0,
-"metal": 0,
-"money": 0,
-"quartz": 0,
-"sand": 0,
-"stone": 0,
-"wood": 0
-}
+price = {}
 can_build_on = [-1]

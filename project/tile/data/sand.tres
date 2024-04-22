@@ -6,13 +6,5 @@
 script = ExtResource("1_drrsk")
 tile_id = 3
 tile_name = "sand"
-price = {
-"food": 0,
-"metal": 0,
-"money": 0,
-"quartz": 0,
-"sand": 0,
-"stone": 0,
-"wood": 0
-}
+price = {}
 can_build_on = []
