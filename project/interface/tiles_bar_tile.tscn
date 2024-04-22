@@ -12,7 +12,7 @@ extends Button
 
 @onready var texture_rect = $TextureRect
 @onready var popup = $PopupPanel
-@onready var popup_container = $PopupPanel/MarginContainer/VBoxContainer
+@onready var popup_container = $PopupPanel/MarginContainer/PopupContainer
 
 @export var tile_name : String
 @export var tile_texture : Texture2D
@@ -86,7 +86,8 @@ func _on_mouse_entered():
 	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween_hover.tween_property(self, \"scale\", Vector2(1.1, 1.1), 0.5)
 	
-	popup.show()
+	if popup_container.get_child_count() > 0:
+		popup.show()
 
 func _on_mouse_exited():
 	# Reset rotation
@@ -166,7 +167,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel/MarginContainer"]
+[node name="PopupContainer" type="VBoxContainer" parent="PopupPanel/MarginContainer"]
 layout_mode = 2
 alignment = 1
 

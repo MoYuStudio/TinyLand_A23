@@ -1,10 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqatkw3r5u63j"]
+[gd_scene load_steps=8 format=3 uid="uid://cqatkw3r5u63j"]
 
 [ext_resource type="Texture2D" uid="uid://ce5j2ofes6ys8" path="res://icon/resource/money.png" id="1_nwsf8"]
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_csdwj"]
 [ext_resource type="FontFile" uid="uid://cyvdvdsbhwc8m" path="res://fonts/kenney_mini_square.ttf" id="3_2mwkt"]
 [ext_resource type="Texture2D" uid="uid://8pv780mlgjx5" path="res://icon/resource/food.png" id="3_j6pmn"]
 [ext_resource type="Texture2D" uid="uid://di78mjx51a8iq" path="res://icon/resource/manpower.png" id="4_t33qk"]
+
+[sub_resource type="GDScript" id="GDScript_7w7ci"]
+script/source = "
+extends Control
+
+@onready var v_scroll = $VScrollBar
+@onready var container = $Container
+
+func _ready():
+	pass
+
+func _physics_process(delta):
+	container.position.y = - (v_scroll.value * 
+							((container.size.y - v_scroll.size.y) / 100))
+	
+"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lguiq"]
 bg_color = Color(0.374139, 0.374139, 0.374139, 1)
@@ -15,6 +31,8 @@ anchors_preset = 0
 offset_right = 360.0
 offset_bottom = 1440.0
 scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+script = SubResource("GDScript_7w7ci")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -25,12 +43,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lguiq")
 
+[node name="VScrollBar" type="VScrollBar" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 16.0
+grow_vertical = 2
+
 [node name="Container" type="VBoxContainer" parent="."]
 texture_filter = 1
-layout_mode = 2
-offset_top = 3.0
-offset_right = 2560.0
-offset_bottom = 63.0
+layout_mode = 1
+offset_left = 24.0
+offset_right = 336.0
+offset_bottom = 1832.0
 alignment = 1
 
 [node name="Money" type="HBoxContainer" parent="Container"]
@@ -104,6 +129,1254 @@ offset = Vector2(16, 16)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Container/Food/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower2" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower2"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower2/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower2/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower3" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower3"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower3/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower3"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower3/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower4" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower4"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower4/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower4"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower4/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower5" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower5"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower5/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower5"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower5/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower6" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower6"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower6/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower6"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower6/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower7" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower7"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower7/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower7"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower7/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower8" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower8"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower8/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower8"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower8/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower9" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower9"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower9/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower9"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower9/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower10" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower10"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower10/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower10"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower10/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower11" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower11"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower11/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower11"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower11/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower12" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower12"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower12/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower12"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower12/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower13" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower13"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower13/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower13"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower13/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower14" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower14"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower14/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower14"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower14/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower15" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower15"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower15/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower15"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower15/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower16" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower16"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower16/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower16"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower16/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower17" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower17"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower17/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower17"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower17/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower18" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower18"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower18/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower18"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower18/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower19" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower19"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower19/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower19"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower19/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower20" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower20"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower20/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower20"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower20/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower21" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower21"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower21/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower21"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower21/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower22" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower22"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower22/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower22"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower22/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower23" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower23"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower23/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower23"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower23/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower24" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower24"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower24/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower24"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower24/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower25" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower25"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower25/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower25"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower25/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower26" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower26"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower26/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower26"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower26/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower27" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower27"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower27/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower27"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower27/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower28" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower28"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower28/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower28"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower28/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower29" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower29"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower29/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower29"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower29/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower30" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower30"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower30/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower30"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower30/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower31" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower31"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower31/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower31"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower31/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower32" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower32"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower32/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower32"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower32/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower33" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower33"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower33/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower33"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower33/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower34" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower34"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower34/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower34"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower34/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower35" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower35"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower35/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower35"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower35/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower36" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower36"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower36/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower36"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower36/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower37" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower37"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower37/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower37"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower37/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower38" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower38"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower38/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower38"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower38/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower39" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower39"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower39/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower39"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower39/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower40" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower40"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower40/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower40"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower40/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower41" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower41"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower41/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower41"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower41/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower42" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower42"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower42/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower42"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower42/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower43" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower43"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower43/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower43"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower43/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower44" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower44"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower44/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower44"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower44/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower45" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower45"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower45/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower45"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower45/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower46" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower46"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower46/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower46"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower46/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower47" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower47"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower47/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower47"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower47/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower48" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower48"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower48/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower48"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower48/Num"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_csdwj")
+theme_override_fonts/font = ExtResource("3_2mwkt")
+theme_override_font_sizes/font_size = 24
+text = "0"
+
+[node name="Manpower49" type="HBoxContainer" parent="Container"]
+layout_mode = 2
+
+[node name="Icon" type="MarginContainer" parent="Container/Manpower49"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Sprite" type="Sprite2D" parent="Container/Manpower49/Icon"]
+texture_filter = 1
+texture = ExtResource("4_t33qk")
+offset = Vector2(16, 16)
+
+[node name="Num" type="MarginContainer" parent="Container/Manpower49"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Container/Manpower49/Num"]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("2_csdwj")
