@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://0otwsrs2ureo" path="res://tile/png/3.png" id="5_0oqrq"]
 [ext_resource type="Texture2D" uid="uid://bgg68vgrvmcu8" path="res://tile/png/512.png" id="6_6a21l"]
 [ext_resource type="Texture2D" uid="uid://5hr2xdlm6pk7" path="res://tile/png/4.png" id="6_gunf2"]
-[ext_resource type="Texture2D" uid="uid://56tumnnhcb42" path="res://tile/png/262.png" id="6_tb44o"]
+[ext_resource type="Texture2D" uid="uid://dc4kj0frv5pif" path="res://tile/png/262.png" id="6_tb44o"]
 [ext_resource type="Texture2D" uid="uid://djfso8r2bed71" path="res://tile/png/5.png" id="7_au4gn"]
-[ext_resource type="Texture2D" uid="uid://cnoj1gxgwn7fe" path="res://tile/png/769.png" id="7_l1qb5"]
+[ext_resource type="Texture2D" uid="uid://cd73e10paxbg" path="res://tile/png/769.png" id="7_l1qb5"]
 
 [node name="TilesBar" type="MarginContainer"]
 anchors_preset = 7

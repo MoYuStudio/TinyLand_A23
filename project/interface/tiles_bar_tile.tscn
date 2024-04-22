@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="1_6w3eh"]
 [ext_resource type="Shader" path="res://shader/2DPerspective.gdshader" id="1_hhkvq"]
-[ext_resource type="Texture2D" uid="uid://c16yiulcboja4" path="res://tile/png/255.png" id="2_wtupq"]
+[ext_resource type="Texture2D" uid="uid://byetkxqw1stua" path="res://tile/png/255.png" id="2_wtupq"]
 
 [sub_resource type="GDScript" id="GDScript_8qkpb"]
 script/source = "

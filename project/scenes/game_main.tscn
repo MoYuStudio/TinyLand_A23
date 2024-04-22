@@ -8,13 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://0otwsrs2ureo" path="res://tile/png/3.png" id="5_x1riv"]
 [ext_resource type="Texture2D" uid="uid://5hr2xdlm6pk7" path="res://tile/png/4.png" id="6_72ph8"]
 [ext_resource type="Texture2D" uid="uid://we18t0s2ob2r" path="res://tile/png/5a1.png" id="7_0ycd3"]
-[ext_resource type="Texture2D" uid="uid://cicabngtdppgo" path="res://tile/png/254.png" id="8_d4rgs"]
+[ext_resource type="Texture2D" uid="uid://bjpwocmmkch3l" path="res://tile/png/254.png" id="8_d4rgs"]
 [ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="9_c86v8"]
 [ext_resource type="PackedScene" uid="uid://cqatkw3r5u63j" path="res://interface/resources_bar.tscn" id="11_ed847"]
 [ext_resource type="PackedScene" uid="uid://be3rafvp3s3pe" path="res://interface/tiles_bar.tscn" id="12_ewp7h"]
 [ext_resource type="AudioStream" uid="uid://bhiiqmxpslqy5" path="res://music/1996.mp3" id="12_s8qj7"]
 [ext_resource type="PackedScene" uid="uid://catj35d1cnagp" path="res://interface/tiles_bar_tile.tscn" id="13_si5w3"]
-[ext_resource type="Texture2D" uid="uid://c16yiulcboja4" path="res://tile/png/255.png" id="14_x22t7"]
+[ext_resource type="Texture2D" uid="uid://byetkxqw1stua" path="res://tile/png/255.png" id="14_x22t7"]
 
 [sub_resource type="GDScript" id="GDScript_5qd7c"]
 script/source = "
