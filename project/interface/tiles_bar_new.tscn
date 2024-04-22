@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cd73e10paxbg" path="res://tile/png/769.png" id="11_8sxwc"]
 
 [node name="TilesBar" type="TabContainer"]
-offset_right = 1024.0
+offset_right = 600.0
 offset_bottom = 128.0
 theme = ExtResource("1_g4uh3")
 tab_alignment = 1
