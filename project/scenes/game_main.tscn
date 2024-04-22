@@ -20,10 +20,13 @@
 script/source = "
 extends Node2D
 
-@onready var resources_bar = $CanvasLayer/ResourcesBar/Container
-@onready var camera = $Camera
-@onready var tilemap = $TileMap
-@onready var animation_player = $AnimationPlayer
+@onready var subviewport = $CanvasLayer/HSplitContainer/Control/ \\
+							SubViewportContainer/SubViewport
+
+@onready var resources_bar = $CanvasLayer/HSplitContainer/ResourcesBar/Container
+@onready var camera = subviewport.get_node(\"Camera\") # $Camera
+@onready var tilemap = subviewport.get_node(\"TileMap\")  # $TileMap
+@onready var animation_player = subviewport.get_node(\"AnimationPlayer\")  # $AnimationPlayer
 
 @export var player_data : MoYuPlayerData
 
@@ -287,44 +290,72 @@ func _process(delta):
 script = SubResource("GDScript_5qd7c")
 player_data = ExtResource("1_au5ao")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 256
+
+[node name="ResourcesBar" parent="CanvasLayer/HSplitContainer" instance=ExtResource("11_ed847")]
+texture_filter = 1
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CanvasLayer/HSplitContainer"]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer/HSplitContainer/Control"]
+layout_mode = 2
+offset_right = 1268.0
+offset_bottom = 720.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1268, 720)
+render_target_update_mode = 4
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_r2gak")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
 stream = ExtResource("12_s8qj7")
 volume_db = -24.0
 autoplay = true
 bus = &"BGM"
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
+[node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
 color = Color(0, 0, 0, 1)
 
-[node name="DirectionalLight" type="DirectionalLight2D" parent="."]
+[node name="DirectionalLight" type="DirectionalLight2D" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
 shadow_enabled = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
 libraries = {
 "": SubResource("AnimationLibrary_p8gab")
 }
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
 follow_viewport_enabled = true
 follow_viewport_scale = 0.9
 scroll_ignore_camera_zoom = true
 
-[node name="Star" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="Star" type="ParallaxLayer" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport/ParallaxBackground"]
 modulate = Color(100, 100, 100, 1)
 motion_scale = Vector2(0.9, 0.9)
 motion_mirroring = Vector2(256, 256)
 
-[node name="Particles" type="GPUParticles2D" parent="ParallaxBackground/Star"]
+[node name="Particles" type="GPUParticles2D" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport/ParallaxBackground/Star"]
 texture_filter = 1
 amount = 64
 process_material = SubResource("ParticleProcessMaterial_okxbh")
 texture = ExtResource("9_c86v8")
 lifetime = 6.0
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
 y_sort_enabled = true
 texture_filter = 1
 tile_set = SubResource("TileSet_gul10")
@@ -337,14 +368,14 @@ layer_1/y_sort_enabled = true
 layer_1/tile_data = PackedInt32Array(196607, 1, 0, 131072, 1, 0, 65535, 1, 0, 0, 1, 0, 131070, 1, 0, 65536, 1, 0, -1, 1, 0, 262143, 1, 0, 131071, 1, 0)
 script = SubResource("GDScript_i2d70")
 
-[node name="PreView" type="Sprite2D" parent="TileMap"]
+[node name="PreView" type="Sprite2D" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport/TileMap"]
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 9
 y_sort_enabled = true
 texture_filter = 1
 texture = ExtResource("8_d4rgs")
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
 zoom = Vector2(6, 6)
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
@@ -352,16 +383,16 @@ rotation_smoothing_enabled = true
 rotation_smoothing_speed = 6.0
 script = SubResource("GDScript_is30g")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="TilesBar" parent="CanvasLayer/HSplitContainer/Control" instance=ExtResource("12_ewp7h")]
+layout_mode = 1
+offset_left = -518.0
+offset_right = 506.0
 
-[node name="ResourcesBar" parent="CanvasLayer" instance=ExtResource("11_ed847")]
-
-[node name="TilesBar" parent="CanvasLayer" instance=ExtResource("12_ewp7h")]
-
-[node name="BuildingCleaner" type="MarginContainer" parent="CanvasLayer"]
-offset_left = 1136.0
+[node name="BuildingCleaner" type="MarginContainer" parent="CanvasLayer/HSplitContainer/Control"]
+layout_mode = 0
+offset_left = 1124.0
 offset_top = 616.0
-offset_right = 1232.0
+offset_right = 1220.0
 offset_bottom = 712.0
 mouse_filter = 0
 theme_override_constants/margin_left = 16
@@ -369,7 +400,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Tile" parent="CanvasLayer/BuildingCleaner" instance=ExtResource("13_si5w3")]
+[node name="Tile" parent="CanvasLayer/HSplitContainer/Control/BuildingCleaner" instance=ExtResource("13_si5w3")]
 layout_mode = 2
 tile_name = "building_air"
 tile_texture = ExtResource("14_x22t7")

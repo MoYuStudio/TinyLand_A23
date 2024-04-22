@@ -7,33 +7,31 @@
 [ext_resource type="Texture2D" uid="uid://di78mjx51a8iq" path="res://icon/resource/manpower.png" id="4_t33qk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lguiq"]
-bg_color = Color(1, 1, 1, 0.25098)
+bg_color = Color(0.374139, 0.374139, 0.374139, 1)
 
 [node name="ResourcesBar" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 2560.0
-offset_bottom = 92.0
+offset_right = 360.0
+offset_bottom = 1440.0
 scale = Vector2(0.5, 0.5)
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
 offset_right = 2560.0
-offset_bottom = 64.0
+offset_bottom = 1440.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_lguiq")
 
-[node name="Container" type="HBoxContainer" parent="."]
+[node name="Container" type="VBoxContainer" parent="."]
 texture_filter = 1
 layout_mode = 2
 offset_top = 3.0
 offset_right = 2560.0
 offset_bottom = 63.0
-theme_override_constants/separation = 128
 alignment = 1
 
 [node name="Money" type="HBoxContainer" parent="Container"]
 layout_mode = 2
-theme_override_constants/separation = 32
 
 [node name="Icon" type="MarginContainer" parent="Container/Money"]
 layout_mode = 2
@@ -44,9 +42,8 @@ theme_override_constants/margin_bottom = 16
 
 [node name="Sprite" type="Sprite2D" parent="Container/Money/Icon"]
 texture_filter = 1
-scale = Vector2(3, 3)
 texture = ExtResource("1_nwsf8")
-offset = Vector2(10, 10)
+offset = Vector2(16, 16)
 
 [node name="Num" type="MarginContainer" parent="Container/Money"]
 layout_mode = 2
@@ -56,12 +53,11 @@ texture_filter = 1
 layout_mode = 2
 theme = ExtResource("2_csdwj")
 theme_override_fonts/font = ExtResource("3_2mwkt")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 24
 text = "0"
 
 [node name="Manpower" type="HBoxContainer" parent="Container"]
 layout_mode = 2
-theme_override_constants/separation = 32
 
 [node name="Icon" type="MarginContainer" parent="Container/Manpower"]
 layout_mode = 2
@@ -72,9 +68,8 @@ theme_override_constants/margin_bottom = 16
 
 [node name="Sprite" type="Sprite2D" parent="Container/Manpower/Icon"]
 texture_filter = 1
-scale = Vector2(3, 3)
 texture = ExtResource("4_t33qk")
-offset = Vector2(10, 10)
+offset = Vector2(16, 16)
 
 [node name="Num" type="MarginContainer" parent="Container/Manpower"]
 layout_mode = 2
@@ -84,12 +79,11 @@ texture_filter = 1
 layout_mode = 2
 theme = ExtResource("2_csdwj")
 theme_override_fonts/font = ExtResource("3_2mwkt")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 24
 text = "0"
 
 [node name="Food" type="HBoxContainer" parent="Container"]
 layout_mode = 2
-theme_override_constants/separation = 32
 
 [node name="Icon" type="MarginContainer" parent="Container/Food"]
 layout_mode = 2
@@ -100,9 +94,8 @@ theme_override_constants/margin_bottom = 16
 
 [node name="Sprite" type="Sprite2D" parent="Container/Food/Icon"]
 texture_filter = 1
-scale = Vector2(3, 3)
 texture = ExtResource("3_j6pmn")
-offset = Vector2(10, 10)
+offset = Vector2(16, 16)
 
 [node name="Num" type="MarginContainer" parent="Container/Food"]
 layout_mode = 2
@@ -112,173 +105,5 @@ texture_filter = 1
 layout_mode = 2
 theme = ExtResource("2_csdwj")
 theme_override_fonts/font = ExtResource("3_2mwkt")
-theme_override_font_sizes/font_size = 48
-text = "0"
-
-[node name="Manpower2" type="HBoxContainer" parent="Container"]
-layout_mode = 2
-theme_override_constants/separation = 32
-
-[node name="Icon" type="MarginContainer" parent="Container/Manpower2"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Sprite" type="Sprite2D" parent="Container/Manpower2/Icon"]
-texture_filter = 1
-scale = Vector2(3, 3)
-texture = ExtResource("4_t33qk")
-offset = Vector2(10, 10)
-
-[node name="Num" type="MarginContainer" parent="Container/Manpower2"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Container/Manpower2/Num"]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("2_csdwj")
-theme_override_fonts/font = ExtResource("3_2mwkt")
-theme_override_font_sizes/font_size = 48
-text = "0"
-
-[node name="Manpower3" type="HBoxContainer" parent="Container"]
-layout_mode = 2
-theme_override_constants/separation = 32
-
-[node name="Icon" type="MarginContainer" parent="Container/Manpower3"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Sprite" type="Sprite2D" parent="Container/Manpower3/Icon"]
-texture_filter = 1
-scale = Vector2(3, 3)
-texture = ExtResource("4_t33qk")
-offset = Vector2(10, 10)
-
-[node name="Num" type="MarginContainer" parent="Container/Manpower3"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Container/Manpower3/Num"]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("2_csdwj")
-theme_override_fonts/font = ExtResource("3_2mwkt")
-theme_override_font_sizes/font_size = 48
-text = "0"
-
-[node name="Manpower4" type="HBoxContainer" parent="Container"]
-layout_mode = 2
-theme_override_constants/separation = 32
-
-[node name="Icon" type="MarginContainer" parent="Container/Manpower4"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Sprite" type="Sprite2D" parent="Container/Manpower4/Icon"]
-texture_filter = 1
-scale = Vector2(3, 3)
-texture = ExtResource("4_t33qk")
-offset = Vector2(10, 10)
-
-[node name="Num" type="MarginContainer" parent="Container/Manpower4"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Container/Manpower4/Num"]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("2_csdwj")
-theme_override_fonts/font = ExtResource("3_2mwkt")
-theme_override_font_sizes/font_size = 48
-text = "0"
-
-[node name="Manpower5" type="HBoxContainer" parent="Container"]
-layout_mode = 2
-theme_override_constants/separation = 32
-
-[node name="Icon" type="MarginContainer" parent="Container/Manpower5"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Sprite" type="Sprite2D" parent="Container/Manpower5/Icon"]
-texture_filter = 1
-scale = Vector2(3, 3)
-texture = ExtResource("4_t33qk")
-offset = Vector2(10, 10)
-
-[node name="Num" type="MarginContainer" parent="Container/Manpower5"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Container/Manpower5/Num"]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("2_csdwj")
-theme_override_fonts/font = ExtResource("3_2mwkt")
-theme_override_font_sizes/font_size = 48
-text = "0"
-
-[node name="Manpower6" type="HBoxContainer" parent="Container"]
-layout_mode = 2
-theme_override_constants/separation = 32
-
-[node name="Icon" type="MarginContainer" parent="Container/Manpower6"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Sprite" type="Sprite2D" parent="Container/Manpower6/Icon"]
-texture_filter = 1
-scale = Vector2(3, 3)
-texture = ExtResource("4_t33qk")
-offset = Vector2(10, 10)
-
-[node name="Num" type="MarginContainer" parent="Container/Manpower6"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Container/Manpower6/Num"]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("2_csdwj")
-theme_override_fonts/font = ExtResource("3_2mwkt")
-theme_override_font_sizes/font_size = 48
-text = "0"
-
-[node name="Manpower7" type="HBoxContainer" parent="Container"]
-layout_mode = 2
-theme_override_constants/separation = 32
-
-[node name="Icon" type="MarginContainer" parent="Container/Manpower7"]
-layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Sprite" type="Sprite2D" parent="Container/Manpower7/Icon"]
-texture_filter = 1
-scale = Vector2(3, 3)
-texture = ExtResource("4_t33qk")
-offset = Vector2(10, 10)
-
-[node name="Num" type="MarginContainer" parent="Container/Manpower7"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Container/Manpower7/Num"]
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("2_csdwj")
-theme_override_fonts/font = ExtResource("3_2mwkt")
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 24
 text = "0"
