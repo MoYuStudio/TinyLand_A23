@@ -28,7 +28,7 @@ class_name MoYuPlayerData
 	"frozen_cultured_meat":0, # 冷冻培养肉
 	
 	# 冰 水
-	"ice":0, # 冰块
+	"ice":0, # 冰
 	"water":0, # 水
 	
 	# 基础资源
@@ -45,6 +45,7 @@ class_name MoYuPlayerData
 	"hardwood_plank":0, # 硬木板
 	"rock_plank":0, # 石板
 	"glass":0, # 玻璃
+	"glass_plank":0, # 玻璃板
 	
 	# 原矿
 	"copper_ore":0, # 铜矿石
@@ -75,7 +76,16 @@ class_name MoYuPlayerData
 	"bronze_alloy":0, # 青铜合金
 	"aluminum_alloy":0, # 铝合金
 	"titanium_alloy":0, # 钛合金
-	"silicon_wafer":0, # 硅片
+	
+	# 科技
+	"high_purity_uranium":0, # 高纯铀
+	"high_purity_lithium":0, # 高纯锂
+	"high_purity_silicon":0, # 高纯硅
+	"silicon_wafer":0, # 单晶硅片
+	"chips":0, # 芯片
+	"advanced_chips":0, # 先进芯片
+	
+	
 	
 }
 
