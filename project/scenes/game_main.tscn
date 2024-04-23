@@ -24,36 +24,17 @@ extends Node2D
 @onready var subviewport = $CanvasLayer/HSplitContainer/Control/ \\
 							SubViewportContainer/SubViewport
 
-@onready var resources_bar = $CanvasLayer/HSplitContainer/ResourcesBar/Container
 @onready var camera = subviewport.get_node(\"Camera\") # $Camera
 @onready var tilemap = subviewport.get_node(\"TileMap\")  # $TileMap
 @onready var animation_player = subviewport.get_node(\"AnimationPlayer\")  # $AnimationPlayer
-
-@export var player_data : MoYuPlayerData
-
-@export var max_offset: Vector2
-@export var smoothing: float = 2.0
 
 func _ready():
 	animation_player.play(\"Sun\")
 
 func _physics_process(delta):
-	resources_bar.get_node(\"Money/Num/Label\").text = str(player_data.price[\"money\"])
-	resources_bar.get_node(\"Food/Num/Label\").text = str(player_data.price[\"food\"])
+	pass
 
 func _process(delta):
-	#var center: Vector2 = get_viewport_rect().size / 2.0
-	#var dist: Vector2 = get_global_mouse_position() - center
-	#var offset: Vector2 = dist / center
-	#
-	#var new_pos: Vector2
-	#
-	#new_pos.x = lerp(max_offset.x, -max_offset.x, offset.x)
-	#new_pos.y = lerp(max_offset.y, -max_offset.y, offset.y)
-	#
-	#camera.position.x = lerp(camera.position.x, new_pos.x, smoothing * delta)
-	#camera.position.y = lerp(camera.position.y, new_pos.y, smoothing * delta)
-
 	pass
 		
 func _on_tiles_bar_mouse_entered():
@@ -294,7 +275,6 @@ func _process(delta):
 
 [node name="GameMain" type="Node2D"]
 script = SubResource("GDScript_5qd7c")
-player_data = ExtResource("1_au5ao")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -310,6 +290,7 @@ split_offset = 360
 [node name="ResourcesBar" parent="CanvasLayer/HSplitContainer" instance=ExtResource("11_ed847")]
 texture_filter = 1
 layout_mode = 2
+player_data = ExtResource("1_au5ao")
 
 [node name="Control" type="Control" parent="CanvasLayer/HSplitContainer"]
 clip_contents = true

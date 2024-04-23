@@ -13,12 +13,19 @@ extends Control
 @onready var v_scroll = $VScrollBar
 @onready var container = $Container
 
+@export var player_data : MoYuPlayerData
+
 func _ready():
 	pass
 
 func _physics_process(delta):
+	# 滚动条
 	container.position.y = - (v_scroll.value * 
 							((container.size.y - v_scroll.size.y) / 100))
+	
+	# 资源更新
+	container.get_node(\"Money/Num/Label\").text = str(player_data.price[\"money\"])
+	container.get_node(\"Food/Num/Label\").text = str(player_data.price[\"food\"])
 	
 "
 
