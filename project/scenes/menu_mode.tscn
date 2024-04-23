@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://4swngb3jh1xo"]
+[gd_scene load_steps=19 format=3 uid="uid://4swngb3jh1xo"]
 
 [ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="1_kgrru"]
 [ext_resource type="PackedScene" uid="uid://bl2tqtjaw3mdn" path="res://interface/mode_card.tscn" id="1_vcu30"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://byetkxqw1stua" path="res://tile/png/255.png" id="3_5duou"]
 [ext_resource type="Texture2D" uid="uid://c66pt2xggi5k5" path="res://tile/png/factory.png" id="4_8reki"]
 [ext_resource type="Texture2D" uid="uid://bljxxddt8b0d7" path="res://tile/png/grass.png" id="5_iwq6n"]
+[ext_resource type="Texture2D" uid="uid://ttj5sycpi60s" path="res://icon/country/zh.png" id="7_r2m61"]
 
 [sub_resource type="GDScript" id="GDScript_u8dgj"]
 script/source = "
@@ -371,6 +372,7 @@ offset_top = 48.0
 offset_right = 104.0
 offset_bottom = 104.0
 text = "多语言国旗"
+icon = ExtResource("7_r2m61")
 
 [node name="Button5" type="Button" parent="CanvasLayer"]
 offset_left = 1160.0
