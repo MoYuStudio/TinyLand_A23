@@ -20,14 +20,14 @@ glow_hdr_luminance_cap = 6.0
 offsets = PackedFloat32Array(0, 0.303279, 0.647541, 1)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_fnnfy"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pjnnc"]
 gradient = SubResource("Gradient_s51f6")
 
 [sub_resource type="Curve" id="Curve_dm3di"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.72, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_nf2qn"]
+[sub_resource type="CurveTexture" id="CurveTexture_iewyp"]
 curve = SubResource("Curve_dm3di")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ykep3"]
@@ -37,8 +37,8 @@ emission_box_extents = Vector3(128, 128, 1)
 gravity = Vector3(0, 0, 0)
 scale_min = 0.3
 scale_max = 0.6
-scale_curve = SubResource("CurveTexture_nf2qn")
-color_ramp = SubResource("GradientTexture1D_fnnfy")
+scale_curve = SubResource("CurveTexture_iewyp")
+color_ramp = SubResource("GradientTexture1D_pjnnc")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xoyke"]
 
@@ -111,7 +111,7 @@ func _on_pressed():
 	audio_player.play()
 	_on_mouse_exited()
 	await audio_player.finished
-	SceneTransition.change_scene('black','res://scenes/game_main.tscn')
+	SceneTransition.change_scene('black','res://scenes/menu_mode.tscn')
 	
 func _on_mouse_entered():
 	if tween_hover and tween_hover.is_running():

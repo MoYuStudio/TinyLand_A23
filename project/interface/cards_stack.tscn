@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfylyyqgjh687"]
+[gd_scene load_steps=10 format=3 uid="uid://cfylyyqgjh687"]
 
 [ext_resource type="PackedScene" uid="uid://bl2tqtjaw3mdn" path="res://interface/mode_card.tscn" id="1_4otcf"]
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_3x4n4"]
+[ext_resource type="Texture2D" uid="uid://byetkxqw1stua" path="res://tile/png/255.png" id="3_i5yln"]
+[ext_resource type="Texture2D" uid="uid://c66pt2xggi5k5" path="res://tile/png/factory.png" id="4_kp7ae"]
+[ext_resource type="Texture2D" uid="uid://bljxxddt8b0d7" path="res://tile/png/grass.png" id="5_0x8by"]
 
 [sub_resource type="GDScript" id="GDScript_chdwk"]
 script/source = "extends Control
@@ -74,7 +77,7 @@ func update_cards(thrown: bool = false, animated: bool = true) -> void:
 			tween.tween_property(c, \"scale\", first_card_scale - Vector2(card_scale, card_scale), duration)
 
 func on_card_put_back(which: Button) -> void:
-	print(\"Put back: \", which.get_name())
+	# print(\"Put back: \", which.get_name())
 	
 	var previous_card: Button = $Cards.get_child($Cards.get_child_count()-2)
 	tween_bg_color(previous_card.color)
@@ -90,6 +93,27 @@ func on_card_put_back(which: Button) -> void:
 	tween_last_card.tween_callback(update_cards.bind(true))
 "
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkc7o"]
+bg_color = Color(0.984314, 0.419608, 0.113725, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suk3y"]
+bg_color = Color(0.560784, 0.827451, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_herc7"]
+bg_color = Color(0.568627, 0.858824, 0.411765, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
 [node name="CardsStack" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -101,10 +125,10 @@ script = SubResource("GDScript_chdwk")
 
 [node name="TopPoint" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 624.0
-offset_top = 120.0
-offset_right = 664.0
-offset_bottom = 160.0
+offset_left = 640.0
+offset_top = 160.0
+offset_right = 680.0
+offset_bottom = 200.0
 
 [node name="Cards" type="Control" parent="."]
 layout_mode = 1
@@ -119,49 +143,128 @@ pivot_offset = Vector2(128, 64)
 
 [node name="ModeCard" parent="Cards" instance=ExtResource("1_4otcf")]
 layout_mode = 0
-offset_left = -328.0
-offset_top = -168.0
-offset_right = -328.0
-offset_bottom = -168.0
+offset_left = -360.0
+offset_top = -214.0
+offset_right = -360.0
+offset_bottom = -214.0
 color = Color(0.847059, 0, 0, 1)
 
-[node name="Label" type="Label" parent="Cards/ModeCard"]
+[node name="Panel" type="Panel" parent="Cards/ModeCard"]
+visible = false
+texture_filter = 1
 layout_mode = 0
-offset_left = -56.0
-offset_top = -16.0
-offset_right = 60.0
-offset_bottom = 26.0
+offset_left = -180.0
+offset_top = -120.0
+offset_right = 180.0
+offset_bottom = 120.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_wkc7o")
+
+[node name="Label" type="Label" parent="Cards/ModeCard/Panel"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 74.0
 theme = ExtResource("2_3x4n4")
 text = "竞赛模式"
 
+[node name="Label2" type="Label" parent="Cards/ModeCard/Panel"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 128.0
+offset_right = 305.0
+offset_bottom = 215.0
+theme = ExtResource("2_3x4n4")
+theme_override_font_sizes/font_size = 24
+text = "挑战排行榜
+与全球玩家同台竞技"
+
+[node name="Sprite" type="Sprite2D" parent="Cards/ModeCard/Panel"]
+position = Vector2(276, 88)
+scale = Vector2(6, 6)
+texture = ExtResource("3_i5yln")
+
 [node name="ModeCard2" parent="Cards" instance=ExtResource("1_4otcf")]
 layout_mode = 0
-offset_left = 352.0
-offset_top = -144.0
-offset_right = 352.0
-offset_bottom = -144.0
+offset_left = 408.0
+offset_top = -168.0
+offset_right = 408.0
+offset_bottom = -168.0
 color = Color(0, 0.972549, 1, 1)
 
-[node name="Label" type="Label" parent="Cards/ModeCard2"]
-offset_left = -56.0
-offset_top = -16.0
-offset_right = 60.0
-offset_bottom = 26.0
+[node name="Panel" type="Panel" parent="Cards/ModeCard2"]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = -180.0
+offset_top = -120.0
+offset_right = 180.0
+offset_bottom = 120.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_suk3y")
+
+[node name="Label" type="Label" parent="Cards/ModeCard2/Panel"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 74.0
 theme = ExtResource("2_3x4n4")
 text = "创造模式"
 
+[node name="Label2" type="Label" parent="Cards/ModeCard2/Panel"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 160.0
+offset_right = 276.0
+offset_bottom = 192.0
+theme = ExtResource("2_3x4n4")
+theme_override_font_sizes/font_size = 24
+text = "吾即是天！！！"
+
+[node name="Sprite" type="Sprite2D" parent="Cards/ModeCard2/Panel"]
+position = Vector2(276, 88)
+scale = Vector2(6, 6)
+texture = ExtResource("4_kp7ae")
+
 [node name="ModeCard3" parent="Cards" instance=ExtResource("1_4otcf")]
 layout_mode = 0
-offset_left = -56.0
-offset_top = 160.0
-offset_right = -56.0
-offset_bottom = 160.0
+offset_top = 64.0
+offset_bottom = 64.0
 color = Color(0, 1, 0.494118, 1)
 
-[node name="Label" type="Label" parent="Cards/ModeCard3"]
-offset_left = -56.0
-offset_top = -16.0
-offset_right = 60.0
-offset_bottom = 26.0
+[node name="Panel" type="Panel" parent="Cards/ModeCard3"]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = -180.0
+offset_top = -120.0
+offset_right = 180.0
+offset_bottom = 120.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_herc7")
+
+[node name="Label" type="Label" parent="Cards/ModeCard3/Panel"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 74.0
 theme = ExtResource("2_3x4n4")
 text = "生存模式"
+
+[node name="Label2" type="Label" parent="Cards/ModeCard3/Panel"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 152.0
+offset_right = 188.0
+offset_bottom = 184.0
+theme = ExtResource("2_3x4n4")
+theme_override_font_sizes/font_size = 24
+text = "传统的生存"
+
+[node name="Sprite" type="Sprite2D" parent="Cards/ModeCard3/Panel"]
+position = Vector2(276, 88)
+scale = Vector2(6, 6)
+texture = ExtResource("5_0x8by")

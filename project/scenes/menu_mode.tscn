@@ -1,0 +1,382 @@
+[gd_scene load_steps=18 format=3 uid="uid://4swngb3jh1xo"]
+
+[ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="1_kgrru"]
+[ext_resource type="PackedScene" uid="uid://bl2tqtjaw3mdn" path="res://interface/mode_card.tscn" id="1_vcu30"]
+[ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_7bai4"]
+[ext_resource type="Texture2D" uid="uid://byetkxqw1stua" path="res://tile/png/255.png" id="3_5duou"]
+[ext_resource type="Texture2D" uid="uid://c66pt2xggi5k5" path="res://tile/png/factory.png" id="4_8reki"]
+[ext_resource type="Texture2D" uid="uid://bljxxddt8b0d7" path="res://tile/png/grass.png" id="5_iwq6n"]
+
+[sub_resource type="GDScript" id="GDScript_u8dgj"]
+script/source = "
+extends Node2D
+
+
+
+func _on_survival_mode_card_pressed():
+	SceneTransition.change_scene('black','res://scenes/game_main.tscn')
+"
+
+[sub_resource type="Environment" id="Environment_fr8e5"]
+background_mode = 3
+glow_enabled = true
+glow_strength = 0.7
+glow_bloom = 0.02
+glow_blend_mode = 0
+glow_hdr_threshold = 0.66
+glow_hdr_scale = 1.2
+glow_hdr_luminance_cap = 6.0
+
+[sub_resource type="Gradient" id="Gradient_2drqj"]
+offsets = PackedFloat32Array(0, 0.303279, 0.647541, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fnnfy"]
+gradient = SubResource("Gradient_2drqj")
+
+[sub_resource type="Curve" id="Curve_k508k"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.72, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nf2qn"]
+curve = SubResource("Curve_k508k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ba8ou"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(128, 128, 1)
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_nf2qn")
+color_ramp = SubResource("GradientTexture1D_fnnfy")
+
+[sub_resource type="GDScript" id="GDScript_chdwk"]
+script/source = "extends Control
+
+@export var offset: float = 30.0
+@export var scale_between_cards: float = 0.05
+@export var anim_duration: float = 0.45
+@export var anim_duration_offset: float = 0.15
+
+var first_card_pos: Vector2
+var first_card_scale: Vector2
+
+var tween: Tween
+var tween_last_card: Tween
+var tween_bg: Tween
+
+func _ready() -> void:
+	for c in $Cards.get_children():
+		c.put_back.connect(on_card_put_back.bind(c))
+	
+	var first_card: Button = $Cards.get_child($Cards.get_child_count() - 1)
+	first_card_pos = first_card.position
+	first_card_scale = first_card.scale
+	
+	await get_tree().create_timer(0.5).timeout
+	
+	tween_bg_color(first_card.color)
+	
+	update_cards()
+	
+	await tween.finished
+	for c in $Cards.get_children():
+		c.original_position = c.global_position
+	
+func tween_bg_color(new_color: Color) -> void:
+	if tween_bg and tween_bg.is_running():
+		tween_bg.kill()
+	tween_bg = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween_bg.tween_property($BG, \"color\", new_color, anim_duration*2.0)
+	
+func update_cards(thrown: bool = false, animated: bool = true) -> void:
+	if tween and tween.is_running():
+		tween.kill()
+	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
+	
+	var child_count: int = $Cards.get_child_count()
+	var card_ref: Button = $Cards.get_child(child_count - 1)
+	
+	for i: int in range(child_count-1, -1, -1):
+		var c: Button = $Cards.get_child(i)
+		if c == card_ref:
+			c.disabled = false
+		else:
+			c.disabled = true
+		
+		# print(\"Button: \", c.get_name())
+		var multiplier: float = child_count-1-i
+		# print(\"Multiplier: \", multiplier)
+		var card_offset: float = offset*multiplier
+		# print(\"Card offset: \", card_offset)
+		var card_scale: float = scale_between_cards * multiplier
+		# print(\"Card scale: \", card_scale)
+		
+		if not animated:
+			c.position = first_card_pos - Vector2(0, card_offset)
+			c.scale = first_card_scale - Vector2(card_scale, card_scale)
+		else:
+			var duration: float = anim_duration + (anim_duration_offset * multiplier)
+			tween.tween_property(c, \"position\", first_card_pos - Vector2(0, card_offset), duration)
+			tween.tween_property(c, \"scale\", first_card_scale - Vector2(card_scale, card_scale), duration)
+
+func on_card_put_back(which: Button) -> void:
+	# print(\"Put back: \", which.get_name())
+	
+	var previous_card: Button = $Cards.get_child($Cards.get_child_count()-2)
+	tween_bg_color(previous_card.color)
+	
+	if tween_last_card and tween_last_card.is_running():
+		tween_last_card.kill()
+	tween_last_card = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween_last_card.tween_property(which, \"global_position\", $TopPoint.global_position-(which.size/2.0), anim_duration/2.0)
+	tween_last_card.parallel().tween_property(which, \"scale\", Vector2(0.8, 0.8), anim_duration/2.0)
+	
+	# Move card to back
+	tween_last_card.tween_callback($Cards.move_child.bind(which, 0))
+	tween_last_card.tween_callback(update_cards.bind(true))
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkc7o"]
+bg_color = Color(0.984314, 0.419608, 0.113725, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suk3y"]
+bg_color = Color(0.560784, 0.827451, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_herc7"]
+bg_color = Color(0.568627, 0.858824, 0.411765, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="MenuMode" type="Node2D"]
+script = SubResource("GDScript_u8dgj")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fr8e5")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+follow_viewport_enabled = true
+follow_viewport_scale = 0.9
+scroll_ignore_camera_zoom = true
+
+[node name="Star" type="ParallaxLayer" parent="ParallaxBackground"]
+modulate = Color(100, 100, 100, 1)
+motion_scale = Vector2(0.9, 0.9)
+motion_mirroring = Vector2(256, 256)
+
+[node name="Particles" type="GPUParticles2D" parent="ParallaxBackground/Star"]
+texture_filter = 1
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_ba8ou")
+texture = ExtResource("1_kgrru")
+lifetime = 6.0
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CardsStack" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_chdwk")
+
+[node name="TopPoint" type="Control" parent="CanvasLayer/CardsStack"]
+anchors_preset = 0
+offset_left = 520.0
+offset_top = 192.0
+offset_right = 560.0
+offset_bottom = 232.0
+
+[node name="Cards" type="Control" parent="CanvasLayer/CardsStack"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -392.0
+offset_top = 104.0
+offset_right = -392.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 64)
+
+[node name="ModeCard" parent="CanvasLayer/CardsStack/Cards" instance=ExtResource("1_vcu30")]
+layout_mode = 0
+offset_left = 252.0
+offset_top = -1256.0
+offset_right = 252.0
+offset_bottom = -1256.0
+color = Color(0.847059, 0, 0, 1)
+
+[node name="Panel" type="Panel" parent="CanvasLayer/CardsStack/Cards/ModeCard"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -180.0
+offset_top = -120.0
+offset_right = 180.0
+offset_bottom = 120.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_wkc7o")
+
+[node name="Label" type="Label" parent="CanvasLayer/CardsStack/Cards/ModeCard/Panel"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 74.0
+theme = ExtResource("2_7bai4")
+text = "竞赛模式"
+
+[node name="Label2" type="Label" parent="CanvasLayer/CardsStack/Cards/ModeCard/Panel"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 128.0
+offset_right = 305.0
+offset_bottom = 215.0
+theme = ExtResource("2_7bai4")
+theme_override_font_sizes/font_size = 24
+text = "挑战排行榜
+与全球玩家同台竞技"
+
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/CardsStack/Cards/ModeCard/Panel"]
+position = Vector2(276, 88)
+scale = Vector2(6, 6)
+texture = ExtResource("3_5duou")
+
+[node name="ModeCard2" parent="CanvasLayer/CardsStack/Cards" instance=ExtResource("1_vcu30")]
+layout_mode = 0
+offset_left = 272.0
+offset_top = -600.0
+offset_right = 272.0
+offset_bottom = -600.0
+color = Color(0, 0.972549, 1, 1)
+
+[node name="Panel" type="Panel" parent="CanvasLayer/CardsStack/Cards/ModeCard2"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -180.0
+offset_top = -120.0
+offset_right = 180.0
+offset_bottom = 120.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_suk3y")
+
+[node name="Label" type="Label" parent="CanvasLayer/CardsStack/Cards/ModeCard2/Panel"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 74.0
+theme = ExtResource("2_7bai4")
+text = "创造模式"
+
+[node name="Label2" type="Label" parent="CanvasLayer/CardsStack/Cards/ModeCard2/Panel"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 160.0
+offset_right = 276.0
+offset_bottom = 192.0
+theme = ExtResource("2_7bai4")
+theme_override_font_sizes/font_size = 24
+text = "吾即是天！！！"
+
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/CardsStack/Cards/ModeCard2/Panel"]
+position = Vector2(276, 88)
+scale = Vector2(6, 6)
+texture = ExtResource("4_8reki")
+
+[node name="SurvivalModeCard" parent="CanvasLayer/CardsStack/Cards" instance=ExtResource("1_vcu30")]
+layout_mode = 0
+offset_left = 272.0
+offset_right = 272.0
+color = Color(0, 1, 0.494118, 1)
+
+[node name="Panel" type="Panel" parent="CanvasLayer/CardsStack/Cards/SurvivalModeCard"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -180.0
+offset_top = -120.0
+offset_right = 180.0
+offset_bottom = 120.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_herc7")
+
+[node name="Label" type="Label" parent="CanvasLayer/CardsStack/Cards/SurvivalModeCard/Panel"]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 74.0
+theme = ExtResource("2_7bai4")
+text = "生存模式"
+
+[node name="Label2" type="Label" parent="CanvasLayer/CardsStack/Cards/SurvivalModeCard/Panel"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 152.0
+offset_right = 188.0
+offset_bottom = 184.0
+theme = ExtResource("2_7bai4")
+theme_override_font_sizes/font_size = 24
+text = "传统的生存"
+
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/CardsStack/Cards/SurvivalModeCard/Panel"]
+position = Vector2(276, 88)
+scale = Vector2(6, 6)
+texture = ExtResource("5_iwq6n")
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 984.0
+offset_top = 48.0
+offset_right = 1224.0
+offset_bottom = 136.0
+text = "返回开始界面"
+
+[node name="Button2" type="Button" parent="CanvasLayer"]
+offset_left = 984.0
+offset_top = 576.0
+offset_right = 1224.0
+offset_bottom = 664.0
+text = "设置"
+
+[node name="Button3" type="LineEdit" parent="CanvasLayer"]
+offset_left = 992.0
+offset_top = 456.0
+offset_right = 1224.0
+offset_bottom = 496.0
+placeholder_text = "地图种子"
+alignment = 1
+
+[node name="Button4" type="Button" parent="CanvasLayer"]
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 104.0
+offset_bottom = 104.0
+text = "多语言国旗"
+
+[node name="Button5" type="Button" parent="CanvasLayer"]
+offset_left = 1160.0
+offset_top = 160.0
+offset_right = 1224.0
+offset_bottom = 224.0
+text = "关于"
+
+[connection signal="pressed" from="CanvasLayer/CardsStack/Cards/SurvivalModeCard" to="." method="_on_survival_mode_card_pressed"]
