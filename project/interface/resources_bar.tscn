@@ -69,3 +69,4 @@ layout_mode = 1
 offset_left = 24.0
 offset_right = 336.0
 offset_bottom = 1832.0
+theme_override_constants/separation = 6

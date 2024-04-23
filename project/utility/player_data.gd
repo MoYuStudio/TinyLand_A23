@@ -6,7 +6,7 @@ class_name MoYuPlayerData
 
 @export var price : Dictionary = {
 	# 货币类
-	"shell":0, # 贝壳
+	"shell_coin":0, # 贝壳
 	"copper_coin":0, # 铜币
 	"iron_coin":0, # 铁币
 	"silver_coin":0, # 银币
@@ -19,7 +19,7 @@ class_name MoYuPlayerData
 	"electricity":0, # 电力
 	
 	# 食物
-	"berries":0, # 浆果
+	"berry":0, # 浆果
 	"wheat":0, # 小麦
 	"corn":0, # 玉米
 	"rice":0, # 水稻

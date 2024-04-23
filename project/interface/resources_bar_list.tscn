@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dbmcb668fbaqu"]
 
-[ext_resource type="Texture2D" uid="uid://ce5j2ofes6ys8" path="res://icon/resource/money.png" id="1_fds8r"]
+[ext_resource type="Texture2D" uid="uid://c25vxnspekyev" path="res://icon/resource/gold_coin.png" id="1_xlye0"]
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_mnecp"]
 [ext_resource type="FontFile" uid="uid://cyvdvdsbhwc8m" path="res://fonts/kenney_mini_square.ttf" id="3_06iy8"]
 
@@ -9,6 +9,7 @@ script/source = "
 extends HBoxContainer
 
 @onready var self_icon = $Icon/Sprite
+@onready var self_name = $Name/Label
 @onready var self_num = $Num/Label
 @onready var self_add = $Add/Label
 
@@ -23,22 +24,40 @@ func _ready():
 
 func _process(delta):
 	pass
+
+func _on_icon_mouse_entered():
+	self_name.text = str(name)
+
+func _on_icon_mouse_exited():
+	self_name.text = \"\"
 "
 
 [node name="HBoxContainer" type="HBoxContainer"]
 script = SubResource("GDScript_khv6k")
 
 [node name="Icon" type="MarginContainer" parent="."]
+texture_filter = 1
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
+theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 16
 
 [node name="Sprite" type="Sprite2D" parent="Icon"]
 texture_filter = 1
-texture = ExtResource("1_fds8r")
-offset = Vector2(16, 17)
+scale = Vector2(2, 2)
+texture = ExtResource("1_xlye0")
+offset = Vector2(9, 8.6)
+
+[node name="Name" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_right = 6
+
+[node name="Label" type="Label" parent="Name"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("2_mnecp")
+theme_override_font_sizes/font_size = 16
 
 [node name="Num" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -56,8 +75,12 @@ layout_mode = 2
 theme_override_constants/margin_left = 16
 
 [node name="Label" type="Label" parent="Add"]
+texture_filter = 1
 layout_mode = 2
 theme = ExtResource("2_mnecp")
 theme_override_fonts/font = ExtResource("3_06iy8")
 theme_override_font_sizes/font_size = 16
 text = "+ 1.25/s"
+
+[connection signal="mouse_entered" from="Icon" to="." method="_on_icon_mouse_entered"]
+[connection signal="mouse_exited" from="Icon" to="." method="_on_icon_mouse_exited"]
