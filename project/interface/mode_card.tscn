@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bl2tqtjaw3mdn"]
+[gd_scene load_steps=12 format=3 uid="uid://bl2tqtjaw3mdn"]
 
 [ext_resource type="Shader" path="res://shader/2DPerspective.gdshader" id="1_6pghr"]
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="1_k4sp6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7vlgo"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x381x"]
 
@@ -13,8 +15,9 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gw3fg"]
 
-[sub_resource type="GDScript" id="GDScript_8pnog"]
-script/source = "# @tool
+[sub_resource type="GDScript" id="GDScript_ly00d"]
+script/source = "
+@tool
 extends Button
 
 signal put_back()
@@ -34,7 +37,7 @@ var tween_grab: Tween
 var tween_movement: Tween
 var picked_up: bool = false
 var offset: Vector2
-var is_3D: bool = true
+var is_3D: bool = false
 var last_speed: float = 0.0
 
 @onready var original_position: Vector2 = global_position
@@ -68,7 +71,7 @@ func _on_button_up() -> void:
 	picked_up = false
 	set_process(false)
 	var dist: float = abs(original_position.y - global_position.y)
-	print(\"Distance: \", dist)
+	# print(\"Distance: \", dist)
 	
 	if use_speed:
 		if last_speed <= -threshold_speed:
@@ -138,13 +141,14 @@ corner_radius_bottom_left = 16
 
 [node name="ModeCard" type="Button"]
 texture_filter = 1
+material = SubResource("ShaderMaterial_7vlgo")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_x381x")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_lvf1c")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_12stu")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_2snuw")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gw3fg")
 flat = true
-script = SubResource("GDScript_8pnog")
+script = SubResource("GDScript_ly00d")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_h8f7k")

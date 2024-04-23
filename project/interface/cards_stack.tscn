@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfylyyqgjh687"]
+[gd_scene load_steps=4 format=3 uid="uid://cfylyyqgjh687"]
 
 [ext_resource type="PackedScene" uid="uid://bl2tqtjaw3mdn" path="res://interface/mode_card.tscn" id="1_4otcf"]
+[ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_3x4n4"]
 
 [sub_resource type="GDScript" id="GDScript_chdwk"]
 script/source = "extends Control
@@ -56,13 +57,13 @@ func update_cards(thrown: bool = false, animated: bool = true) -> void:
 		else:
 			c.disabled = true
 		
-		print(\"Button: \", c.get_name())
+		# print(\"Button: \", c.get_name())
 		var multiplier: float = child_count-1-i
-		print(\"Multiplier: \", multiplier)
+		# print(\"Multiplier: \", multiplier)
 		var card_offset: float = offset*multiplier
-		print(\"Card offset: \", card_offset)
+		# print(\"Card offset: \", card_offset)
 		var card_scale: float = scale_between_cards * multiplier
-		print(\"Card scale: \", card_scale)
+		# print(\"Card scale: \", card_scale)
 		
 		if not animated:
 			c.position = first_card_pos - Vector2(0, card_offset)
@@ -118,8 +119,49 @@ pivot_offset = Vector2(128, 64)
 
 [node name="ModeCard" parent="Cards" instance=ExtResource("1_4otcf")]
 layout_mode = 0
-color = Color(1, 0, 0, 1)
+offset_left = -328.0
+offset_top = -168.0
+offset_right = -328.0
+offset_bottom = -168.0
+color = Color(0.847059, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Cards/ModeCard"]
+layout_mode = 0
+offset_left = -56.0
+offset_top = -16.0
+offset_right = 60.0
+offset_bottom = 26.0
+theme = ExtResource("2_3x4n4")
+text = "竞赛模式"
 
 [node name="ModeCard2" parent="Cards" instance=ExtResource("1_4otcf")]
 layout_mode = 0
-color = Color(0, 1, 0, 1)
+offset_left = 352.0
+offset_top = -144.0
+offset_right = 352.0
+offset_bottom = -144.0
+color = Color(0, 0.972549, 1, 1)
+
+[node name="Label" type="Label" parent="Cards/ModeCard2"]
+offset_left = -56.0
+offset_top = -16.0
+offset_right = 60.0
+offset_bottom = 26.0
+theme = ExtResource("2_3x4n4")
+text = "创造模式"
+
+[node name="ModeCard3" parent="Cards" instance=ExtResource("1_4otcf")]
+layout_mode = 0
+offset_left = -56.0
+offset_top = 160.0
+offset_right = -56.0
+offset_bottom = 160.0
+color = Color(0, 1, 0.494118, 1)
+
+[node name="Label" type="Label" parent="Cards/ModeCard3"]
+offset_left = -56.0
+offset_top = -16.0
+offset_right = 60.0
+offset_bottom = 26.0
+theme = ExtResource("2_3x4n4")
+text = "生存模式"
