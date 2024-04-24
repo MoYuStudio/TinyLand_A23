@@ -9,4 +9,5 @@ tile_name = "farm"
 price = {
 "food": 1
 }
+manufacture = {}
 can_build_on = []

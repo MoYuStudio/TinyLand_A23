@@ -7,4 +7,5 @@ script = ExtResource("1_drrsk")
 tile_id = 3
 tile_name = "sand"
 price = {}
+manufacture = {}
 can_build_on = []

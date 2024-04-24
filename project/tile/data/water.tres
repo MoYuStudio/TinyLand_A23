@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_25v7h")
 tile_id = 5
-tile_name = "water"
 price = {}
+manufacture = {}
 can_build_on = []

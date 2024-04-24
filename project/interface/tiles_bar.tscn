@@ -1,16 +1,33 @@
-[gd_scene load_steps=12 format=3 uid="uid://be3rafvp3s3pe"]
+[gd_scene load_steps=3 format=3 uid="uid://be3rafvp3s3pe"]
 
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="1_7ui4f"]
-[ext_resource type="Texture2D" uid="uid://srsh0c5vlsrn" path="res://tile/png/2.png" id="2_fp0e5"]
-[ext_resource type="PackedScene" uid="uid://catj35d1cnagp" path="res://interface/tiles_bar_tile.tscn" id="2_k5ees"]
-[ext_resource type="Texture2D" uid="uid://duvmtgy0ub7y3" path="res://tile/png/261.png" id="3_lk0h7"]
-[ext_resource type="Texture2D" uid="uid://d4hwlbsghmx6t" path="res://tile/png/1.png" id="4_mk68r"]
-[ext_resource type="Texture2D" uid="uid://0otwsrs2ureo" path="res://tile/png/3.png" id="5_0oqrq"]
-[ext_resource type="Texture2D" uid="uid://bgg68vgrvmcu8" path="res://tile/png/512.png" id="6_6a21l"]
-[ext_resource type="Texture2D" uid="uid://5hr2xdlm6pk7" path="res://tile/png/4.png" id="6_gunf2"]
-[ext_resource type="Texture2D" uid="uid://dc4kj0frv5pif" path="res://tile/png/262.png" id="6_tb44o"]
-[ext_resource type="Texture2D" uid="uid://djfso8r2bed71" path="res://tile/png/5.png" id="7_au4gn"]
-[ext_resource type="Texture2D" uid="uid://cd73e10paxbg" path="res://tile/png/769.png" id="7_l1qb5"]
+
+[sub_resource type="GDScript" id="GDScript_yjgb4"]
+script/source = "
+extends MarginContainer
+
+@onready var tiles_bar_tile = preload(\"res://interface/tiles_bar_tile.tscn\")
+
+@onready var tab_container = $TabContainer
+
+var tab_data = {
+	\"瓷砖\":[\"air\",\"dirt\",\"grass\"],
+}
+
+func _ready():
+	for tab in tab_data:
+		var tab_list = tab_container.get_node(tab + \"/MarginContainer/HBoxContainer\")
+		for tile_name in tab_data[tab]:
+			var tile_data = load(\"res://tile/data/\"+tile_name+\".tres\")
+			var tile = tiles_bar_tile.instantiate()
+			tile.name = tile_name
+			tile.tile_name = tile_name
+			tile.tile_texture = tile_data.tile_texture
+			tab_list.add_child(tile)
+
+func _process(delta):
+	pass
+"
 
 [node name="TilesBar" type="MarginContainer"]
 anchors_preset = 12
@@ -26,19 +43,20 @@ theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
+script = SubResource("GDScript_yjgb4")
 
-[node name="TilesBar" type="TabContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 tab_alignment = 1
 drag_to_rearrange_enabled = true
 
-[node name="土地" type="TabBar" parent="TilesBar"]
+[node name="瓷砖" type="TabBar" parent="TabContainer"]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="MarginContainer" type="MarginContainer" parent="TilesBar/土地"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/瓷砖"]
 layout_mode = 0
 offset_right = 80.0
 offset_bottom = 80.0
@@ -47,42 +65,36 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TilesBar/土地/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/瓷砖/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Tile" parent="TilesBar/土地/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
-layout_mode = 2
-tile_name = "dirt"
-tile_texture = ExtResource("2_fp0e5")
-
-[node name="Tile2" parent="TilesBar/土地/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
-layout_mode = 2
-tile_name = "grass"
-tile_texture = ExtResource("4_mk68r")
-
-[node name="Tile3" parent="TilesBar/土地/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
-layout_mode = 2
-tile_name = "sand"
-tile_texture = ExtResource("5_0oqrq")
-
-[node name="Tile4" parent="TilesBar/土地/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
-layout_mode = 2
-tile_name = "stone"
-tile_texture = ExtResource("6_gunf2")
-
-[node name="Tile5" parent="TilesBar/土地/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
-layout_mode = 2
-tile_name = "water"
-tile_texture = ExtResource("7_au4gn")
-
-[node name="农业" type="TabBar" parent="TilesBar"]
+[node name="墙壁" type="TabBar" parent="TabContainer"]
 visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="MarginContainer" type="MarginContainer" parent="TilesBar/农业"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/墙壁"]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/墙壁/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="农业" type="TabBar" parent="TabContainer"]
+visible = false
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("1_7ui4f")
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/农业"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -91,27 +103,17 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TilesBar/农业/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/农业/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Tile" parent="TilesBar/农业/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
-layout_mode = 2
-tile_name = "farm"
-tile_texture = ExtResource("3_lk0h7")
-
-[node name="Tile2" parent="TilesBar/农业/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
-layout_mode = 2
-tile_name = "farm"
-tile_texture = ExtResource("6_tb44o")
-
-[node name="工业" type="TabBar" parent="TilesBar"]
+[node name="工业" type="TabBar" parent="TabContainer"]
 visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="MarginContainer" type="MarginContainer" parent="TilesBar/工业"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/工业"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -120,28 +122,17 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TilesBar/工业/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/工业/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Tile" parent="TilesBar/工业/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
-layout_mode = 2
-tile_name = "farm"
-tile_texture = ExtResource("6_6a21l")
-
-[node name="商业" type="TabBar" parent="TilesBar"]
+[node name="商业" type="TabBar" parent="TabContainer"]
 visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="科技" type="TabBar" parent="TilesBar"]
-visible = false
-texture_filter = 1
-layout_mode = 2
-theme = ExtResource("1_7ui4f")
-
-[node name="MarginContainer" type="MarginContainer" parent="TilesBar/科技"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/商业"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -150,23 +141,63 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TilesBar/科技/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/商业/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Tile" parent="TilesBar/科技/MarginContainer/HBoxContainer" instance=ExtResource("2_k5ees")]
-layout_mode = 2
-tile_name = "farm"
-tile_texture = ExtResource("7_l1qb5")
-
-[node name="奇观" type="TabBar" parent="TilesBar"]
+[node name="科技" type="TabBar" parent="TabContainer"]
 visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="装饰" type="TabBar" parent="TilesBar"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/科技"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/科技/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="奇观" type="TabBar" parent="TabContainer"]
 visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/奇观"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/奇观/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="装饰" type="TabBar" parent="TabContainer"]
+visible = false
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("1_7ui4f")
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/装饰"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/装饰/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8

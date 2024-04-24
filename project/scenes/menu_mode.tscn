@@ -12,8 +12,6 @@
 script/source = "
 extends Node2D
 
-
-
 func _on_survival_mode_card_pressed():
 	SceneTransition.change_scene('black','res://scenes/game_main.tscn')
 "
