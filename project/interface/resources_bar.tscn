@@ -6,8 +6,7 @@ extends Control
 
 @onready var resources_bar_list = preload(\"res://interface/resources_bar_list.tscn\")
 
-@onready var v_scroll = $VScrollBar
-@onready var container = $Container
+@onready var container = $MarginContainer/ScrollContainer/Container
 
 @export var player_data : MoYuPlayerData
 
@@ -24,10 +23,6 @@ func _ready():
 			update_list.append(resource)
 
 func _physics_process(delta):
-	# 滚动条
-	container.position.y = - (v_scroll.value * 
-							((container.size.y - v_scroll.size.y) / 100))
-	
 	# 资源更新
 	for resource in update_list:
 		container.get_node(resource+\"/Num/Label\").text = \\
@@ -40,9 +35,11 @@ bg_color = Color(0.374139, 0.374139, 0.374139, 1)
 
 [node name="ResourcesBar" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 360.0
-offset_bottom = 1440.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 script = SubResource("GDScript_7w7ci")
@@ -56,17 +53,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lguiq")
 
-[node name="VScrollBar" type="VScrollBar" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 16.0
+grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Container" type="VBoxContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
 texture_filter = 1
-layout_mode = 1
-offset_left = 24.0
-offset_right = 336.0
-offset_bottom = 1832.0
+layout_mode = 2
 theme_override_constants/separation = 6
