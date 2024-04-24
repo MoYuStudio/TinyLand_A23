@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_3x4n4"]
 [ext_resource type="Texture2D" uid="uid://byetkxqw1stua" path="res://tile/png/255.png" id="3_i5yln"]
 [ext_resource type="Texture2D" uid="uid://c66pt2xggi5k5" path="res://tile/png/factory.png" id="4_kp7ae"]
-[ext_resource type="Texture2D" uid="uid://bljxxddt8b0d7" path="res://tile/png/grass.png" id="5_0x8by"]
+[ext_resource type="Texture2D" uid="uid://bbgt3jxeos01f" path="res://tile/png/grass_block.png" id="5_0x8by"]
 
 [sub_resource type="GDScript" id="GDScript_chdwk"]
 script/source = "extends Control

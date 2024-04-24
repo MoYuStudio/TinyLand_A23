@@ -13,6 +13,7 @@ extends Control
 var update_list = []
 
 func _ready():
+	# 生成价格 Popup
 	for resource in player_data.price:
 		if player_data.price[resource] > 0:
 			var list = resources_bar_list.instantiate()
@@ -25,7 +26,7 @@ func _ready():
 func _physics_process(delta):
 	# 资源更新
 	for resource in update_list:
-		container.get_node(resource+\"/Num/Label\").text = \\
+		container.get_node(resource+\"/Container/Num/Label\").text = \\
 							str(player_data.price[resource])
 	
 "
@@ -67,4 +68,4 @@ layout_mode = 2
 [node name="Container" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
 texture_filter = 1
 layout_mode = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 48

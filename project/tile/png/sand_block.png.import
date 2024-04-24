@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddssw5r586na3"
-path="res://.godot/imported/water.png-15ebdff217a9d819a8f9e59a731a6cac.ctex"
+uid="uid://dcwek0um440c3"
+path="res://.godot/imported/sand_block.png-ee90459f871d2ebd1083aa10bfebc9a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/png/water.png"
-dest_files=["res://.godot/imported/water.png-15ebdff217a9d819a8f9e59a731a6cac.ctex"]
+source_file="res://tile/png/sand_block.png"
+dest_files=["res://.godot/imported/sand_block.png-ee90459f871d2ebd1083aa10bfebc9a8.ctex"]
 
 [params]
 

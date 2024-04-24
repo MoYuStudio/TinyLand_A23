@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://be3rafvp3s3pe"]
+[gd_scene load_steps=4 format=3 uid="uid://be3rafvp3s3pe"]
 
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="1_7ui4f"]
 
@@ -14,12 +14,19 @@ var tab_data = {
 	\"瓷砖\":[\"air\",\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\",
 			\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\",
 			\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\"],
+	\"墙壁\":[],
+	\"农业\":[],
+	\"工业\":[],
+	\"商业\":[],
+	\"科技\":[],
+	\"奇观\":[],
+	\"装饰\":[],
 }
 
 func _ready():
 	# 根据 tab_data 生成 瓷砖选择器
 	for tab in tab_data:
-		var tab_list = tab_container.get_node(tab + \"/MarginContainer/ScrollContainer/HBoxContainer\")
+		var tab_list = tab_container.get_node(tab+\"/MarginContainer/ScrollContainer/HBoxContainer\")
 		for tile_name in tab_data[tab]:
 			var tile_data = load(\"res://tile/data/\"+tile_name+\".tres\")
 			var tile = tiles_bar_tile.instantiate()
@@ -32,6 +39,9 @@ func _process(delta):
 	pass
 "
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_07wep"]
+bg_color = Color(1, 1, 1, 0.12549)
+
 [node name="TilesBar" type="MarginContainer"]
 anchors_preset = 12
 anchor_top = 1.0
@@ -42,15 +52,16 @@ grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(512, 80)
 mouse_filter = 0
-theme_override_constants/margin_left = 16
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
+theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 16
 script = SubResource("GDScript_yjgb4")
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
+theme_override_styles/panel = SubResource("StyleBoxFlat_07wep")
 tab_alignment = 1
 drag_to_rearrange_enabled = true
 
@@ -64,14 +75,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_right = 16
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/瓷砖/MarginContainer"]
+clip_contents = false
 layout_mode = 2
 vertical_scroll_mode = 0
 
@@ -94,7 +106,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/墙壁/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/墙壁/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/墙壁/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -113,7 +130,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/农业/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/农业/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/农业/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -132,7 +154,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/工业/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/工业/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/工业/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -151,7 +178,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/商业/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/商业/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/商业/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -170,7 +202,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/科技/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/科技/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/科技/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -189,7 +226,12 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/奇观/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/奇观/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/奇观/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
@@ -208,6 +250,11 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/装饰/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/装饰/MarginContainer"]
+clip_contents = false
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/装饰/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8

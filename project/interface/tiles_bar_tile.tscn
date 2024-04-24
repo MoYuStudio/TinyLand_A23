@@ -1,8 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://catj35d1cnagp"]
+[gd_scene load_steps=11 format=3 uid="uid://catj35d1cnagp"]
 
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="1_6w3eh"]
 [ext_resource type="Shader" path="res://shader/2DPerspective.gdshader" id="1_hhkvq"]
 [ext_resource type="Texture2D" uid="uid://byetkxqw1stua" path="res://tile/png/255.png" id="2_wtupq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hrx7d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p8qhy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u7mwm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0pt5d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0mwmn"]
 
 [sub_resource type="GDScript" id="GDScript_8qkpb"]
 script/source = "
@@ -115,13 +125,6 @@ shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lu3j3"]
-bg_color = Color(1, 1, 1, 0.25098)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
 [node name="Tile" type="Button"]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
@@ -130,6 +133,11 @@ offset_top = -32.0
 offset_right = 32.0
 offset_bottom = 32.0
 pivot_offset = Vector2(32, 32)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hrx7d")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p8qhy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u7mwm")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_0pt5d")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0mwmn")
 flat = true
 script = SubResource("GDScript_8qkpb")
 
@@ -149,23 +157,29 @@ offset_bottom = 64.0
 texture = ExtResource("2_wtupq")
 
 [node name="PopupPanel" type="Panel" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_left = -32.0
-offset_top = -136.0
-offset_right = 96.0
-offset_bottom = -8.0
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -168.0
+offset_right = 64.0
+offset_bottom = -40.0
 theme = ExtResource("1_6w3eh")
-theme_override_styles/panel = SubResource("StyleBoxFlat_lu3j3")
 
 [node name="MarginContainer" type="MarginContainer" parent="PopupPanel"]
 layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 120.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="PopupContainer" type="VBoxContainer" parent="PopupPanel/MarginContainer"]
 layout_mode = 2

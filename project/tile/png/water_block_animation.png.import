@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw6nu2ay46x7c"
-path="res://.godot/imported/dirt.png-77974cf076561ecfa180dde81ddfef25.ctex"
+uid="uid://ttri0jfkedpi"
+path="res://.godot/imported/water_block_animation.png-36850d28f5fd1a27f728ee9076109040.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/png/dirt.png"
-dest_files=["res://.godot/imported/dirt.png-77974cf076561ecfa180dde81ddfef25.ctex"]
+source_file="res://tile/png/water_block_animation.png"
+dest_files=["res://.godot/imported/water_block_animation.png-36850d28f5fd1a27f728ee9076109040.ctex"]
 
 [params]
 

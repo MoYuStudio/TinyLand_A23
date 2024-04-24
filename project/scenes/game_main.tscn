@@ -201,11 +201,10 @@ func _unhandled_input(event):
 				
 		elif tile_to_build.tile_id < 10000:
 			if get_cell_source_id(land_layer, land_pos) != tile_to_build.tile_id:
-				for tile in get_surrounding_tiles(Vector2(land_pos.x,land_pos.y)):
-					if get_cell_source_id(land_layer,tile) != -1:
-						if pay(tile_to_build):
-							set_cell(land_layer, land_pos, tile_to_build.tile_id, Vector2(0, 0), 0)
-							set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
+				if get_cell_source_id(land_layer,land_pos) == -1:
+					if pay(tile_to_build):
+						set_cell(land_layer, land_pos, tile_to_build.tile_id, Vector2(0, 0), 0)
+						set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
 			
 		elif tile_to_build.tile_id == 10000:
 			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
@@ -307,7 +306,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(912, 720)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
@@ -378,6 +377,7 @@ script = SubResource("GDScript_is30g")
 [node name="TilesBar" parent="CanvasLayer/HSplitContainer/Control" instance=ExtResource("12_ewp7h")]
 texture_filter = 1
 layout_mode = 1
+offset_left = -8.0
 
 [node name="BuildingCleaner" type="MarginContainer" parent="CanvasLayer/HSplitContainer/Control"]
 layout_mode = 1

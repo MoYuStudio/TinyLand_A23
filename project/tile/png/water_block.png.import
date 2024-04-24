@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcwek0um440c3"
-path="res://.godot/imported/quar.png-ef8fa067d945d306aecd650427bf7d5d.ctex"
+uid="uid://ddssw5r586na3"
+path="res://.godot/imported/water_block.png-09bfb2a6410818456cf34bea2dc547db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/png/quar.png"
-dest_files=["res://.godot/imported/quar.png-ef8fa067d945d306aecd650427bf7d5d.ctex"]
+source_file="res://tile/png/water_block.png"
+dest_files=["res://.godot/imported/water_block.png-09bfb2a6410818456cf34bea2dc547db.ctex"]
 
 [params]
 
