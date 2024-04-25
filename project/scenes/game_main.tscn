@@ -1,21 +1,20 @@
-[gd_scene load_steps=36 format=3 uid="uid://c4i274kh3fecs"]
+[gd_scene load_steps=35 format=3 uid="uid://c4i274kh3fecs"]
 
-[ext_resource type="Texture2D" uid="uid://yw8tnl3bx5dg" path="res://tile/png/0.png" id="1_eohhp"]
-[ext_resource type="Texture2D" uid="uid://d4hwlbsghmx6t" path="res://tile/png/1.png" id="2_rswqe"]
+[ext_resource type="Texture2D" uid="uid://d2kdpiwjrunpr" path="res://tile/png/air.png" id="1_eohhp"]
+[ext_resource type="Texture2D" uid="uid://dw6nu2ay46x7c" path="res://tile/png/dirt_block.png" id="2_rswqe"]
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_u15gb"]
-[ext_resource type="Texture2D" uid="uid://srsh0c5vlsrn" path="res://tile/png/2.png" id="3_dd6hf"]
+[ext_resource type="Texture2D" uid="uid://bbgt3jxeos01f" path="res://tile/png/grass_block.png" id="3_dd6hf"]
 [ext_resource type="Resource" uid="uid://bpi8bwlel30b8" path="res://data/player_data.tres" id="3_wjxsp"]
 [ext_resource type="PackedScene" uid="uid://o32sdvgym6n6" path="res://tile/farm.tscn" id="4_kta7o"]
-[ext_resource type="Texture2D" uid="uid://0otwsrs2ureo" path="res://tile/png/3.png" id="5_x1riv"]
-[ext_resource type="Texture2D" uid="uid://5hr2xdlm6pk7" path="res://tile/png/4.png" id="6_72ph8"]
-[ext_resource type="Texture2D" uid="uid://we18t0s2ob2r" path="res://tile/png/5a1.png" id="7_0ycd3"]
-[ext_resource type="Texture2D" uid="uid://bjpwocmmkch3l" path="res://tile/png/254.png" id="8_d4rgs"]
+[ext_resource type="Texture2D" uid="uid://dcwek0um440c3" path="res://tile/png/sand_block.png" id="6_72ph8"]
+[ext_resource type="Texture2D" uid="uid://ttri0jfkedpi" path="res://tile/png/water_block_animation.png" id="7_0ycd3"]
+[ext_resource type="Texture2D" uid="uid://cicabngtdppgo" path="res://tile/png/254.png" id="8_d4rgs"]
 [ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="9_c86v8"]
 [ext_resource type="PackedScene" uid="uid://cqatkw3r5u63j" path="res://interface/resources_bar.tscn" id="11_ed847"]
 [ext_resource type="PackedScene" uid="uid://be3rafvp3s3pe" path="res://interface/tiles_bar.tscn" id="12_ewp7h"]
 [ext_resource type="AudioStream" uid="uid://bhiiqmxpslqy5" path="res://music/1996.mp3" id="12_s8qj7"]
 [ext_resource type="PackedScene" uid="uid://catj35d1cnagp" path="res://interface/tiles_bar_tile.tscn" id="13_si5w3"]
-[ext_resource type="Texture2D" uid="uid://byetkxqw1stua" path="res://tile/png/255.png" id="14_x22t7"]
+[ext_resource type="Texture2D" uid="uid://c16yiulcboja4" path="res://tile/png/255.png" id="14_x22t7"]
 
 [sub_resource type="GDScript" id="GDScript_5qd7c"]
 script/source = "
@@ -121,7 +120,7 @@ texture = ExtResource("3_dd6hf")
 0:1/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05rjl"]
-texture = ExtResource("5_x1riv")
+texture = ExtResource("6_72ph8")
 0:0/0 = 0
 0:0/0/y_sort_origin = -4
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)

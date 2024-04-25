@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MoYuTileData" load_steps=3 format=3 uid="uid://cjn6kub21e8mp"]
 
 [ext_resource type="Script" path="res://utility/tile_data.gd" id="1_q72qs"]
-[ext_resource type="Texture2D" uid="uid://yw8tnl3bx5dg" path="res://tile/png/0.png" id="2_c47cy"]
+[ext_resource type="Texture2D" uid="uid://d2kdpiwjrunpr" path="res://tile/png/air.png" id="2_c47cy"]
 
 [resource]
 script = ExtResource("1_q72qs")
