@@ -210,7 +210,7 @@ func _unhandled_input(event):
 			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
 	
 func pay(tile_to_build):
-	var player_data = load(\"res://data/player_data_slot_0.tres\")
+	var player_data = load(\"res://data/player_data.tres\")
 	
 	for pay in tile_to_build.price:
 		if player_data.price[pay] >= tile_to_build.price[pay]:
@@ -306,7 +306,7 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(2, 2)
+size = Vector2i(912, 720)
 render_target_update_mode = 4
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]

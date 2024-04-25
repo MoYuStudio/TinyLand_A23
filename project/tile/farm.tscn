@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://o32sdvgym6n6"]
 
 [ext_resource type="Texture2D" uid="uid://bocv6p2u6x22s" path="res://tile/png/256a1.png" id="1_klrmf"]
-[ext_resource type="Resource" uid="uid://4qm45cmei5f2" path="res://data/player_data_slot_0.tres" id="1_xpgsa"]
+[ext_resource type="Resource" uid="uid://bpi8bwlel30b8" path="res://data/player_data.tres" id="1_rf1om"]
 [ext_resource type="Texture2D" uid="uid://c0opaixgch2oc" path="res://interface/light.png" id="3_ava5w"]
 
 [sub_resource type="GDScript" id="GDScript_aqvtr"]
@@ -63,7 +63,7 @@ _data = {
 
 [node name="Farm" type="Node2D"]
 script = SubResource("GDScript_aqvtr")
-player_data = ExtResource("1_xpgsa")
+player_data = ExtResource("1_rf1om")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 1
