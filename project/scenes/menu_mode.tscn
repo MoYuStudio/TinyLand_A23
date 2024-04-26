@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://4swngb3jh1xo"]
+[gd_scene load_steps=24 format=3 uid="uid://4swngb3jh1xo"]
 
 [ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="1_kgrru"]
 [ext_resource type="PackedScene" uid="uid://bl2tqtjaw3mdn" path="res://interface/mode_card.tscn" id="1_vcu30"]
@@ -157,6 +157,16 @@ corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m60tp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_77yn4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uafun"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ckq4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_elu3v"]
 
 [node name="MenuMode" type="Node2D"]
 script = SubResource("GDScript_u8dgj")
@@ -347,6 +357,7 @@ offset_left = 984.0
 offset_top = 48.0
 offset_right = 1224.0
 offset_bottom = 136.0
+theme = ExtResource("2_7bai4")
 text = "返回开始界面"
 
 [node name="Button2" type="Button" parent="CanvasLayer"]
@@ -354,6 +365,7 @@ offset_left = 984.0
 offset_top = 576.0
 offset_right = 1224.0
 offset_bottom = 664.0
+theme = ExtResource("2_7bai4")
 text = "设置"
 
 [node name="Button3" type="LineEdit" parent="CanvasLayer"]
@@ -361,22 +373,32 @@ offset_left = 992.0
 offset_top = 456.0
 offset_right = 1224.0
 offset_bottom = 496.0
+theme = ExtResource("2_7bai4")
 placeholder_text = "地图种子"
 alignment = 1
 
 [node name="Button4" type="Button" parent="CanvasLayer"]
-offset_left = 48.0
-offset_top = 48.0
-offset_right = 104.0
-offset_bottom = 104.0
-text = "多语言国旗"
+texture_filter = 1
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 128.0
+theme = ExtResource("2_7bai4")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m60tp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_77yn4")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_uafun")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2ckq4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_elu3v")
 icon = ExtResource("7_r2m61")
+flat = true
 
 [node name="Button5" type="Button" parent="CanvasLayer"]
 offset_left = 1160.0
 offset_top = 160.0
 offset_right = 1224.0
 offset_bottom = 224.0
+theme = ExtResource("2_7bai4")
 text = "关于"
 
 [connection signal="pressed" from="CanvasLayer/CardsStack/Cards/SurvivalModeCard" to="." method="_on_survival_mode_card_pressed"]

@@ -1,76 +1,77 @@
-﻿key,zh,en
-<shell_coin>,贝壳,shell_coin
-<copper_coin>,铜币,copper_coin
-<iron_coin>,铁币,iron_coin
-<silver_coin>,银币,silver_coin
-<gold_coin>,金币,gold_coin
-<titanium_coin>,钛币,titanium_coin
-<population>,人口,population
-<manpower>,人力,manpower
-<electricity>,电力,electricity
-<oxygen>,氧气,oxygen
-<berry>,浆果,berry
-<wheat>,小麦,wheat
-<corn>,玉米,corn
-<rice>,水稻,rice
-<canned_food>,罐头食品,canned_food
-<cultured_meat>,培养肉,cultured_meat
-<frozen_cultured_meat>,冷冻培养肉,frozen_cultured_meat
-<ice>,冰块,ice
-<water>,水,water
-<dirt>,泥土,dirt
-<clay>,黏土,clay
-<wood>,木材,wood
-<hardwood>,硬木材,hardwood
-<rock>,岩石,rock
-<sand>,沙子,sand
-<dirt_plank>,土板,dirt_plank
-<wood_plank>,木板,wood_plank
-<hardwood_plank>,硬木板,hardwood_plank
-<rock_plank>,石板,rock_plank
-<glass>,玻璃,glass
-<glass_plank>,玻璃板,glass_plank
-<copper_ore>,铜矿石,copper_ore
-<tin_ore>,锡矿石,tin_ore
-<aluminum_ore>,铝矿石,aluminum_ore
-<iron_ore>,铁矿石,iron_ore
-<silver_ore>,银矿石,silver_ore
-<gold_ore>,金矿石,gold_ore
-<titanium_ore>,钛矿石,titanium_ore
-<lithium_ore>,锂矿石,lithium_ore
-<uranium_ore>,铀矿石,uranium_ore
-<silicon_ore>,硅矿石,silicon_ore
-<coal>,煤碳块,coal
-<copper_ingot>,铜锭,copper_ingot
-<tin_ingot>,锡锭,tin_ingot
-<aluminum_ingot>,铝锭,aluminum_ingot
-<Iron_ingot>,铁锭,Iron_ingot
-<silver_ingot>,银锭,silver_ingot
-<gold_ingot>,金锭,gold_ingot
-<titanium_ingot>,钛锭,titanium_ingot
-<lithium_ingot>,锂锭,lithium_ingot
-<uranium_ingot>,铀锭,uranium_ingot
-<silicon_ingot>,硅锭,silicon_ingot
-<bronze_alloy>,青铜合金,bronze_alloy
-<aluminum_alloy>,铝合金,aluminum_alloy
-<titanium_alloy>,钛合金,titanium_alloy
-<high_purity_oxygen>,高纯氧,high_purity_oxygen
-<high_purity_uranium>,高纯铀,high_purity_uranium
-<uranium_bomb>,铀弹,uranium_bomb
-<high_purity_hydrogen>,高纯氢,high_purity_hydrogen
-<hydrogen_bomb>,氢弹,hydrogen_bomb
-<high_purity_lithium>,高纯锂,high_purity_lithium
-<lithium_battery>,锂电池,lithium_battery
-<advanced_lithium_battery>,先进锂电池,advanced_lithium_battery
-<high_purity_silicon>,高纯硅,high_purity_silicon
-<silicon_wafer>,单晶硅片,silicon_wafer
-<chips>,芯片,chips
-<advanced_chips>,先进芯片,advanced_chips
-<tile>,瓷砖,Tile
-<wall>,墙壁,Wall
-<agriculture>,农业,agriculture
-<industry>,工业,industry
-<commerce>,商业,commerce
-<technology>,科技,technology
-<wonder>,奇观,wonder
-<decoration>,装饰,decoration
+﻿key,zh,en,ru
+<tinyland>,弹丸之地,TinyLand,Микроземелье
+<shell_coin>,贝壳,shell_coin,Морская раковина
+<copper_coin>,铜币,copper_coin,Медный монеты
+<iron_coin>,铁币,iron_coin,железный монетка
+<silver_coin>,银币,silver_coin,Серебряная монета
+<gold_coin>,金币,gold_coin,Золотая монета
+<titanium_coin>,钛币,titanium_coin,Титановая монета
+<population>,人口,population,Население
+<manpower>,人力,manpower,Рабочая сила
+<electricity>,电力,electricity,Электроэнергия
+<oxygen>,氧气,oxygen,Кислород
+<berry>,浆果,berry,Ягоды
+<wheat>,小麦,wheat,Пшеница
+<corn>,玉米,corn,Mais
+<rice>,水稻,rice,Рис
+<canned_food>,罐头食品,canned_food,Консервы
+<cultured_meat>,培养肉,cultured_meat,Сушеное мясо
+<frozen_cultured_meat>,冷冻培养肉,frozen_cultured_meat,Охлажденное культивированное мясо
+<ice>,冰块,ice,Кубики льда
+<water>,水,water,Вода
+<dirt>,泥土,dirt,Глина
+<clay>,黏土,clay,Клеевая глина
+<wood>,木材,wood,Древесина
+<hardwood>,硬木材,hardwood,Твердая древесина
+<rock>,岩石,rock,Камень
+<sand>,沙子,sand,Песок
+<dirt_plank>,土板,dirt_plank,Глиняная плитка
+<wood_plank>,木板,wood_plank,Доска
+<hardwood_plank>,硬木板,hardwood_plank,Твердая доска
+<rock_plank>,石板,rock_plank,Каменная плита
+<glass>,玻璃,glass,Стекло
+<glass_plank>,玻璃板,glass_plank,Стеклянная пластина
+<copper_ore>,铜矿石,copper_ore,Медnée руда
+<tin_ore>,锡矿石,tin_ore,Олово руда
+<aluminum_ore>,铝矿石,aluminum_ore,Алюминиевое рудо
+<iron_ore>,铁矿石,iron_ore,руда железо
+<silver_ore>,银矿石,silver_ore,Серебряная руда
+<gold_ore>,金矿石,gold_ore,Золото руда
+<titanium_ore>,钛矿石,titanium_ore,Титановая руда
+<lithium_ore>,锂矿石,lithium_ore,Литий руда
+<uranium_ore>,铀矿石,uranium_ore,Урановая руда
+<silicon_ore>,硅矿石,silicon_ore,Кремнёвое рудо
+<coal>,煤碳块,coal,Уголь
+<copper_ingot>,铜锭,copper_ingot,Медный слиток
+<tin_ingot>,锡锭,tin_ingot,Олово слиток
+<aluminum_ingot>,铝锭,aluminum_ingot,Алюминиевый слиток
+<Iron_ingot>,铁锭,Iron_ingot,железный слиток
+<silver_ingot>,银锭,silver_ingot,Серебряный слиток
+<gold_ingot>,金锭,gold_ingot,Золотой слиток
+<titanium_ingot>,钛锭,titanium_ingot,Титановый слиток
+<lithium_ingot>,锂锭,lithium_ingot,Литийный слиток
+<uranium_ingot>,铀锭,uranium_ingot,Урановый слиток
+<silicon_ingot>,硅锭,silicon_ingot,Кремний слиток
+<bronze_alloy>,青铜合金,bronze_alloy,Бронзовый сплав
+<aluminum_alloy>,铝合金,aluminum_alloy,Алюминиевый сплав
+<titanium_alloy>,钛合金,titanium_alloy,Титановый сплав
+<high_purity_oxygen>,高纯氧,high_purity_oxygen,Высокопурified кислород
+<high_purity_uranium>,高纯铀,high_purity_uranium,Высокопурified уран
+<uranium_bomb>,铀弹,uranium_bomb,Урановая бомба
+<high_purity_hydrogen>,高纯氢,high_purity_hydrogen,Высокопурified водород
+<hydrogen_bomb>,氢弹,hydrogen_bomb,Водородная бомба
+<high_purity_lithium>,高纯锂,high_purity_lithium,Высокопурified литий
+<lithium_battery>,锂电池,lithium_battery,литиевая батарея
+<advanced_lithium_battery>,先进锂电池,advanced_lithium_battery,Прогрессивная литиевая батарея
+<high_purity_silicon>,高纯硅,high_purity_silicon,Высокопурифицированный кремний
+<silicon_wafer>,单晶硅片,silicon_wafer,Однослойный кремниевый диск
+<chips>,芯片,chips,Микросхема
+<advanced_chips>,先进芯片,advanced_chips,Прогрессивный микросхема
+<tile>,瓷砖,Tile,Керамическая плитка
+<wall>,墙壁,Wall,Стена
+<agriculture>,农业,agriculture,Сельское хозяйство
+<industry>,工业,industry,Промышленность
+<commerce>,商业,commerce,Komмерcia
+<technology>,科技,technology,Наука и техника
+<wonder>,奇观,wonder,Чудо
+<decoration>,装饰,decoration,Декорация
