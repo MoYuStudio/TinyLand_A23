@@ -1,12 +1,12 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4i274kh3fecs"]
+[gd_scene load_steps=22 format=3 uid="uid://c4i274kh3fecs"]
 
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_u15gb"]
+[ext_resource type="AudioStream" uid="uid://ynohea28i701" path="res://music/Awake.mp3" id="3_b6rfu"]
 [ext_resource type="TileSet" uid="uid://x4rcasuy7xwy" path="res://tile/tile_set.tres" id="6_y1sps"]
 [ext_resource type="Texture2D" uid="uid://cicabngtdppgo" path="res://tile/png/254.png" id="8_d4rgs"]
 [ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="9_c86v8"]
 [ext_resource type="PackedScene" uid="uid://cqatkw3r5u63j" path="res://interface/resources_bar.tscn" id="11_ed847"]
 [ext_resource type="PackedScene" uid="uid://be3rafvp3s3pe" path="res://interface/tiles_bar.tscn" id="12_ewp7h"]
-[ext_resource type="AudioStream" uid="uid://bhiiqmxpslqy5" path="res://music/1996.mp3" id="12_s8qj7"]
 [ext_resource type="PackedScene" uid="uid://catj35d1cnagp" path="res://interface/tiles_bar_tile.tscn" id="13_si5w3"]
 [ext_resource type="Texture2D" uid="uid://c16yiulcboja4" path="res://tile/png/255.png" id="14_x22t7"]
 
@@ -32,6 +32,22 @@ func _process(delta):
 		
 func _on_tiles_bar_mouse_entered():
 	tilemap.preview.hide()
+"
+
+[sub_resource type="GDScript" id="GDScript_xshbh"]
+script/source = "
+extends HSplitContainer
+
+@export var player_data : MoYuPlayerData = preload(\"res://data/player_data.tres\")
+
+func _ready():
+	split_offset = 0
+
+func _process(delta):
+	for resource in player_data.price:
+		if player_data.price[resource] > 0:
+			var tween = create_tween()
+			tween.tween_property(self,\"split_offset\",300,0.5)
 "
 
 [sub_resource type="Environment" id="Environment_r2gak"]
@@ -215,7 +231,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_u15gb")
-split_offset = 360
+split_offset = 300
+script = SubResource("GDScript_xshbh")
 
 [node name="ResourcesBar" parent="CanvasLayer/HSplitContainer" instance=ExtResource("11_ed847")]
 texture_filter = 1
@@ -236,15 +253,16 @@ stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(912, 720)
+size = Vector2i(972, 720)
 render_target_update_mode = 4
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_r2gak")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
-stream = ExtResource("12_s8qj7")
+stream = ExtResource("3_b6rfu")
 volume_db = -24.0
+autoplay = true
 bus = &"BGM"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
