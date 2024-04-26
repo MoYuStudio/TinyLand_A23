@@ -1,10 +1,10 @@
-[gd_scene load_steps=35 format=3 uid="uid://c4i274kh3fecs"]
+[gd_scene load_steps=36 format=3 uid="uid://c4i274kh3fecs"]
 
 [ext_resource type="Texture2D" uid="uid://d2kdpiwjrunpr" path="res://tile/png/air.png" id="1_eohhp"]
 [ext_resource type="Texture2D" uid="uid://dw6nu2ay46x7c" path="res://tile/png/dirt_block.png" id="2_rswqe"]
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_u15gb"]
+[ext_resource type="Script" path="res://utility/player_data.gd" id="3_5qbrm"]
 [ext_resource type="Texture2D" uid="uid://bbgt3jxeos01f" path="res://tile/png/grass_block.png" id="3_dd6hf"]
-[ext_resource type="Resource" uid="uid://bpi8bwlel30b8" path="res://data/player_data.tres" id="3_wjxsp"]
 [ext_resource type="PackedScene" uid="uid://o32sdvgym6n6" path="res://tile/farm.tscn" id="4_kta7o"]
 [ext_resource type="Texture2D" uid="uid://dcwek0um440c3" path="res://tile/png/sand_block.png" id="6_72ph8"]
 [ext_resource type="Texture2D" uid="uid://ttri0jfkedpi" path="res://tile/png/water_block_animation.png" id="7_0ycd3"]
@@ -39,6 +39,71 @@ func _process(delta):
 func _on_tiles_bar_mouse_entered():
 	tilemap.preview.hide()
 "
+
+[sub_resource type="Resource" id="Resource_p7ath"]
+script = ExtResource("3_5qbrm")
+price = {
+"advanced_chips": 1,
+"aluminum_alloy": 1,
+"aluminum_ingot": 1,
+"aluminum_ore": 1,
+"berry": 1,
+"bronze_alloy": 1,
+"canned_food": 1,
+"chips": 1,
+"clay": 1,
+"coal": 1,
+"copper_coin": 1,
+"copper_ingot": 1,
+"copper_ore": 1,
+"corn": 1,
+"cultured_meat": 1,
+"dirt": 1,
+"dirt_plank": 1,
+"electricity": 1,
+"frozen_cultured_meat": 1,
+"glass": 1,
+"glass_plank": 0,
+"gold_coin": 1,
+"gold_ingot": 0,
+"gold_ore": 0,
+"hardwood": 0,
+"hardwood_plank": 0,
+"high_purity_lithium": 0,
+"high_purity_silicon": 0,
+"high_purity_uranium": 0,
+"ice": 0,
+"iron_coin": 1,
+"iron_ingot": 0,
+"iron_ore": 0,
+"lithium_ingot": 0,
+"lithium_ore": 0,
+"manpower": 1,
+"population": 1,
+"rice": 0,
+"rock": 0,
+"rock_plank": 0,
+"sand": 0,
+"shell_coin": 1,
+"silicon_ingot": 0,
+"silicon_ore": 0,
+"silicon_wafer": 0,
+"silver_coin": 1,
+"silver_ingot": 0,
+"silver_ore": 0,
+"tin_ingot": 0,
+"tin_ore": 0,
+"titanium_alloy": 0,
+"titanium_coin": 1,
+"titanium_ingot": 0,
+"titanium_ore": 0,
+"uranium_ingot": 0,
+"uranium_ore": 0,
+"water": 0,
+"wheat": 1,
+"wood": 0,
+"wood_plank": 0
+}
 
 [sub_resource type="Environment" id="Environment_r2gak"]
 background_mode = 3
@@ -288,7 +353,7 @@ split_offset = 360
 [node name="ResourcesBar" parent="CanvasLayer/HSplitContainer" instance=ExtResource("11_ed847")]
 texture_filter = 1
 layout_mode = 2
-player_data = ExtResource("3_wjxsp")
+player_data = SubResource("Resource_p7ath")
 
 [node name="Control" type="Control" parent="CanvasLayer/HSplitContainer"]
 clip_contents = true

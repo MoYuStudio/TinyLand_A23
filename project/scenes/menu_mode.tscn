@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bl2tqtjaw3mdn" path="res://interface/mode_card.tscn" id="1_vcu30"]
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_7bai4"]
 [ext_resource type="Texture2D" uid="uid://c66pt2xggi5k5" path="res://tile/png/factory.png" id="4_8reki"]
-[ext_resource type="Texture2D" uid="uid://cd73e10paxbg" path="res://tile/png/769.png" id="4_r3jml"]
+[ext_resource type="Texture2D" uid="uid://cnoj1gxgwn7fe" path="res://tile/png/769.png" id="4_r3jml"]
 [ext_resource type="Texture2D" uid="uid://bbgt3jxeos01f" path="res://tile/png/grass_block.png" id="5_iwq6n"]
 [ext_resource type="Texture2D" uid="uid://ttj5sycpi60s" path="res://icon/country/zh.png" id="7_r2m61"]
 

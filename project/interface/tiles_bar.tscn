@@ -11,16 +11,24 @@ extends MarginContainer
 @onready var tab_container = $TabContainer
 
 var tab_data = {
-	\"瓷砖\":[\"air\",\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\",
+	# 瓷砖
+	\"<tile>\":[\"air\",\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\",
 			\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\",
 			\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\"],
-	\"墙壁\":[],
-	\"农业\":[],
-	\"工业\":[],
-	\"商业\":[],
-	\"科技\":[],
-	\"奇观\":[],
-	\"装饰\":[],
+	# 墙壁
+	\"<wall>\":[],
+	# 农业
+	\"<agriculture>\":[],
+	# 工业
+	\"<industry>\":[],
+	# 商业
+	\"<commerce>\":[],
+	# 科技
+	\"<technology>\":[],
+	# 奇观
+	\"<wonder>\":[],
+	# 装饰
+	\"<decoration>\":[],
 }
 
 func _ready():
@@ -65,12 +73,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_07wep")
 tab_alignment = 1
 drag_to_rearrange_enabled = true
 
-[node name="瓷砖" type="TabBar" parent="TabContainer"]
+[node name="<tile>" type="TabBar" parent="TabContainer"]
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/瓷砖"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/<tile>"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,22 +90,22 @@ theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 16
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/瓷砖/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<tile>/MarginContainer"]
 clip_contents = false
 layout_mode = 2
 vertical_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/瓷砖/MarginContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/<tile>/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="墙壁" type="TabBar" parent="TabContainer"]
+[node name="<wall>" type="TabBar" parent="TabContainer"]
 visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/墙壁"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/<wall>"]
 layout_mode = 0
 offset_right = 80.0
 offset_bottom = 80.0
@@ -106,22 +114,22 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/墙壁/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<wall>/MarginContainer"]
 clip_contents = false
 layout_mode = 2
 vertical_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/墙壁/MarginContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/<wall>/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="农业" type="TabBar" parent="TabContainer"]
+[node name="<agriculture>" type="TabBar" parent="TabContainer"]
 visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/农业"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/<agriculture>"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -130,22 +138,22 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/农业/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<agriculture>/MarginContainer"]
 clip_contents = false
 layout_mode = 2
 vertical_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/农业/MarginContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/<agriculture>/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="工业" type="TabBar" parent="TabContainer"]
+[node name="<industry>" type="TabBar" parent="TabContainer"]
 visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/工业"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/<industry>"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -154,22 +162,22 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/工业/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<industry>/MarginContainer"]
 clip_contents = false
 layout_mode = 2
 vertical_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/工业/MarginContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/<industry>/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="商业" type="TabBar" parent="TabContainer"]
+[node name="<commerce>" type="TabBar" parent="TabContainer"]
 visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/商业"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/<commerce>"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -178,22 +186,22 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/商业/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<commerce>/MarginContainer"]
 clip_contents = false
 layout_mode = 2
 vertical_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/商业/MarginContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/<commerce>/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="科技" type="TabBar" parent="TabContainer"]
+[node name="<technology>" type="TabBar" parent="TabContainer"]
 visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/科技"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/<technology>"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -202,22 +210,22 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/科技/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<technology>/MarginContainer"]
 clip_contents = false
 layout_mode = 2
 vertical_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/科技/MarginContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/<technology>/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="奇观" type="TabBar" parent="TabContainer"]
+[node name="<wonder>" type="TabBar" parent="TabContainer"]
 visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/奇观"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/<wonder>"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -226,22 +234,22 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/奇观/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<wonder>/MarginContainer"]
 clip_contents = false
 layout_mode = 2
 vertical_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/奇观/MarginContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/<wonder>/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="装饰" type="TabBar" parent="TabContainer"]
+[node name="<decoration>" type="TabBar" parent="TabContainer"]
 visible = false
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_7ui4f")
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/装饰"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/<decoration>"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -250,11 +258,11 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/装饰/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<decoration>/MarginContainer"]
 clip_contents = false
 layout_mode = 2
 vertical_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/装饰/MarginContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/<decoration>/MarginContainer/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8

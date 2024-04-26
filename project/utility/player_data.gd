@@ -13,10 +13,11 @@ class_name MoYuPlayerData
 	"gold_coin":0, # 金币
 	"titanium_coin":0, # 钛币
 	
-	# 人口 人力 电力
+	# 人口 人力 电力 氧气
 	"population":0, # 人口
 	"manpower":0, # 人力
 	"electricity":0, # 电力
+	"oxygen":0, # 氧气
 	
 	# 食物
 	"berry":0, # 浆果
@@ -78,14 +79,22 @@ class_name MoYuPlayerData
 	"titanium_alloy":0, # 钛合金
 	
 	# 科技
+	"high_purity_oxygen":0,# 高纯氧
+	
 	"high_purity_uranium":0, # 高纯铀
+	"uranium_bomb":0, # 铀弹
+	
+	"high_purity_hydrogen":0, # 高纯氢
+	"hydrogen_bomb":0, # 氢弹
+	
 	"high_purity_lithium":0, # 高纯锂
+	"lithium_battery":0, # 锂电池
+	"advanced_lithium_battery":0, # 先进锂电池
+	
 	"high_purity_silicon":0, # 高纯硅
 	"silicon_wafer":0, # 单晶硅片
 	"chips":0, # 芯片
 	"advanced_chips":0, # 先进芯片
-	
-	
 	
 }
 
