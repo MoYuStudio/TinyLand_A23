@@ -242,7 +242,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("5_hy4mo")
 theme_override_font_sizes/font_size = 16
-text = "TinyLand A23 Dv2024041501"
+text = "TinyLand A23 Dv2024042601"
 
 [connection signal="gui_input" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_gui_input"]
 [connection signal="mouse_entered" from="CanvasLayer/Button" to="CanvasLayer/Button" method="_on_mouse_entered"]
