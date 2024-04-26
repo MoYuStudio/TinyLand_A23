@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cditqoj3ln4b1"
-path="res://.godot/imported/ice.png-18d2493ea555c77b06ccd8d8d47055ff.ctex"
+uid="uid://28vamhysdsb6"
+path="res://.godot/imported/berry_bush_animation.png-6d28292747115e01a07f198d63128dbe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/png/ice.png"
-dest_files=["res://.godot/imported/ice.png-18d2493ea555c77b06ccd8d8d47055ff.ctex"]
+source_file="res://tile/png/berry_bush_animation.png"
+dest_files=["res://.godot/imported/berry_bush_animation.png-6d28292747115e01a07f198d63128dbe.ctex"]
 
 [params]
 

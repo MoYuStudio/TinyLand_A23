@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=3 uid="uid://o32sdvgym6n6"]
+
+[ext_resource type="Texture2D" uid="uid://b45tpb0768f7r" path="res://tile/png/wheat_field_animation.png" id="2_15l45"]
+[ext_resource type="Texture2D" uid="uid://c0opaixgch2oc" path="res://interface/light.png" id="2_d0xr4"]
+
+[sub_resource type="GDScript" id="GDScript_aqvtr"]
+script/source = "
+extends Node2D
+
+@onready var sprite = $Sprite
+@onready var animation_player = $AnimationPlayer
+
+@export var player_data : MoYuPlayerData = preload(\"res://data/player_data.tres\")
+
+@export var price = 10
+@export var sprite_texture : Texture2D
+
+@export var reap = 10
+
+func _ready():
+	animation_player.play(\"animation\")
+
+func _on_growing_timer_timeout():
+	if sprite.frame >= 5:
+		sprite.frame = 0
+		player_data.price[\"wheat\"] += 10
+	sprite.frame += 1
+"
+
+[sub_resource type="Animation" id="Animation_tfeic"]
+resource_name = "animation"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.06), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -0.3), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1rxtf"]
+_data = {
+"animation": SubResource("Animation_tfeic")
+}
+
+[node name="WheatField" type="Node2D"]
+script = SubResource("GDScript_aqvtr")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+texture_filter = 1
+texture = ExtResource("2_15l45")
+hframes = 6
+
+[node name="GrowingTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1rxtf")
+}
+
+[node name="PointLight" type="PointLight2D" parent="."]
+position = Vector2(0, 4)
+energy = 0.0
+texture = ExtResource("2_d0xr4")
+
+[connection signal="timeout" from="GrowingTimer" to="." method="_on_growing_timer_timeout"]

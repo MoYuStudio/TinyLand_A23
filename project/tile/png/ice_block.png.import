@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b45tpb0768f7r"
-path="res://.godot/imported/farmland_animation.png-42f232f42acbdffaafd9a1b94d9187eb.ctex"
+uid="uid://cditqoj3ln4b1"
+path="res://.godot/imported/ice_block.png-c741646a4816ec976c2d0f4f93d9754f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tile/png/farmland_animation.png"
-dest_files=["res://.godot/imported/farmland_animation.png-42f232f42acbdffaafd9a1b94d9187eb.ctex"]
+source_file="res://tile/png/ice_block.png"
+dest_files=["res://.godot/imported/ice_block.png-c741646a4816ec976c2d0f4f93d9754f.ctex"]
 
 [params]
 

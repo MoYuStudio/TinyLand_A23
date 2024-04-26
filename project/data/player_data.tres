@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MoYuPlayerData" load_steps=2 format=3 uid="uid://b7w4p8rwbsgve"]
+[gd_resource type="Resource" script_class="MoYuPlayerData" load_steps=2 format=3 uid="uid://bxpwu3qfoa4vr"]
 
 [ext_resource type="Script" path="res://utility/player_data.gd" id="1_ca77g"]
 

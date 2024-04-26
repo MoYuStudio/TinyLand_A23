@@ -8,24 +8,24 @@ extends Control
 
 @onready var container = $MarginContainer/ScrollContainer/Container
 
-@export var player_data : MoYuPlayerData
-
-var update_list = []
+@export var player_data : MoYuPlayerData = preload(\"res://data/player_data.tres\")
 
 func _ready():
 	# 生成价格 Popup
 	for resource in player_data.price:
-		if player_data.price[resource] > 0:
-			var list = resources_bar_list.instantiate()
-			list.name = resource
-			list.icon = load(\"res://icon/resource/\"+resource+\".png\")
-			list.num = str(player_data.price[resource])
-			container.add_child(list)
-			update_list.append(resource)
+		var list = resources_bar_list.instantiate()
+		list.name = resource
+		list.icon = load(\"res://icon/resource/\"+resource+\".png\")
+		list.num = str(player_data.price[resource])
+		if player_data.price[resource] <= 0:
+			list.hide()
+		container.add_child(list)
 
-func _physics_process(delta):
+func _process(delta):
 	# 资源更新
-	for resource in update_list:
+	for resource in player_data.price:
+		if player_data.price[resource] > 0:
+			container.get_node(resource).show()
 		container.get_node(resource+\"/Container/Num/Label\").text = \\
 							str(player_data.price[resource])
 	

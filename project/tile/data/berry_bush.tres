@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="MoYuTileData" load_steps=3 format=3 uid="uid://cvcgrelrgcy12"]
+
+[ext_resource type="Script" path="res://utility/tile_data.gd" id="1_mlr50"]
+[ext_resource type="Texture2D" uid="uid://b54grhc7lb1dv" path="res://tile/png/berry_bush.png" id="2_4eru5"]
+
+[resource]
+script = ExtResource("1_mlr50")
+tile_id = 20001
+tile_texture = ExtResource("2_4eru5")
+price = {}
+manufacture = {}
+can_build_on = []

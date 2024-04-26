@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://o32sdvgym6n6"]
+[gd_scene load_steps=6 format=3 uid="uid://c0bnhdfjm8sj3"]
 
-[ext_resource type="Texture2D" uid="uid://bocv6p2u6x22s" path="res://tile/png/256a1.png" id="1_klrmf"]
-[ext_resource type="Resource" uid="uid://bpi8bwlel30b8" path="res://data/player_data.tres" id="1_rf1om"]
-[ext_resource type="Texture2D" uid="uid://c0opaixgch2oc" path="res://interface/light.png" id="3_ava5w"]
+[ext_resource type="Texture2D" uid="uid://28vamhysdsb6" path="res://tile/png/berry_bush_animation.png" id="2_sn6lk"]
+[ext_resource type="Texture2D" uid="uid://c0opaixgch2oc" path="res://interface/light.png" id="2_uxuxs"]
 
 [sub_resource type="GDScript" id="GDScript_aqvtr"]
 script/source = "
@@ -11,7 +10,7 @@ extends Node2D
 @onready var sprite = $Sprite
 @onready var animation_player = $AnimationPlayer
 
-@export var player_data : MoYuPlayerData
+@export var player_data : MoYuPlayerData = preload(\"res://data/player_data.tres\")
 
 @export var price = 10
 @export var sprite_texture : Texture2D
@@ -24,7 +23,7 @@ func _ready():
 func _on_growing_timer_timeout():
 	if sprite.frame >= 5:
 		sprite.frame = 0
-		player_data.price[\"food\"] += 10
+		player_data.price[\"berry\"] += 10
 	sprite.frame += 1
 "
 
@@ -61,19 +60,18 @@ _data = {
 "animation": SubResource("Animation_tfeic")
 }
 
-[node name="Farm" type="Node2D"]
+[node name="BerryBush" type="Node2D"]
 script = SubResource("GDScript_aqvtr")
-player_data = ExtResource("1_rf1om")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 1
 y_sort_enabled = true
 texture_filter = 1
-texture = ExtResource("1_klrmf")
+texture = ExtResource("2_sn6lk")
 hframes = 6
 
 [node name="GrowingTimer" type="Timer" parent="."]
-wait_time = 9.0
+wait_time = 3.0
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -84,6 +82,6 @@ libraries = {
 [node name="PointLight" type="PointLight2D" parent="."]
 position = Vector2(0, 4)
 energy = 0.0
-texture = ExtResource("3_ava5w")
+texture = ExtResource("2_uxuxs")
 
 [connection signal="timeout" from="GrowingTimer" to="." method="_on_growing_timer_timeout"]

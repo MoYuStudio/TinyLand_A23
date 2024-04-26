@@ -1,13 +1,7 @@
-[gd_scene load_steps=36 format=3 uid="uid://c4i274kh3fecs"]
+[gd_scene load_steps=21 format=3 uid="uid://c4i274kh3fecs"]
 
-[ext_resource type="Texture2D" uid="uid://d2kdpiwjrunpr" path="res://tile/png/air.png" id="1_eohhp"]
-[ext_resource type="Texture2D" uid="uid://dw6nu2ay46x7c" path="res://tile/png/dirt_block.png" id="2_rswqe"]
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_u15gb"]
-[ext_resource type="Script" path="res://utility/player_data.gd" id="3_5qbrm"]
-[ext_resource type="Texture2D" uid="uid://bbgt3jxeos01f" path="res://tile/png/grass_block.png" id="3_dd6hf"]
-[ext_resource type="PackedScene" uid="uid://o32sdvgym6n6" path="res://tile/farm.tscn" id="4_kta7o"]
-[ext_resource type="Texture2D" uid="uid://dcwek0um440c3" path="res://tile/png/sand_block.png" id="6_72ph8"]
-[ext_resource type="Texture2D" uid="uid://ttri0jfkedpi" path="res://tile/png/water_block_animation.png" id="7_0ycd3"]
+[ext_resource type="TileSet" uid="uid://x4rcasuy7xwy" path="res://tile/tile_set.tres" id="6_y1sps"]
 [ext_resource type="Texture2D" uid="uid://cicabngtdppgo" path="res://tile/png/254.png" id="8_d4rgs"]
 [ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="9_c86v8"]
 [ext_resource type="PackedScene" uid="uid://cqatkw3r5u63j" path="res://interface/resources_bar.tscn" id="11_ed847"]
@@ -39,71 +33,6 @@ func _process(delta):
 func _on_tiles_bar_mouse_entered():
 	tilemap.preview.hide()
 "
-
-[sub_resource type="Resource" id="Resource_p7ath"]
-script = ExtResource("3_5qbrm")
-price = {
-"advanced_chips": 1,
-"aluminum_alloy": 1,
-"aluminum_ingot": 1,
-"aluminum_ore": 1,
-"berry": 1,
-"bronze_alloy": 1,
-"canned_food": 1,
-"chips": 1,
-"clay": 1,
-"coal": 1,
-"copper_coin": 1,
-"copper_ingot": 1,
-"copper_ore": 1,
-"corn": 1,
-"cultured_meat": 1,
-"dirt": 1,
-"dirt_plank": 1,
-"electricity": 1,
-"frozen_cultured_meat": 1,
-"glass": 1,
-"glass_plank": 0,
-"gold_coin": 1,
-"gold_ingot": 0,
-"gold_ore": 0,
-"hardwood": 0,
-"hardwood_plank": 0,
-"high_purity_lithium": 0,
-"high_purity_silicon": 0,
-"high_purity_uranium": 0,
-"ice": 0,
-"iron_coin": 1,
-"iron_ingot": 0,
-"iron_ore": 0,
-"lithium_ingot": 0,
-"lithium_ore": 0,
-"manpower": 1,
-"population": 1,
-"rice": 0,
-"rock": 0,
-"rock_plank": 0,
-"sand": 0,
-"shell_coin": 1,
-"silicon_ingot": 0,
-"silicon_ore": 0,
-"silicon_wafer": 0,
-"silver_coin": 1,
-"silver_ingot": 0,
-"silver_ore": 0,
-"tin_ingot": 0,
-"tin_ore": 0,
-"titanium_alloy": 0,
-"titanium_coin": 1,
-"titanium_ingot": 0,
-"titanium_ore": 0,
-"uranium_ingot": 0,
-"uranium_ore": 0,
-"water": 0,
-"wheat": 1,
-"wood": 0,
-"wood_plank": 0
-}
 
 [sub_resource type="Environment" id="Environment_r2gak"]
 background_mode = 3
@@ -161,72 +90,6 @@ scale_max = 0.6
 scale_curve = SubResource("CurveTexture_uukse")
 color_ramp = SubResource("GradientTexture1D_bqjk5")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn43b"]
-texture = ExtResource("1_eohhp")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rw2b5"]
-texture = ExtResource("2_rswqe")
-0:0/0 = 0
-0:0/0/y_sort_origin = -4
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_hjayu"]
-scenes/1/scene = ExtResource("4_kta7o")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nv0ff"]
-texture = ExtResource("3_dd6hf")
-0:0/0 = 0
-0:0/0/y_sort_origin = -4
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05rjl"]
-texture = ExtResource("6_72ph8")
-0:0/0 = 0
-0:0/0/y_sort_origin = -4
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0u5g7"]
-texture = ExtResource("6_72ph8")
-0:0/0 = 0
-0:0/0/y_sort_origin = -4
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_op77s"]
-texture = ExtResource("7_0ycd3")
-0:0/animation_columns = 2
-0:0/animation_mode = 1
-0:0/animation_frame_0/duration = 0.3
-0:0/animation_frame_1/duration = 0.3
-0:0/0 = 0
-0:0/0/y_sort_origin = -4
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-
-[sub_resource type="TileSet" id="TileSet_gul10"]
-tile_shape = 1
-tile_size = Vector2i(16, 8)
-physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_rw2b5")
-sources/0 = SubResource("TileSetAtlasSource_nn43b")
-sources/2 = SubResource("TileSetAtlasSource_nv0ff")
-sources/3 = SubResource("TileSetAtlasSource_05rjl")
-sources/4 = SubResource("TileSetAtlasSource_0u5g7")
-sources/5 = SubResource("TileSetAtlasSource_op77s")
-sources/10001 = SubResource("TileSetScenesCollectionSource_hjayu")
-
 [sub_resource type="GDScript" id="GDScript_i2d70"]
 script/source = "
 extends TileMap
@@ -256,7 +119,11 @@ func _unhandled_input(event):
 		var tile_to_build = load(\"res://tile/data/\"+
 			RuningData.choose_tile_name+\".tres\")
 			
-		if tile_to_build.tile_id > 10000:
+		if tile_to_build.tile_id == 0:
+			set_cell(land_layer, land_pos, -1, Vector2(0, 0), 0)
+			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
+			
+		elif tile_to_build.tile_id > 10000:
 			if get_cell_source_id(land_layer, land_pos) != -1:
 				if get_cell_source_id(building_layer, building_pos) == -1:
 					if pay(tile_to_build):
@@ -353,7 +220,6 @@ split_offset = 360
 [node name="ResourcesBar" parent="CanvasLayer/HSplitContainer" instance=ExtResource("11_ed847")]
 texture_filter = 1
 layout_mode = 2
-player_data = SubResource("Resource_p7ath")
 
 [node name="Control" type="Control" parent="CanvasLayer/HSplitContainer"]
 clip_contents = true
@@ -412,7 +278,7 @@ lifetime = 6.0
 [node name="TileMap" type="TileMap" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
 y_sort_enabled = true
 texture_filter = 1
-tile_set = SubResource("TileSet_gul10")
+tile_set = ExtResource("6_y1sps")
 format = 2
 layer_0/name = "Building"
 layer_0/y_sort_enabled = true

@@ -18,7 +18,7 @@ var tab_data = {
 	# 墙壁
 	\"<wall>\":[],
 	# 农业
-	\"<agriculture>\":[],
+	\"<agriculture>\":[\"berry_bush\",\"wheat_field\"],
 	# 工业
 	\"<industry>\":[],
 	# 商业
