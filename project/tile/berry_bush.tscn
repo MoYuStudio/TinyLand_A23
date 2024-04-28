@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c0bnhdfjm8sj3"]
 
-[ext_resource type="Texture2D" uid="uid://28vamhysdsb6" path="res://tile/png/berry_bush_animation.png" id="2_sn6lk"]
+[ext_resource type="Texture2D" uid="uid://b54grhc7lb1dv" path="res://tile/png/berry_bush.png" id="1_uu8mg"]
 [ext_resource type="Texture2D" uid="uid://c0opaixgch2oc" path="res://interface/light.png" id="2_uxuxs"]
 
 [sub_resource type="GDScript" id="GDScript_aqvtr"]
@@ -15,16 +15,14 @@ extends Node2D
 @export var price = 10
 @export var sprite_texture : Texture2D
 
-@export var reap = 10
+@export var reap = 0.1
 
 func _ready():
 	animation_player.play(\"animation\")
 
 func _on_growing_timer_timeout():
-	if sprite.frame >= 5:
-		sprite.frame = 0
-		player_data.price[\"berry\"] += 10
-	sprite.frame += 1
+	player_data.price[\"berry\"] += reap
+
 "
 
 [sub_resource type="Animation" id="Animation_tfeic"]
@@ -67,11 +65,9 @@ script = SubResource("GDScript_aqvtr")
 z_index = 1
 y_sort_enabled = true
 texture_filter = 1
-texture = ExtResource("2_sn6lk")
-hframes = 6
+texture = ExtResource("1_uu8mg")
 
 [node name="GrowingTimer" type="Timer" parent="."]
-wait_time = 3.0
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://o32sdvgym6n6"]
 
-[ext_resource type="Texture2D" uid="uid://b45tpb0768f7r" path="res://tile/png/wheat_field_animation.png" id="2_15l45"]
+[ext_resource type="Texture2D" uid="uid://ynmjemibo47" path="res://tile/png/wheat_field.png" id="1_t2hok"]
 [ext_resource type="Texture2D" uid="uid://c0opaixgch2oc" path="res://interface/light.png" id="2_d0xr4"]
 
 [sub_resource type="GDScript" id="GDScript_aqvtr"]
@@ -15,16 +15,13 @@ extends Node2D
 @export var price = 10
 @export var sprite_texture : Texture2D
 
-@export var reap = 10
+@export var reap = 0.1
 
 func _ready():
 	animation_player.play(\"animation\")
 
 func _on_growing_timer_timeout():
-	if sprite.frame >= 5:
-		sprite.frame = 0
-		player_data.price[\"wheat\"] += 10
-	sprite.frame += 1
+	player_data.price[\"wheat\"] += reap
 "
 
 [sub_resource type="Animation" id="Animation_tfeic"]
@@ -67,11 +64,9 @@ script = SubResource("GDScript_aqvtr")
 z_index = 1
 y_sort_enabled = true
 texture_filter = 1
-texture = ExtResource("2_15l45")
-hframes = 6
+texture = ExtResource("1_t2hok")
 
 [node name="GrowingTimer" type="Timer" parent="."]
-wait_time = 3.0
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

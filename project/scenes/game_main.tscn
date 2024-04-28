@@ -261,8 +261,7 @@ environment = SubResource("Environment_r2gak")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]
 stream = ExtResource("3_b6rfu")
-volume_db = -24.0
-autoplay = true
+volume_db = -36.0
 bus = &"BGM"
 
 [node name="CanvasModulate" type="CanvasModulate" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer/SubViewport"]

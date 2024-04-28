@@ -13,20 +13,31 @@ extends Control
 @onready var self_num = $Container/Num/Label
 @onready var self_add = $Container/Add/Label
 
+@onready var timer = $Timer
+
 @onready var name_popup = $Name
 
 @export var icon : Texture2D
-@export var num : String
-@export var add : String
+@export var num : int = 0
+
+var last_value: float = 0.0
+var value: float = 0.0
+
+var add : float = 0.0
 
 func _ready():
 	name_popup.visible = false
 	self_icon.texture = icon
-	self_num.text = num
-	self_add.text = add
+	self_num.text = str(num)
 
 func _process(delta):
 	pass
+	
+func calculated_growth():
+	value = int(self_num.text)
+	add = value - last_value
+	last_value = value
+	self_add.text = \"+ \"+str(snapped(add/3,0.01))+\"/s\"
 
 func _on_icon_mouse_entered():
 	name_popup.visible = true
@@ -35,6 +46,9 @@ func _on_icon_mouse_entered():
 func _on_icon_mouse_exited():
 	name_popup.visible = false
 	self_name.text = \"\"
+
+func _on_timer_timeout():
+	calculated_growth()
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdy55"]
@@ -90,7 +104,7 @@ layout_mode = 2
 theme = ExtResource("2_mnecp")
 theme_override_fonts/font = ExtResource("3_06iy8")
 theme_override_font_sizes/font_size = 16
-text = "+ 1.25/s"
+text = "+ 0/s"
 
 [node name="Name" type="Panel" parent="."]
 texture_filter = 1
@@ -111,5 +125,10 @@ offset_bottom = 27.0
 theme = ExtResource("2_mnecp")
 theme_override_font_sizes/font_size = 16
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
 [connection signal="mouse_entered" from="Container/Icon" to="." method="_on_icon_mouse_entered"]
 [connection signal="mouse_exited" from="Container/Icon" to="." method="_on_icon_mouse_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -16,7 +16,7 @@ func _ready():
 		var list = resources_bar_list.instantiate()
 		list.name = resource
 		list.icon = load(\"res://icon/resource/\"+resource+\".png\")
-		list.num = str(player_data.price[resource])
+		list.num = player_data.price[resource]
 		if player_data.price[resource] <= 0:
 			list.hide()
 		container.add_child(list)
@@ -27,7 +27,7 @@ func _process(delta):
 		if player_data.price[resource] > 0:
 			container.get_node(resource).show()
 		container.get_node(resource+\"/Container/Num/Label\").text = \\
-							str(player_data.price[resource])
+							str(snapped(player_data.price[resource],0.01))
 	
 "
 

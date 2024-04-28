@@ -12,9 +12,7 @@ extends MarginContainer
 
 var tab_data = {
 	# 瓷砖
-	\"<tile>\":[\"air\",\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\",
-			\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\",
-			\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\"],
+	\"<tile>\":[\"air\",\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\",],
 	# 墙壁
 	\"<wall>\":[],
 	# 农业
