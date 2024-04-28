@@ -1,0 +1,110 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfhoqjfkwvc0"]
+
+[ext_resource type="TileSet" uid="uid://x4rcasuy7xwy" path="res://tile/tile_set.tres" id="1_rv0x4"]
+[ext_resource type="Texture2D" uid="uid://cicabngtdppgo" path="res://tile/png/254.png" id="2_er7pl"]
+
+[sub_resource type="GDScript" id="GDScript_i2d70"]
+script/source = "
+extends TileMap
+
+@onready var preview = $PreView
+
+var tile_to_build
+
+# Layers IDs
+var building_layer = 0
+var land_layer = 1
+
+func _ready():
+	pass
+	
+func _process(delta):
+	tile_to_build = load(\"res://tile/data/\"+
+			RuningData.choose_tile_name+\".tres\")
+	if tile_to_build.tile_id < 10000:
+		var mouse_pos = get_global_mouse_position()
+		mouse_pos.y += 4
+		preview.position = map_to_local(Vector2(local_to_map(mouse_pos).x, \\
+												local_to_map(mouse_pos).y))
+		preview.texture = tile_to_build.tile_texture
+		preview.z_index = 0
+	else:
+		var mouse_pos = get_global_mouse_position()
+		mouse_pos.y -= 4
+		preview.position = map_to_local(local_to_map(mouse_pos))
+		preview.texture = tile_to_build.tile_texture
+		preview.z_index = 1
+
+func _unhandled_input(event):
+	preview.show()
+	var mouse_pos = get_global_mouse_position()
+	mouse_pos.y -= 4
+	var land_pos = local_to_map(mouse_pos)
+	land_pos.y += 2
+	var building_pos = local_to_map(mouse_pos)
+	if Input.is_action_pressed(\"build\"):
+			
+		if tile_to_build.tile_id == 0:
+			set_cell(land_layer, land_pos, -1, Vector2(0, 0), 0)
+			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
+			
+		elif tile_to_build.tile_id > 10000:
+			if get_cell_source_id(land_layer, land_pos) != -1:
+				if get_cell_source_id(building_layer, building_pos) == -1:
+					if pay(tile_to_build):
+						set_cell(building_layer, building_pos, 
+						tile_to_build.tile_id, Vector2(0, 0), 1)
+				
+		elif tile_to_build.tile_id < 10000:
+			if get_cell_source_id(land_layer, land_pos) != tile_to_build.tile_id:
+				if get_cell_source_id(land_layer,land_pos) == -1:
+					if pay(tile_to_build):
+						set_cell(land_layer, land_pos, tile_to_build.tile_id, Vector2(0, 0), 0)
+						set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
+			
+		elif tile_to_build.tile_id == 10000:
+			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
+	
+func pay(tile_to_build):
+	var player_data = load(\"res://data/player_data.tres\")
+	
+	for pay in tile_to_build.price:
+		if player_data.price[pay] >= tile_to_build.price[pay]:
+			player_data.price[pay] -= tile_to_build.price[pay]
+		else:
+			return false
+		
+	return true
+	
+# 周围瓷砖检测 3x3
+func get_surrounding_tiles(current_tile):
+	var surrounding_tiles =[]
+	var target_tile
+	for y in 3:
+		for x in 3:
+			target_tile = current_tile + Vector2(x-1,y-1)
+			if current_tile == target_tile:
+				continue
+			surrounding_tiles.append(target_tile)
+	return surrounding_tiles
+"
+
+[node name="TileMap" type="TileMap"]
+y_sort_enabled = true
+texture_filter = 1
+tile_set = ExtResource("1_rv0x4")
+format = 2
+layer_0/name = "Building"
+layer_0/y_sort_enabled = true
+layer_0/z_index = 1
+layer_1/name = "Land"
+layer_1/y_sort_enabled = true
+layer_1/tile_data = PackedInt32Array(131072, 2, 0, 65536, 2, 0, 262143, 2, 0, 65535, 2, 0, 131070, 2, 0, -1, 2, 0, 0, 2, 0, 131071, 2, 0, 196607, 2, 0)
+script = SubResource("GDScript_i2d70")
+
+[node name="PreView" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(0, 25)
+texture = ExtResource("2_er7pl")

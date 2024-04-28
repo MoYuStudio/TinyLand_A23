@@ -59,6 +59,7 @@ _data = {
 }
 
 [node name="BerryBush" type="Node2D"]
+texture_filter = 1
 script = SubResource("GDScript_aqvtr")
 
 [node name="Sprite" type="Sprite2D" parent="."]
