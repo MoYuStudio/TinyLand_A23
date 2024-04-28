@@ -23,6 +23,7 @@ extends Button
 @onready var texture_rect = $TextureRect
 @onready var popup = $PopupPanel
 @onready var popup_container = $PopupPanel/MarginContainer/PopupContainer
+@onready var self_tile_name = $TileName
 
 @export var tile_name : String
 @export var tile_texture : Texture2D
@@ -44,6 +45,9 @@ func _ready():
 	angle_y_max = deg_to_rad(angle_y_max)
 	
 	popup.hide()
+	
+	self_tile_name.text = \"<\"+tile_name+\">\"
+	self_tile_name.hide()
 	
 	var tile_data = load(\"res://tile/data/\"+tile_name+\".tres\")
 	for cost in tile_data.price:
@@ -98,6 +102,8 @@ func _on_mouse_entered():
 	
 	if popup_container.get_child_count() > 0:
 		popup.show()
+	
+	self_tile_name.show()
 
 func _on_mouse_exited():
 	# Reset rotation
@@ -114,6 +120,7 @@ func _on_mouse_exited():
 	tween_hover.tween_property(self, \"scale\", Vector2.ONE, 0.55)
 	
 	popup.hide()
+	self_tile_name.hide()
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r35ih"]
@@ -156,6 +163,17 @@ offset_right = 64.0
 offset_bottom = 64.0
 texture = ExtResource("2_wtupq")
 
+[node name="TileName" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = -1.0
+offset_top = 65.0
+offset_right = 65.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 12
+text = "Tile Name"
+horizontal_alignment = 1
+
 [node name="PopupPanel" type="Panel" parent="."]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
@@ -173,7 +191,7 @@ theme = ExtResource("1_6w3eh")
 [node name="MarginContainer" type="MarginContainer" parent="PopupPanel"]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 8.0
+offset_top = 25.0
 offset_right = 120.0
 offset_bottom = 120.0
 theme_override_constants/margin_left = 8
