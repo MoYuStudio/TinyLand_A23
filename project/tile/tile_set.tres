@@ -29,10 +29,10 @@ texture = ExtResource("3_j57iq")
 0:1/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4dmvm"]
-scenes/1/scene = ExtResource("4_vp75f")
+scenes/0/scene = ExtResource("4_vp75f")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_hjayu"]
-scenes/1/scene = ExtResource("4_7pcsr")
+scenes/0/scene = ExtResource("4_7pcsr")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_op77s"]
 texture = ExtResource("5_ojvk3")
@@ -54,7 +54,7 @@ texture = ExtResource("7_vtq6w")
 0:1/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_kg6fq"]
-scenes/1/scene = ExtResource("8_nhre1")
+scenes/0/scene = ExtResource("8_nhre1")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05rjl"]
 texture = ExtResource("6_o23sb")
