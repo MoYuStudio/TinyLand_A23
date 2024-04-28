@@ -1,15 +1,12 @@
 [gd_resource type="Resource" script_class="MoYuTileData" load_steps=3 format=3 uid="uid://cvatok4qk1x1r"]
 
 [ext_resource type="Script" path="res://utility/tile_data.gd" id="1_cv8ea"]
-[ext_resource type="Texture2D" uid="uid://bgt72gm2w3x8j" path="res://tile/png/natural_wonde.png" id="2_l5gw6"]
+[ext_resource type="Texture2D" uid="uid://bgt72gm2w3x8j" path="res://tile/png/natural_wonder.png" id="2_l5gw6"]
 
 [resource]
 script = ExtResource("1_cv8ea")
-tile_id = 60001
+tile_id = 6001
 tile_texture = ExtResource("2_l5gw6")
-price = {
-"berry": 999,
-"dirt": 99
-}
+price = {}
 manufacture = {}
 can_build_on = []

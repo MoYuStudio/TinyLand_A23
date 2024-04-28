@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ttri0jfkedpi" path="res://tile/png/water_block_animation.png" id="5_ojvk3"]
 [ext_resource type="Texture2D" uid="uid://dcwek0um440c3" path="res://tile/png/sand_block.png" id="6_o23sb"]
 [ext_resource type="Texture2D" uid="uid://cc1fx40vrdbmi" path="res://tile/png/rock_block.png" id="7_vtq6w"]
-[ext_resource type="PackedScene" uid="uid://c7185n547lb8v" path="res://tile/natural_wonder.tscn" id="8_nhre1"]
+[ext_resource type="PackedScene" uid="uid://bcd48a5l6rd4i" path="res://tile/natural_wonder.tscn" id="8_nhre1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn43b"]
 texture = ExtResource("1_x8gxj")
@@ -53,7 +53,7 @@ texture = ExtResource("7_vtq6w")
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4g38e"]
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_kg6fq"]
 scenes/1/scene = ExtResource("8_nhre1")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_05rjl"]
@@ -74,7 +74,7 @@ sources/0 = SubResource("TileSetAtlasSource_nn43b")
 sources/2 = SubResource("TileSetAtlasSource_nv0ff")
 sources/5 = SubResource("TileSetAtlasSource_op77s")
 sources/7 = SubResource("TileSetAtlasSource_05rjl")
-sources/20002 = SubResource("TileSetScenesCollectionSource_hjayu")
-sources/20001 = SubResource("TileSetScenesCollectionSource_4dmvm")
 sources/6 = SubResource("TileSetAtlasSource_yb83x")
-sources/60001 = SubResource("TileSetScenesCollectionSource_4g38e")
+sources/2001 = SubResource("TileSetScenesCollectionSource_4dmvm")
+sources/2002 = SubResource("TileSetScenesCollectionSource_hjayu")
+sources/6001 = SubResource("TileSetScenesCollectionSource_kg6fq")

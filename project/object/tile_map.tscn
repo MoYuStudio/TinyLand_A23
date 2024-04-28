@@ -24,7 +24,7 @@ func _process(delta):
 	# 预览图标判定
 	tile_to_build = load(\"res://tile/data/\"+
 			RuningData.choose_tile_name+\".tres\")
-	if tile_to_build.tile_id < 10000:
+	if tile_to_build.tile_id < 1000:
 		var mouse_pos = get_global_mouse_position()
 		mouse_pos.y += 4
 		preview.position = map_to_local(Vector2(local_to_map(mouse_pos).x, \\
@@ -47,26 +47,25 @@ func _unhandled_input(event):
 	land_pos.y += 2
 	var building_pos = local_to_map(mouse_pos)
 	if Input.is_action_pressed(\"build\"):
-			
 		if tile_to_build.tile_id == 0:
 			set_cell(land_layer, land_pos, -1, Vector2(0, 0), 0)
 			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
 			
-		elif tile_to_build.tile_id > 10000:
+		elif tile_to_build.tile_id > 1000:
 			if get_cell_source_id(land_layer, land_pos) != -1:
 				if get_cell_source_id(building_layer, building_pos) == -1:
 					if pay(tile_to_build):
 						set_cell(building_layer, building_pos, 
 						tile_to_build.tile_id, Vector2(0, 0), 1)
 				
-		elif tile_to_build.tile_id < 10000:
+		elif tile_to_build.tile_id < 1000:
 			if get_cell_source_id(land_layer, land_pos) != tile_to_build.tile_id:
 				if get_cell_source_id(land_layer,land_pos) == -1:
 					if pay(tile_to_build):
 						set_cell(land_layer, land_pos, tile_to_build.tile_id, Vector2(0, 0), 0)
 						set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
 			
-		elif tile_to_build.tile_id == 10000:
+		elif tile_to_build.tile_id == 1000:
 			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
 	
 func pay(tile_to_build):
@@ -99,6 +98,7 @@ format = 2
 layer_0/name = "Building"
 layer_0/y_sort_enabled = true
 layer_0/z_index = 1
+layer_0/tile_data = PackedInt32Array(262143, 60001, 65536, -262144, 60001, 65536, -196608, 60001, 65536, -131072, 60001, 65536, -1, 60001, 65536, 65535, 60001, 65536, 0, 60001, 65536)
 layer_1/name = "Land"
 layer_1/y_sort_enabled = true
 layer_1/tile_data = PackedInt32Array(65535, 1, 0, 131070, 1, 0, -1, 1, 0, 0, 1, 0, 65536, 1, 0, 131071, 1, 0, 131072, 1, 0, 196607, 1, 0, 262143, 1, 0)

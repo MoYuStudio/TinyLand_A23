@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_0meyw")
-tile_id = 10000
+tile_id = 1000
 tile_texture = ExtResource("2_y7ppa")
 price = {}
 manufacture = {}
