@@ -7,6 +7,8 @@
 script = ExtResource("1_e0swc")
 tile_id = 6
 tile_texture = ExtResource("2_3wgmm")
-price = {}
+price = {
+"rock": 9
+}
 manufacture = {}
 can_build_on = []

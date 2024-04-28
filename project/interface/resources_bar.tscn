@@ -10,6 +10,8 @@ extends Control
 
 @export var player_data : MoYuPlayerData = preload(\"res://data/player_data.tres\")
 
+@onready var berry_timer = $BerryTimer
+
 func _ready():
 	# 生成价格 Popup
 	for resource in player_data.price:
@@ -28,7 +30,19 @@ func _process(delta):
 			container.get_node(resource).show()
 		container.get_node(resource+\"/Container/Num/Label\").text = \\
 							str(snapped(player_data.price[resource],0.01))
-	
+							
+# 食物腐烂机制
+	#\"berry\":0, # 浆果
+	#\"wheat\":0, # 小麦
+	#\"corn\":0, # 玉米
+	#\"rice\":0, # 水稻
+	#\"canned_food\":0, # 罐头食品
+	#\"cultured_meat\":0, # 培养肉
+	#\"frozen_cultured_meat\":0, # 冷冻培养肉
+func _on_berry_timer_timeout():
+	if player_data.price[\"berry\"] > 0:
+		player_data.price[\"dirt\"] += player_data.price[\"berry\"]*0.01
+		player_data.price[\"berry\"] -= player_data.price[\"berry\"]*0.1
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lguiq"]
@@ -69,3 +83,9 @@ layout_mode = 2
 texture_filter = 1
 layout_mode = 2
 theme_override_constants/separation = 48
+
+[node name="BerryTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="BerryTimer" to="." method="_on_berry_timer_timeout"]

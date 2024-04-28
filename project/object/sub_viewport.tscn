@@ -143,7 +143,8 @@ lifetime = 6.0
 [node name="TileMap" parent="." instance=ExtResource("3_nkgb1")]
 
 [node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(6, 6)
+zoom = Vector2(6.1, 6.1)
+limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 rotation_smoothing_enabled = true

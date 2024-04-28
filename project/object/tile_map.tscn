@@ -7,6 +7,8 @@
 script/source = "
 extends TileMap
 
+@export var player_data : MoYuPlayerData = preload(\"res://data/player_data.tres\")
+
 @onready var preview = $PreView
 
 var tile_to_build
@@ -19,6 +21,7 @@ func _ready():
 	pass
 	
 func _process(delta):
+	# 预览图标判定
 	tile_to_build = load(\"res://tile/data/\"+
 			RuningData.choose_tile_name+\".tres\")
 	if tile_to_build.tile_id < 10000:
@@ -34,6 +37,7 @@ func _process(delta):
 		preview.position = map_to_local(local_to_map(mouse_pos))
 		preview.texture = tile_to_build.tile_texture
 		preview.z_index = 1
+		
 
 func _unhandled_input(event):
 	preview.show()
@@ -66,8 +70,6 @@ func _unhandled_input(event):
 			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
 	
 func pay(tile_to_build):
-	var player_data = load(\"res://data/player_data.tres\")
-	
 	for pay in tile_to_build.price:
 		if player_data.price[pay] >= tile_to_build.price[pay]:
 			player_data.price[pay] -= tile_to_build.price[pay]
@@ -99,12 +101,12 @@ layer_0/y_sort_enabled = true
 layer_0/z_index = 1
 layer_1/name = "Land"
 layer_1/y_sort_enabled = true
-layer_1/tile_data = PackedInt32Array(131072, 2, 0, 65536, 2, 0, 262143, 2, 0, 65535, 2, 0, 131070, 2, 0, -1, 2, 0, 0, 2, 0, 131071, 2, 0, 196607, 2, 0)
+layer_1/tile_data = PackedInt32Array(65535, 1, 0, 131070, 1, 0, -1, 1, 0, 0, 1, 0, 65536, 1, 0, 131071, 1, 0, 131072, 1, 0, 196607, 1, 0, 262143, 1, 0)
 script = SubResource("GDScript_i2d70")
 
 [node name="PreView" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.501961)
+z_index = 1
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(0, 25)
 texture = ExtResource("2_er7pl")

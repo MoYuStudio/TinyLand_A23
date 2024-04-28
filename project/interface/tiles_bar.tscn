@@ -12,7 +12,7 @@ extends MarginContainer
 
 var tab_data = {
 	# 瓷砖
-	\"<tile>\":[\"air\",\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\",],
+	\"<tile>\":[\"dirt_block\",\"grass_block\",\"rock_block\",\"sand_block\",\"water_block\",],
 	# 墙壁
 	\"<wall>\":[],
 	# 农业
@@ -24,7 +24,7 @@ var tab_data = {
 	# 科技
 	\"<technology>\":[],
 	# 奇观
-	\"<wonder>\":[],
+	\"<wonder>\":[\"natural_wonder\"],
 	# 装饰
 	\"<decoration>\":[],
 }
@@ -107,10 +107,9 @@ theme = ExtResource("1_7ui4f")
 layout_mode = 0
 offset_right = 80.0
 offset_bottom = 80.0
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_right = 16
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<wall>/MarginContainer"]
 clip_contents = false
@@ -131,10 +130,9 @@ theme = ExtResource("1_7ui4f")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_right = 16
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<agriculture>/MarginContainer"]
 clip_contents = false
@@ -155,10 +153,9 @@ theme = ExtResource("1_7ui4f")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_right = 16
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<industry>/MarginContainer"]
 clip_contents = false
@@ -179,10 +176,9 @@ theme = ExtResource("1_7ui4f")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_right = 16
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<commerce>/MarginContainer"]
 clip_contents = false
@@ -203,10 +199,9 @@ theme = ExtResource("1_7ui4f")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_right = 16
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<technology>/MarginContainer"]
 clip_contents = false
@@ -227,10 +222,9 @@ theme = ExtResource("1_7ui4f")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_right = 16
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<wonder>/MarginContainer"]
 clip_contents = false
@@ -251,10 +245,9 @@ theme = ExtResource("1_7ui4f")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_right = 16
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/<decoration>/MarginContainer"]
 clip_contents = false
