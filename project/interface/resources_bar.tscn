@@ -43,6 +43,9 @@ func _on_berry_timer_timeout():
 	if player_data.price[\"berry\"] > 0:
 		player_data.price[\"dirt\"] += player_data.price[\"berry\"]*0.01
 		player_data.price[\"berry\"] -= player_data.price[\"berry\"]*0.1
+	if player_data.price[\"wheat\"] > 0:
+		player_data.price[\"dirt\"] += player_data.price[\"wheat\"]*0.001
+		player_data.price[\"wheat\"] -= player_data.price[\"wheat\"]*0.01
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lguiq"]

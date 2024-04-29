@@ -65,7 +65,7 @@ script/source = "
 extends Camera2D
 
 var move_speed = 1
-var zoom_speed = 0.03
+var zoom_speed = 0.3
 # 最大和最小缩放值
 var max_zoom = Vector2(9, 9)
 var min_zoom = Vector2(2, 2)
@@ -73,23 +73,22 @@ var min_zoom = Vector2(2, 2)
 var default_pos = Vector2(0,0)
 var default_zoom = Vector2(6,6)
 
+var pivot_camera = Vector2.ZERO
+
 func _ready():
 	position = default_pos
 
 func _process(delta):
-	if Input.is_action_pressed(\"move_up\"):
-		position.y -= move_speed
-	if Input.is_action_pressed(\"move_down\"):
-		position.y += move_speed
-	if Input.is_action_pressed(\"move_left\"):
-		position.x -= move_speed
-	if Input.is_action_pressed(\"move_right\"):
-		position.x += move_speed
-	if Input.is_action_pressed(\"zoom_in\"):
+	if Input.is_action_just_pressed(\"move\"):
+		pivot_camera = get_global_mouse_position()
+	if Input.is_action_pressed(\"move\"):
+		var gap = pivot_camera - get_global_mouse_position()
+		position += gap
+	if Input.is_action_just_pressed(\"zoom_in\"):
 		if zoom.x <= max_zoom.x:
 			zoom.x += zoom_speed
 			zoom.y += zoom_speed
-	if Input.is_action_pressed(\"zoom_out\"):
+	if Input.is_action_just_pressed(\"zoom_out\"):
 		if zoom.x >= min_zoom.x:
 			zoom.x -= zoom_speed
 			zoom.y -= zoom_speed
@@ -97,6 +96,10 @@ func _process(delta):
 	if Input.is_action_just_pressed(\"reset\"):
 		position = default_pos
 		zoom = default_zoom
+		
+	
+
+
 "
 
 [node name="SubViewport" type="SubViewport"]
@@ -145,8 +148,6 @@ lifetime = 6.0
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(6.1, 6.1)
 limit_smoothed = true
-position_smoothing_enabled = true
 position_smoothing_speed = 6.0
-rotation_smoothing_enabled = true
 rotation_smoothing_speed = 6.0
 script = SubResource("GDScript_is30g")
