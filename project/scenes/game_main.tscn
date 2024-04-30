@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4i274kh3fecs"]
+[gd_scene load_steps=11 format=3 uid="uid://c4i274kh3fecs"]
 
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_u15gb"]
 [ext_resource type="PackedScene" uid="uid://bcm0so3k83m3a" path="res://object/sub_viewport.tscn" id="3_g4y6i"]
@@ -20,15 +20,16 @@ extends Node2D
 
 func _ready():
 	animation_player.play(\"Sun\")
-
+	
 func _physics_process(delta):
 	pass
-
+	
 func _process(delta):
 	pass
-		
+	
 func _on_tiles_bar_mouse_entered():
 	tilemap.preview.hide()
+	
 "
 
 [sub_resource type="GDScript" id="GDScript_xshbh"]
@@ -45,6 +46,22 @@ func _process(delta):
 		if player_data.price[resource] > 0:
 			var tween = create_tween()
 			tween.tween_property(self,\"split_offset\",300,0.5)
+"
+
+[sub_resource type="GDScript" id="GDScript_snj8j"]
+script/source = "
+extends Button
+
+func _pressed():
+	Global.save_pack(\"res://data/player_data.tres\")
+"
+
+[sub_resource type="GDScript" id="GDScript_g14l6"]
+script/source = "
+extends Button
+
+func _pressed():
+	SceneTransition.change_scene('black','res://scenes/menu_main.tscn')
 "
 
 [node name="GameMain" type="Node2D"]
@@ -80,7 +97,6 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer" instance=ExtResource("3_g4y6i")]
-size = Vector2i(2, 2)
 
 [node name="TilesBar" parent="CanvasLayer/HSplitContainer/Control" instance=ExtResource("12_ewp7h")]
 texture_filter = 1
@@ -118,3 +134,24 @@ text = "Ground Cleaner"
 alignment = 2
 tile_name = "air"
 tile_texture = ExtResource("14_x22t7")
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 1099.0
+offset_top = 26.0
+offset_right = 1156.0
+offset_bottom = 61.0
+theme = ExtResource("2_u15gb")
+theme_override_font_sizes/font_size = 16
+text = "save"
+script = SubResource("GDScript_snj8j")
+
+[node name="Button2" type="Button" parent="CanvasLayer"]
+offset_left = 1196.0
+offset_top = 30.0
+offset_right = 1253.0
+offset_bottom = 63.0
+theme = ExtResource("2_u15gb")
+theme_override_font_sizes/font_size = 16
+text = "主菜单"
+script = SubResource("GDScript_g14l6")

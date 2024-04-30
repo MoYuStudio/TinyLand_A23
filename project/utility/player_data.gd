@@ -98,3 +98,4 @@ class_name MoYuPlayerData
 	
 }
 
+@export var map_data = []

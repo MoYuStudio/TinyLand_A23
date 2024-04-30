@@ -11,13 +11,17 @@ func _ready():
 	
 	# zh en ru
 	TranslationServer.set_locale("zh")
+	
+func save_pack(path):
+	var pack = load(path)
+	ResourceSaver.save(pack,path)
 
-func save_data(slot_name,data):
+func save_moyu_data(slot_name,data):
 	var file = FileAccess.open('data/'+str(slot_name)+'.moyudata', FileAccess.WRITE)
 	var json_str = JSON.stringify(data)
 	file.store_line(json_str)
 	
-func load_data(slot_name):
+func load_moyu_data(slot_name):
 	var path = 'data/'+str(slot_name)+'.moyudata'
 	var data = {}
 	if not FileAccess.file_exists(path):
