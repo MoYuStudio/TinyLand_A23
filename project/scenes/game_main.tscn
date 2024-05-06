@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4i274kh3fecs"]
+[gd_scene load_steps=12 format=3 uid="uid://c4i274kh3fecs"]
 
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_u15gb"]
 [ext_resource type="PackedScene" uid="uid://bcm0so3k83m3a" path="res://object/sub_viewport.tscn" id="3_g4y6i"]
+[ext_resource type="Texture2D" uid="uid://dhisx63n8ymgf" path="res://icon/save.png" id="7_be41r"]
 [ext_resource type="PackedScene" uid="uid://cqatkw3r5u63j" path="res://interface/resources_bar.tscn" id="11_ed847"]
 [ext_resource type="PackedScene" uid="uid://be3rafvp3s3pe" path="res://interface/tiles_bar.tscn" id="12_ewp7h"]
 [ext_resource type="PackedScene" uid="uid://catj35d1cnagp" path="res://interface/tiles_bar_tile.tscn" id="13_si5w3"]
@@ -137,20 +138,24 @@ tile_texture = ExtResource("14_x22t7")
 
 [node name="Button" type="Button" parent="CanvasLayer"]
 texture_filter = 1
-offset_left = 1099.0
-offset_top = 26.0
-offset_right = 1156.0
-offset_bottom = 61.0
+offset_left = 1223.0
+offset_top = 58.0
+offset_right = 1259.0
+offset_bottom = 94.0
 theme = ExtResource("2_u15gb")
 theme_override_font_sizes/font_size = 16
-text = "save"
+icon = ExtResource("7_be41r")
+flat = true
+icon_alignment = 1
+expand_icon = true
 script = SubResource("GDScript_snj8j")
 
 [node name="Button2" type="Button" parent="CanvasLayer"]
-offset_left = 1196.0
-offset_top = 30.0
-offset_right = 1253.0
-offset_bottom = 63.0
+texture_filter = 1
+offset_left = 1204.0
+offset_top = 16.0
+offset_right = 1261.0
+offset_bottom = 49.0
 theme = ExtResource("2_u15gb")
 theme_override_font_sizes/font_size = 16
 text = "主菜单"

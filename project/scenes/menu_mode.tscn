@@ -1,11 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://4swngb3jh1xo"]
+[gd_scene load_steps=22 format=3 uid="uid://4swngb3jh1xo"]
 
 [ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="1_kgrru"]
-[ext_resource type="PackedScene" uid="uid://bl2tqtjaw3mdn" path="res://interface/mode_card.tscn" id="1_vcu30"]
+[ext_resource type="PackedScene" uid="uid://wjmmg7ki3tv2" path="res://interface/mode_card.tscn" id="1_vcu30"]
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_7bai4"]
 [ext_resource type="Texture2D" uid="uid://c66pt2xggi5k5" path="res://tile/png/factory.png" id="4_8reki"]
 [ext_resource type="Texture2D" uid="uid://cnoj1gxgwn7fe" path="res://tile/png/769.png" id="4_r3jml"]
-[ext_resource type="Texture2D" uid="uid://bbgt3jxeos01f" path="res://tile/png/grass_block.png" id="5_iwq6n"]
+[ext_resource type="Texture2D" uid="uid://drtufin8cor46" path="res://icon/mode_cover.png" id="6_akhii"]
 [ext_resource type="Texture2D" uid="uid://ttj5sycpi60s" path="res://icon/country/zh.png" id="7_r2m61"]
 
 [sub_resource type="GDScript" id="GDScript_u8dgj"]
@@ -50,100 +50,6 @@ scale_max = 0.6
 scale_curve = SubResource("CurveTexture_nf2qn")
 color_ramp = SubResource("GradientTexture1D_fnnfy")
 
-[sub_resource type="GDScript" id="GDScript_chdwk"]
-script/source = "extends Control
-
-@export var offset: float = 30.0
-@export var scale_between_cards: float = 0.05
-@export var anim_duration: float = 0.45
-@export var anim_duration_offset: float = 0.15
-
-var first_card_pos: Vector2
-var first_card_scale: Vector2
-
-var tween: Tween
-var tween_last_card: Tween
-var tween_bg: Tween
-
-func _ready() -> void:
-	for c in $Cards.get_children():
-		c.put_back.connect(on_card_put_back.bind(c))
-	
-	var first_card: Button = $Cards.get_child($Cards.get_child_count() - 1)
-	first_card_pos = first_card.position
-	first_card_scale = first_card.scale
-	
-	await get_tree().create_timer(0.5).timeout
-	
-	tween_bg_color(first_card.color)
-	
-	update_cards()
-	
-	await tween.finished
-	for c in $Cards.get_children():
-		c.original_position = c.global_position
-	
-func tween_bg_color(new_color: Color) -> void:
-	if tween_bg and tween_bg.is_running():
-		tween_bg.kill()
-	tween_bg = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween_bg.tween_property($BG, \"color\", new_color, anim_duration*2.0)
-	
-func update_cards(thrown: bool = false, animated: bool = true) -> void:
-	if tween and tween.is_running():
-		tween.kill()
-	tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
-	
-	var child_count: int = $Cards.get_child_count()
-	var card_ref: Button = $Cards.get_child(child_count - 1)
-	
-	for i: int in range(child_count-1, -1, -1):
-		var c: Button = $Cards.get_child(i)
-		if c == card_ref:
-			c.disabled = false
-		else:
-			c.disabled = true
-		
-		# print(\"Button: \", c.get_name())
-		var multiplier: float = child_count-1-i
-		# print(\"Multiplier: \", multiplier)
-		var card_offset: float = offset*multiplier
-		# print(\"Card offset: \", card_offset)
-		var card_scale: float = scale_between_cards * multiplier
-		# print(\"Card scale: \", card_scale)
-		
-		if not animated:
-			c.position = first_card_pos - Vector2(0, card_offset)
-			c.scale = first_card_scale - Vector2(card_scale, card_scale)
-		else:
-			var duration: float = anim_duration + (anim_duration_offset * multiplier)
-			tween.tween_property(c, \"position\", first_card_pos - Vector2(0, card_offset), duration)
-			tween.tween_property(c, \"scale\", first_card_scale - Vector2(card_scale, card_scale), duration)
-
-func on_card_put_back(which: Button) -> void:
-	# print(\"Put back: \", which.get_name())
-	
-	var previous_card: Button = $Cards.get_child($Cards.get_child_count()-2)
-	tween_bg_color(previous_card.color)
-	
-	if tween_last_card and tween_last_card.is_running():
-		tween_last_card.kill()
-	tween_last_card = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween_last_card.tween_property(which, \"global_position\", $TopPoint.global_position-(which.size/2.0), anim_duration/2.0)
-	tween_last_card.parallel().tween_property(which, \"scale\", Vector2(0.8, 0.8), anim_duration/2.0)
-	
-	# Move card to back
-	tween_last_card.tween_callback($Cards.move_child.bind(which, 0))
-	tween_last_card.tween_callback(update_cards.bind(true))
-"
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkc7o"]
-bg_color = Color(0.984314, 0.419608, 0.113725, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suk3y"]
 bg_color = Color(0.560784, 0.827451, 1, 1)
 corner_radius_top_left = 16
@@ -151,8 +57,8 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_herc7"]
-bg_color = Color(0.568627, 0.858824, 0.411765, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ylnc"]
+bg_color = Color(0.984314, 0.419608, 0.113725, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -196,161 +102,126 @@ zoom = Vector2(3, 3)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CardsStack" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = SubResource("GDScript_chdwk")
-
-[node name="TopPoint" type="Control" parent="CanvasLayer/CardsStack"]
 anchors_preset = 0
-offset_left = 520.0
-offset_top = 192.0
-offset_right = 560.0
-offset_bottom = 232.0
+offset_left = 76.0
+offset_top = 176.0
+offset_right = 792.0
+offset_bottom = 560.0
 
-[node name="Cards" type="Control" parent="CanvasLayer/CardsStack"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -392.0
-offset_top = 104.0
-offset_right = -392.0
-offset_bottom = 104.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(128, 64)
-
-[node name="ModeCard" parent="CanvasLayer/CardsStack/Cards" instance=ExtResource("1_vcu30")]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control"]
+clip_contents = false
 layout_mode = 0
-offset_left = 252.0
-offset_top = -1256.0
-offset_right = 252.0
-offset_bottom = -1256.0
-color = Color(0.847059, 0, 0, 1)
+offset_left = 182.0
+offset_top = 26.0
+offset_right = 932.0
+offset_bottom = 369.0
+scroll_horizontal = 115
+vertical_scroll_mode = 0
 
-[node name="Panel" type="Panel" parent="CanvasLayer/CardsStack/Cards/ModeCard"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 36
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer/MarginContainer2"]
+texture_filter = 1
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer/MarginContainer2/Button"]
+texture_filter = 1
+layout_mode = 2
+offset_right = 300.0
+offset_bottom = 300.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_suk3y")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer/MarginContainer2/Button"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 125.0
+offset_right = 209.0
+offset_bottom = 167.0
+theme = ExtResource("2_7bai4")
+text = "创造模式"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer/MarginContainer2/Button"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 212.0
+offset_right = 240.0
+offset_bottom = 244.0
+theme = ExtResource("2_7bai4")
+theme_override_font_sizes/font_size = 24
+text = "吾即是天！！！"
+
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer/MarginContainer2/Button"]
+position = Vector2(149, 64)
+scale = Vector2(6, 6)
+texture = ExtResource("4_8reki")
+
+[node name="SurvivalCard" type="MarginContainer" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="ModeCard" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer/SurvivalCard" instance=ExtResource("1_vcu30")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer/MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+text = "
+"
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer/MarginContainer/Button"]
 texture_filter = 1
 layout_mode = 0
-offset_left = -180.0
-offset_top = -120.0
-offset_right = 180.0
-offset_bottom = 120.0
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_wkc7o")
+offset_right = 300.0
+offset_bottom = 300.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4ylnc")
 
-[node name="Label" type="Label" parent="CanvasLayer/CardsStack/Cards/ModeCard/Panel"]
+[node name="Label" type="Label" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer/MarginContainer/Button"]
 layout_mode = 0
-offset_left = 44.0
-offset_top = 32.0
-offset_right = 160.0
-offset_bottom = 74.0
+offset_left = 90.0
+offset_top = 117.0
+offset_right = 206.0
+offset_bottom = 159.0
 theme = ExtResource("2_7bai4")
 text = "竞赛模式"
 
-[node name="Label2" type="Label" parent="CanvasLayer/CardsStack/Cards/ModeCard/Panel"]
+[node name="Label2" type="Label" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer/MarginContainer/Button"]
 layout_mode = 0
-offset_left = 44.0
-offset_top = 128.0
-offset_right = 305.0
-offset_bottom = 215.0
+offset_left = 38.0
+offset_top = 217.0
+offset_right = 299.0
+offset_bottom = 304.0
 theme = ExtResource("2_7bai4")
 theme_override_font_sizes/font_size = 24
 text = "挑战排行榜
 与全球玩家同台竞技"
 
-[node name="Sprite" type="Sprite2D" parent="CanvasLayer/CardsStack/Cards/ModeCard/Panel"]
-position = Vector2(276, 88)
+[node name="Sprite" type="Sprite2D" parent="CanvasLayer/Control/ScrollContainer/HBoxContainer/MarginContainer/Button"]
+position = Vector2(149, 67)
 scale = Vector2(6, 6)
 texture = ExtResource("4_r3jml")
 
-[node name="ModeCard2" parent="CanvasLayer/CardsStack/Cards" instance=ExtResource("1_vcu30")]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_left = 272.0
-offset_top = -600.0
-offset_right = 272.0
-offset_bottom = -600.0
-color = Color(0, 0.972549, 1, 1)
-
-[node name="Panel" type="Panel" parent="CanvasLayer/CardsStack/Cards/ModeCard2"]
-texture_filter = 1
-layout_mode = 0
-offset_left = -180.0
-offset_top = -120.0
-offset_right = 180.0
-offset_bottom = 120.0
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_suk3y")
-
-[node name="Label" type="Label" parent="CanvasLayer/CardsStack/Cards/ModeCard2/Panel"]
-layout_mode = 0
-offset_left = 44.0
-offset_top = 32.0
-offset_right = 160.0
-offset_bottom = 74.0
-theme = ExtResource("2_7bai4")
-text = "创造模式"
-
-[node name="Label2" type="Label" parent="CanvasLayer/CardsStack/Cards/ModeCard2/Panel"]
-layout_mode = 0
-offset_left = 108.0
-offset_top = 160.0
-offset_right = 276.0
-offset_bottom = 192.0
-theme = ExtResource("2_7bai4")
-theme_override_font_sizes/font_size = 24
-text = "吾即是天！！！"
-
-[node name="Sprite" type="Sprite2D" parent="CanvasLayer/CardsStack/Cards/ModeCard2/Panel"]
-position = Vector2(276, 88)
-scale = Vector2(6, 6)
-texture = ExtResource("4_8reki")
-
-[node name="SurvivalModeCard" parent="CanvasLayer/CardsStack/Cards" instance=ExtResource("1_vcu30")]
-layout_mode = 0
-offset_left = 272.0
-offset_right = 272.0
-color = Color(0, 1, 0.494118, 1)
-
-[node name="Panel" type="Panel" parent="CanvasLayer/CardsStack/Cards/SurvivalModeCard"]
-texture_filter = 1
-layout_mode = 0
-offset_left = -180.0
-offset_top = -120.0
-offset_right = 180.0
-offset_bottom = 120.0
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_herc7")
-
-[node name="Label" type="Label" parent="CanvasLayer/CardsStack/Cards/SurvivalModeCard/Panel"]
-layout_mode = 0
-offset_left = 44.0
-offset_top = 32.0
-offset_right = 160.0
-offset_bottom = 74.0
-theme = ExtResource("2_7bai4")
-text = "生存模式"
-
-[node name="Label2" type="Label" parent="CanvasLayer/CardsStack/Cards/SurvivalModeCard/Panel"]
-layout_mode = 0
-offset_left = 76.0
-offset_top = 152.0
-offset_right = 188.0
-offset_bottom = 184.0
-theme = ExtResource("2_7bai4")
-theme_override_font_sizes/font_size = 24
-text = "传统的生存"
-
-[node name="Sprite" type="Sprite2D" parent="CanvasLayer/CardsStack/Cards/SurvivalModeCard/Panel"]
-position = Vector2(276, 88)
-scale = Vector2(6, 6)
-texture = ExtResource("5_iwq6n")
+offset_left = -77.0
+offset_top = -173.0
+offset_right = 1205.0
+offset_bottom = 544.0
+mouse_filter = 2
+texture = ExtResource("6_akhii")
 
 [node name="Button" type="Button" parent="CanvasLayer"]
 offset_left = 984.0
@@ -361,18 +232,18 @@ theme = ExtResource("2_7bai4")
 text = "返回开始界面"
 
 [node name="Button2" type="Button" parent="CanvasLayer"]
-offset_left = 984.0
-offset_top = 576.0
-offset_right = 1224.0
-offset_bottom = 664.0
+offset_left = 857.0
+offset_top = 569.0
+offset_right = 1097.0
+offset_bottom = 657.0
 theme = ExtResource("2_7bai4")
 text = "设置"
 
 [node name="Button3" type="LineEdit" parent="CanvasLayer"]
-offset_left = 992.0
-offset_top = 456.0
-offset_right = 1224.0
-offset_bottom = 496.0
+offset_left = 173.0
+offset_top = 583.0
+offset_right = 405.0
+offset_bottom = 623.0
 theme = ExtResource("2_7bai4")
 placeholder_text = "地图种子"
 alignment = 1
@@ -394,11 +265,9 @@ icon = ExtResource("7_r2m61")
 flat = true
 
 [node name="Button5" type="Button" parent="CanvasLayer"]
-offset_left = 1160.0
-offset_top = 160.0
-offset_right = 1224.0
-offset_bottom = 224.0
+offset_left = 1153.0
+offset_top = 630.0
+offset_right = 1219.0
+offset_bottom = 694.0
 theme = ExtResource("2_7bai4")
 text = "关于"
-
-[connection signal="pressed" from="CanvasLayer/CardsStack/Cards/SurvivalModeCard" to="." method="_on_survival_mode_card_pressed"]

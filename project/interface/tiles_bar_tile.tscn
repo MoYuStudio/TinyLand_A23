@@ -69,7 +69,7 @@ func handle_mouse_click(event):
 	if event.is_pressed():
 		following_mouse = true
 
-func _on_gui_input(event):
+func _gui_input(event):
 	
 	handle_mouse_click(event)
 	
@@ -91,7 +91,7 @@ func _on_gui_input(event):
 	texture_rect.material.set_shader_parameter(\"x_rot\", rot_y)
 	texture_rect.material.set_shader_parameter(\"y_rot\", rot_x)
 
-func _on_pressed():
+func _pressed():
 	RuningData.choose_tile_name = tile_name
 	
 func _on_mouse_entered():
@@ -203,7 +203,5 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 1
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="pressed" from="." to="." method="_on_pressed"]
