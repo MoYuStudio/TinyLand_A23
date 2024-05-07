@@ -117,7 +117,7 @@ offset_left = 182.0
 offset_top = 26.0
 offset_right = 932.0
 offset_bottom = 369.0
-scroll_horizontal = 115
+scroll_horizontal = 100
 vertical_scroll_mode = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/ScrollContainer"]

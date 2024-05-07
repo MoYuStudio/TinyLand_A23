@@ -1,11 +1,12 @@
-[gd_resource type="TileSet" load_steps=19 format=3 uid="uid://x4rcasuy7xwy"]
+[gd_resource type="TileSet" load_steps=21 format=3 uid="uid://x4rcasuy7xwy"]
 
 [ext_resource type="Texture2D" uid="uid://d2kdpiwjrunpr" path="res://tile/png/air.png" id="1_x8gxj"]
 [ext_resource type="Texture2D" uid="uid://dw6nu2ay46x7c" path="res://tile/png/dirt_block.png" id="2_humnf"]
 [ext_resource type="Texture2D" uid="uid://bbgt3jxeos01f" path="res://tile/png/grass_block.png" id="3_j57iq"]
-[ext_resource type="PackedScene" uid="uid://o32sdvgym6n6" path="res://tile/wheat_field.tscn" id="4_7pcsr"]
-[ext_resource type="PackedScene" uid="uid://c0bnhdfjm8sj3" path="res://tile/berry_bush.tscn" id="4_vp75f"]
+[ext_resource type="PackedScene" uid="uid://bybu8kuglchdk" path="res://tile/class_plant/berry_bush.tscn" id="4_p3lb6"]
 [ext_resource type="Texture2D" uid="uid://ttri0jfkedpi" path="res://tile/png/water_block_animation.png" id="5_ojvk3"]
+[ext_resource type="PackedScene" uid="uid://cru8ydme1lbpi" path="res://tile/class_plant/wheat_field.tscn" id="5_xdk17"]
+[ext_resource type="PackedScene" uid="uid://cida5jg5b83bl" path="res://tile/dirt_capture_net.tscn" id="6_l45ma"]
 [ext_resource type="Texture2D" uid="uid://dcwek0um440c3" path="res://tile/png/sand_block.png" id="6_o23sb"]
 [ext_resource type="Texture2D" uid="uid://cc1fx40vrdbmi" path="res://tile/png/rock_block.png" id="7_vtq6w"]
 [ext_resource type="PackedScene" uid="uid://bcd48a5l6rd4i" path="res://tile/natural_wonder.tscn" id="8_nhre1"]
@@ -29,10 +30,13 @@ texture = ExtResource("3_j57iq")
 0:1/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4dmvm"]
-scenes/0/scene = ExtResource("4_vp75f")
+scenes/0/scene = ExtResource("4_p3lb6")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_hjayu"]
-scenes/0/scene = ExtResource("4_7pcsr")
+scenes/0/scene = ExtResource("5_xdk17")
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ifbvy"]
+scenes/0/scene = ExtResource("6_l45ma")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_op77s"]
 texture = ExtResource("5_ojvk3")
@@ -78,3 +82,4 @@ sources/6 = SubResource("TileSetAtlasSource_yb83x")
 sources/2001 = SubResource("TileSetScenesCollectionSource_4dmvm")
 sources/2002 = SubResource("TileSetScenesCollectionSource_hjayu")
 sources/6001 = SubResource("TileSetScenesCollectionSource_kg6fq")
+sources/3001 = SubResource("TileSetScenesCollectionSource_ifbvy")

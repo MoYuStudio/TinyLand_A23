@@ -18,8 +18,8 @@ var tab_data = {
 	# 农业
 	\"<agriculture>\":[\"berry_bush\",\"wheat_field\",],
 	# 工业
+	\"<industry>\":[\"dirt_capture_net\"],
 	# 商业
-	\"<industry>\":[],
 	\"<commerce>\":[],
 	# 科技
 	\"<technology>\":[],

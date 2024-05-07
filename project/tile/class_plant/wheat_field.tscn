@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cru8ydme1lbpi"]
+
+[ext_resource type="PackedScene" uid="uid://b4vqoso35s6ir" path="res://tile/class/plant.tscn" id="1_rw2re"]
+[ext_resource type="Texture2D" uid="uid://ynmjemibo47" path="res://tile/png/wheat_field.png" id="2_nuhhc"]
+
+[node name="Plant" instance=ExtResource("1_rw2re")]
+sprite_texture = ExtResource("2_nuhhc")
+reap_name = "wheat"
+reap_num = 0.1

@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://o32sdvgym6n6"]
+[gd_scene load_steps=5 format=3 uid="uid://b4vqoso35s6ir"]
 
-[ext_resource type="Texture2D" uid="uid://ynmjemibo47" path="res://tile/png/wheat_field.png" id="1_t2hok"]
-[ext_resource type="Texture2D" uid="uid://c0opaixgch2oc" path="res://interface/light.png" id="2_d0xr4"]
+[ext_resource type="Texture2D" uid="uid://ynmjemibo47" path="res://tile/png/wheat_field.png" id="1_rnyy6"]
 
 [sub_resource type="GDScript" id="GDScript_aqvtr"]
 script/source = "
@@ -12,16 +11,18 @@ extends Node2D
 
 @export var player_data : MoYuPlayerData = preload(\"res://data/player_data.tres\")
 
-@export var price = 10
 @export var sprite_texture : Texture2D
 
-@export var reap = 0.1
+@export var reap_name : String
+@export var reap_num : float
 
 func _ready():
+	sprite.texture = sprite_texture
 	animation_player.play(\"animation\")
 
 func _on_growing_timer_timeout():
-	player_data.price[\"wheat\"] += reap
+	player_data.price[reap_name] += reap_num
+
 "
 
 [sub_resource type="Animation" id="Animation_tfeic"]
@@ -57,14 +58,15 @@ _data = {
 "animation": SubResource("Animation_tfeic")
 }
 
-[node name="WheatField" type="Node2D"]
+[node name="Plant" type="Node2D"]
+texture_filter = 1
 script = SubResource("GDScript_aqvtr")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = 1
 y_sort_enabled = true
 texture_filter = 1
-texture = ExtResource("1_t2hok")
+texture = ExtResource("1_rnyy6")
 
 [node name="GrowingTimer" type="Timer" parent="."]
 autostart = true
@@ -73,10 +75,5 @@ autostart = true
 libraries = {
 "": SubResource("AnimationLibrary_1rxtf")
 }
-
-[node name="PointLight" type="PointLight2D" parent="."]
-position = Vector2(0, 4)
-energy = 0.0
-texture = ExtResource("2_d0xr4")
 
 [connection signal="timeout" from="GrowingTimer" to="." method="_on_growing_timer_timeout"]

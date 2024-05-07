@@ -109,7 +109,7 @@ shader_parameter/y_rot = 0.0
 shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
 
-[node name="Button" type="Button"]
+[node name="ModeCard" type="Button"]
 texture_filter = 1
 pivot_offset = Vector2(150, 150)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ue8b3")
