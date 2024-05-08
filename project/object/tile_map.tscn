@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfhoqjfkwvc0"]
+[gd_scene load_steps=5 format=3 uid="uid://dfhoqjfkwvc0"]
 
 [ext_resource type="TileSet" uid="uid://x4rcasuy7xwy" path="res://tile/tile_set.tres" id="1_rv0x4"]
 [ext_resource type="Texture2D" uid="uid://cicabngtdppgo" path="res://tile/png/254.png" id="2_er7pl"]
+[ext_resource type="PackedScene" uid="uid://dy4nkkur0qm5g" path="res://effect/building.tscn" id="3_86wo8"]
 
 [sub_resource type="GDScript" id="GDScript_i2d70"]
 script/source = "
@@ -10,6 +11,7 @@ extends TileMap
 @export var player_data : MoYuPlayerData = preload(\"res://data/player_data.tres\")
 
 @onready var preview = $PreView
+@onready var building_effect = $BuildingEffect
 
 var tile_to_build
 
@@ -17,43 +19,46 @@ var tile_to_build
 var land_layer = 0
 var building_layer = 1
 
+var mouse_pos = get_global_mouse_position()
+
 func _ready():
 	# 存档恢复
 	for data in player_data.map_data:
 		set_cell(data[0], data[1], data[2], data[3], data[4])
 	
 func _process(delta):
+	
+	mouse_pos = get_global_mouse_position()
+	mouse_pos.y -= 4
+	var land_pos = local_to_map(mouse_pos)
+	land_pos.y += 2
 	# 预览图标判定
 	tile_to_build = load(\"res://tile/data/\"+
 			RuningData.choose_tile_name+\".tres\")
 	if tile_to_build.building_level == land_layer:
-		var mouse_pos = get_global_mouse_position()
-		mouse_pos.y += 4
 		preview.position = map_to_local(Vector2(local_to_map(mouse_pos).x, \\
-												local_to_map(mouse_pos).y))
+												local_to_map(mouse_pos).y+2))
 		preview.texture = tile_to_build.tile_texture
 		preview.z_index = 0
 	elif tile_to_build.building_level == building_layer:
-		var mouse_pos = get_global_mouse_position()
-		mouse_pos.y -= 4
 		preview.position = map_to_local(local_to_map(mouse_pos))
 		preview.texture = tile_to_build.tile_texture
 		preview.z_index = 1
 	
-	var mouse_pos = get_global_mouse_position()
-	mouse_pos.y -= 4
-	var land_pos = local_to_map(mouse_pos)
-	land_pos.y += 2
-	for id in tile_to_build.building_built_on:
-		if get_cell_source_id(land_layer, land_pos) == id:
-			preview.modulate = Color(0,1,0,0.3)
-			break
-		else:
-			preview.modulate = Color(1,0,0,0.3)
+	# 预览图标 可否建造红绿指示 判定
+	if len(tile_to_build.building_built_on) > 0:
+		for id in tile_to_build.building_built_on:
+			if get_cell_source_id(land_layer, land_pos) == id:
+				preview.modulate = Color(0,1,0,0.3)
+				break
+			else:
+				preview.modulate = Color(1,0,0,0.3)
+	else:
+		preview.modulate = Color(1,1,1,0.6)
 
 func _unhandled_input(event):
 	preview.show()
-	var mouse_pos = get_global_mouse_position()
+	mouse_pos = get_global_mouse_position()
 	mouse_pos.y -= 4
 	var land_pos = local_to_map(mouse_pos)
 	land_pos.y += 2
@@ -90,12 +95,14 @@ func _unhandled_input(event):
 					if get_cell_source_id(land_layer, land_pos) == id:
 						if get_cell_source_id(building_layer, building_pos) == -1:
 							if pay(tile_to_build):
+								building_effect.position = map_to_local(building_pos)
+								building_effect.effect()
 								set_cell(building_layer, building_pos, 
 								tile_to_build.tile_id, Vector2(0, 0), 0)
 								
 								player_data.map_data.append([building_layer, building_pos,
 								tile_to_build.tile_id, Vector2(0, 0), 0])
-							break
+						break
 				
 # 支付建造成本
 func pay(tile_to_build):
@@ -141,3 +148,5 @@ z_index = 1
 y_sort_enabled = true
 texture_filter = 1
 texture = ExtResource("2_er7pl")
+
+[node name="BuildingEffect" parent="." instance=ExtResource("3_86wo8")]

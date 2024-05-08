@@ -1,9 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://dy4nkkur0qm5g"]
+[gd_scene load_steps=8 format=3 uid="uid://dy4nkkur0qm5g"]
 
-[ext_resource type="Texture2D" uid="uid://cc1fx40vrdbmi" path="res://tile/png/rock_block.png" id="1_mpfel"]
+[ext_resource type="Texture2D" uid="uid://cicabngtdppgo" path="res://tile/png/254.png" id="1_6uwjl"]
+
+[sub_resource type="GDScript" id="GDScript_q1v04"]
+script/source = "
+extends Node2D
+
+@onready var particles = $GPUParticles2D
+
+func effect():
+	particles.emitting = true
+"
+
+[sub_resource type="Curve" id="Curve_mm3nx"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 200), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h0tuw"]
+curve = SubResource("Curve_mm3nx")
 
 [sub_resource type="Curve" id="Curve_ymf5y"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.754717, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_3ktqy"]
@@ -19,25 +38,29 @@ angular_velocity_max = 398.3
 radial_velocity_min = -164.95
 radial_velocity_max = 82.47
 gravity = Vector3(0, 0, 0)
-linear_accel_min = -30.91
+linear_accel_min = -30.0
 linear_accel_max = 100.0
-radial_accel_min = -53.19
+linear_accel_curve = SubResource("CurveTexture_h0tuw")
+radial_accel_min = -50.0
 radial_accel_max = 100.0
 tangential_accel_max = 100.0
 scale_min = 0.0
-scale_max = 0.3
+scale_max = 0.6
 scale_curve = SubResource("CurveTexture_3ktqy")
 turbulence_enabled = true
 
-[node name="Building" type="Node2D"]
+[node name="BuildingEffect" type="Node2D"]
+script = SubResource("GDScript_q1v04")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-show_behind_parent = true
+z_index = 1
+y_sort_enabled = true
 texture_filter = 1
 emitting = false
 amount = 64
 process_material = SubResource("ParticleProcessMaterial_65bwe")
-texture = ExtResource("1_mpfel")
+texture = ExtResource("1_6uwjl")
+lifetime = 0.6
 one_shot = true
 trail_enabled = true
 trail_lifetime = 0.01

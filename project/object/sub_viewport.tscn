@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://bcm0so3k83m3a"]
+[gd_scene load_steps=13 format=3 uid="uid://bcm0so3k83m3a"]
 
 [ext_resource type="AudioStream" uid="uid://ynohea28i701" path="res://music/Awake.mp3" id="1_kglxk"]
 [ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="2_k8nyy"]
 [ext_resource type="PackedScene" uid="uid://dfhoqjfkwvc0" path="res://object/tile_map.tscn" id="3_nkgb1"]
-[ext_resource type="Resource" uid="uid://bxpwu3qfoa4vr" path="res://data/player_data.tres" id="4_2iqmt"]
 
 [sub_resource type="Environment" id="Environment_r2gak"]
 background_mode = 3
@@ -145,7 +144,6 @@ texture = ExtResource("2_k8nyy")
 lifetime = 6.0
 
 [node name="TileMap" parent="." instance=ExtResource("3_nkgb1")]
-player_data = ExtResource("4_2iqmt")
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(6.1, 6.1)

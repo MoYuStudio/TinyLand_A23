@@ -12,4 +12,4 @@ manufacture = {
 "wheat": 0.1
 }
 building_level = 1
-building_built_on = []
+building_built_on = [1]
