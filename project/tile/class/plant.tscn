@@ -13,15 +13,19 @@ extends Node2D
 
 @export var sprite_texture : Texture2D
 
-@export var reap_name : String
-@export var reap_num : float
+@export var tile_name : String
+
+var tile_data
 
 func _ready():
+	tile_data = load(\"res://tile/data/\" + tile_name + \".tres\")
+			
 	sprite.texture = sprite_texture
 	animation_player.play(\"animation\")
 
 func _on_growing_timer_timeout():
-	player_data.price[reap_name] += reap_num
+	for resource in tile_data.manufacture:
+		player_data.price[resource] += tile_data.manufacture[resource]
 
 "
 

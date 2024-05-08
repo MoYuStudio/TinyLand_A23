@@ -8,6 +8,8 @@ script = ExtResource("1_k32c5")
 tile_id = 2002
 tile_texture = ExtResource("2_6bg1m")
 price = {}
-manufacture = {}
+manufacture = {
+"wheat": 0.1
+}
 building_level = 1
 building_built_on = []

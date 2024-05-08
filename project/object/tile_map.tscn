@@ -18,6 +18,7 @@ var land_layer = 0
 var building_layer = 1
 
 func _ready():
+	# 存档恢复
 	for data in player_data.map_data:
 		set_cell(data[0], data[1], data[2], data[3], data[4])
 	
@@ -38,6 +39,17 @@ func _process(delta):
 		preview.position = map_to_local(local_to_map(mouse_pos))
 		preview.texture = tile_to_build.tile_texture
 		preview.z_index = 1
+	
+	var mouse_pos = get_global_mouse_position()
+	mouse_pos.y -= 4
+	var land_pos = local_to_map(mouse_pos)
+	land_pos.y += 2
+	for id in tile_to_build.building_built_on:
+		if get_cell_source_id(land_layer, land_pos) == id:
+			preview.modulate = Color(0,1,0,0.3)
+			break
+		else:
+			preview.modulate = Color(1,0,0,0.3)
 
 func _unhandled_input(event):
 	preview.show()
@@ -47,13 +59,14 @@ func _unhandled_input(event):
 	land_pos.y += 2
 	var building_pos = local_to_map(mouse_pos)
 	if Input.is_action_pressed(\"build\"):
+		# Land层清除
 		if tile_to_build.tile_id == 0:
 			set_cell(land_layer, land_pos, -1, Vector2(0, 0), 0)
 			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
 			
 			player_data.map_data.append([land_layer, land_pos, -1, Vector2(0, 0), 0])
 			player_data.map_data.append([building_layer, building_pos, -1, Vector2(0, 0), 0])
-		
+		# Building层清除
 		elif tile_to_build.tile_id == 1000:
 			set_cell(building_layer, building_pos, -1, Vector2(0, 0), 0)
 			
@@ -73,15 +86,18 @@ func _unhandled_input(event):
 		# 建造Building层判定
 		elif tile_to_build.building_level == building_layer:
 			if get_cell_source_id(land_layer, land_pos) != -1:
-				if get_cell_source_id(building_layer, building_pos) == -1:
-					if pay(tile_to_build):
-						set_cell(building_layer, building_pos, 
-						tile_to_build.tile_id, Vector2(0, 0), 0)
-						
-						player_data.map_data.append([building_layer, building_pos,
-						tile_to_build.tile_id, Vector2(0, 0), 0])
+				for id in tile_to_build.building_built_on:
+					if get_cell_source_id(land_layer, land_pos) == id:
+						if get_cell_source_id(building_layer, building_pos) == -1:
+							if pay(tile_to_build):
+								set_cell(building_layer, building_pos, 
+								tile_to_build.tile_id, Vector2(0, 0), 0)
+								
+								player_data.map_data.append([building_layer, building_pos,
+								tile_to_build.tile_id, Vector2(0, 0), 0])
+							break
 				
-		
+# 支付建造成本
 func pay(tile_to_build):
 	for pay in tile_to_build.price:
 		if player_data.price[pay] >= tile_to_build.price[pay]:

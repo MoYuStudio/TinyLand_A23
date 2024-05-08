@@ -5,5 +5,4 @@
 
 [node name="Plant" instance=ExtResource("1_rw2re")]
 sprite_texture = ExtResource("2_nuhhc")
-reap_name = "wheat"
-reap_num = 0.1
+tile_name = "wheat_field"
