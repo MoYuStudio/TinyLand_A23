@@ -63,7 +63,6 @@ texture_filter = 1
 script = SubResource("GDScript_aqvtr")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-z_index = 1
 y_sort_enabled = true
 texture_filter = 1
 texture = ExtResource("1_sbveb")

@@ -11,4 +11,5 @@ price = {
 "dirt": 9
 }
 manufacture = {}
-can_build_on = [-1, 1]
+building_level = 0
+building_built_on = []

@@ -9,4 +9,5 @@ tile_id = 3001
 tile_texture = ExtResource("2_1mye7")
 price = {}
 manufacture = {}
-can_build_on = []
+building_level = 0
+building_built_on = []
