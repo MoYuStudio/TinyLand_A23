@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://4swngb3jh1xo"]
+[gd_scene load_steps=23 format=3 uid="uid://4swngb3jh1xo"]
 
 [ext_resource type="Texture2D" uid="uid://dxi6p1iisntbr" path="res://interface/star.png" id="1_kgrru"]
 [ext_resource type="PackedScene" uid="uid://wjmmg7ki3tv2" path="res://interface/mode_card.tscn" id="1_vcu30"]
@@ -73,6 +73,28 @@ corner_radius_bottom_left = 16
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ckq4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_elu3v"]
+
+[sub_resource type="GDScript" id="GDScript_2ecwj"]
+script/source = "
+extends Button
+
+var language_flag_list = [
+	preload(\"res://icon/country/zh.png\"),
+	preload(\"res://icon/country/ru.png\"),
+	preload(\"res://icon/country/en.png\")
+]
+
+var language_list = [\"zh\",\"ru\",\"en\"]
+var language_id = 0
+
+func _pressed():
+	if language_id < len(language_list)-1:
+		language_id += 1
+	else:
+		language_id = 0
+	TranslationServer.set_locale(language_list[language_id])
+	icon = language_flag_list[language_id]
+"
 
 [node name="MenuMode" type="Node2D"]
 script = SubResource("GDScript_u8dgj")
@@ -248,7 +270,7 @@ theme = ExtResource("2_7bai4")
 placeholder_text = "地图种子"
 alignment = 1
 
-[node name="Button4" type="Button" parent="CanvasLayer"]
+[node name="LanguageButton" type="Button" parent="CanvasLayer"]
 texture_filter = 1
 offset_left = 64.0
 offset_top = 64.0
@@ -263,6 +285,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_2ckq4")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_elu3v")
 icon = ExtResource("7_r2m61")
 flat = true
+script = SubResource("GDScript_2ecwj")
 
 [node name="Button5" type="Button" parent="CanvasLayer"]
 offset_left = 1153.0

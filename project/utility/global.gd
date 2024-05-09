@@ -10,7 +10,13 @@ func _ready():
 	# DisplayServer.window_set_position(Vector2(100,200))
 	
 	# zh en ru
-	TranslationServer.set_locale("zh")
+	# TranslationServer.set_locale("zh")
+	if OS.get_locale_language() != "zh" and \
+		OS.get_locale_language() != "en" and \
+		OS.get_locale_language() != "ru":
+		TranslationServer.set_locale("zh")
+	else:
+		TranslationServer.set_locale(OS.get_locale_language())
 	
 func save_pack(path):
 	var pack = load(path)
