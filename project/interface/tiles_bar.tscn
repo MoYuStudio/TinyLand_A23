@@ -26,7 +26,7 @@ var tab_data = {
 	# 奇观
 	\"<wonder>\":[\"natural_wonder\",],
 	# 装饰
-	\"<decoration>\":[],
+	\"<decoration>\":[\"aircraft_carrier_decoration\"],
 }
 
 func _ready():

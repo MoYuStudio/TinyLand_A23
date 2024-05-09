@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="MoYuTileData" load_steps=3 format=3 uid="uid://bw3bx1khqj6vy"]
+
+[ext_resource type="Script" path="res://utility/tile_data.gd" id="1_1aa7y"]
+[ext_resource type="Texture2D" uid="uid://df5gos6ixiu2d" path="res://tile/png/aircraft_carrier_decoration.png" id="2_wrmhd"]
+
+[resource]
+script = ExtResource("1_1aa7y")
+tile_id = 7001
+tile_texture = ExtResource("2_wrmhd")
+price = {}
+manufacture = {}
+building_level = 1
+building_built_on = [1, 2]
