@@ -44,6 +44,9 @@ func _process(delta):
 		preview.position = map_to_local(local_to_map(mouse_pos))
 		preview.texture = tile_to_build.tile_texture
 		preview.z_index = 1
+		
+	if Input.is_action_just_pressed(\"uncheck\"):
+		RuningData.choose_tile_name = \"null\"
 	
 	# 预览图标 可否建造红绿指示 判定
 	if len(tile_to_build.building_built_on) > 0:

@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="MoYuTileData" load_steps=3 format=3 uid="uid://cjn6kub21e8mp"]
 
 [ext_resource type="Script" path="res://utility/tile_data.gd" id="1_q72qs"]
-[ext_resource type="Texture2D" uid="uid://c16yiulcboja4" path="res://tile/png/255.png" id="2_iwyxs"]
+[ext_resource type="Texture2D" uid="uid://d2kdpiwjrunpr" path="res://tile/png/air.png" id="2_mttdf"]
 
 [resource]
 script = ExtResource("1_q72qs")
 tile_id = 0
-tile_texture = ExtResource("2_iwyxs")
+tile_texture = ExtResource("2_mttdf")
 price = {}
 manufacture = {}
 building_level = 0

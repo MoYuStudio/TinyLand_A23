@@ -1,4 +1,4 @@
 
 extends Node
 
-var choose_tile_name : String = "air"
+var choose_tile_name : String = "null"
