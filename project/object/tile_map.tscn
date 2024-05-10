@@ -23,8 +23,10 @@ var building_layer = 1
 
 var mouse_pos = get_global_mouse_position()
 
-var yield_tile_list = [\"berry_bush\" # 浆果
-						,\"wheat_field\" # 小麦
+var yield_tile_list = [\"berry_bush\" # 浆果丛
+						,\"wheat_field\" # 小麦田
+						
+						,\"dirt_capture_net\" # 土制捕获网
 						]
 
 func _ready():
@@ -32,7 +34,7 @@ func _ready():
 	for data in player_data.map_data:
 		set_cell(data[0], data[1], data[2], data[3], data[4])
 	
-func _process(delta):
+func _process(_delta):
 	mouse_pos = get_global_mouse_position()
 	mouse_pos.y -= 4
 	var land_pos = local_to_map(mouse_pos)
@@ -48,7 +50,7 @@ func _process(delta):
 	elif tile_to_build.building_level == building_layer:
 		preview.position = map_to_local(local_to_map(mouse_pos))
 		preview.texture = tile_to_build.tile_texture
-		preview.z_index = 1
+		preview.z_index = 2
 		
 	if Input.is_action_just_pressed(\"uncheck\"):
 		RuningData.choose_tile_name = \"null\"
@@ -56,7 +58,8 @@ func _process(delta):
 	# 预览图标 可否建造红绿指示 判定
 	if len(tile_to_build.building_built_on) > 0:
 		for id in tile_to_build.building_built_on:
-			if get_cell_source_id(land_layer, land_pos) == id:
+			if get_cell_source_id(land_layer, land_pos) == id and \\
+				get_cell_source_id(building_layer, land_pos) == -1:
 				preview.modulate = Color(0,1,0,0.3)
 				break
 			else:
@@ -64,7 +67,7 @@ func _process(delta):
 	else:
 		preview.modulate = Color(1,1,1,0.6)
 
-func _unhandled_input(event):
+func _unhandled_input(_event):
 	preview.show()
 	mouse_pos = get_global_mouse_position()
 	mouse_pos.y -= 4

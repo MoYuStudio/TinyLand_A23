@@ -253,7 +253,7 @@ offset_bottom = 136.0
 theme = ExtResource("2_7bai4")
 text = "返回开始界面"
 
-[node name="Button2" type="Button" parent="CanvasLayer"]
+[node name="SettingButton" type="Button" parent="CanvasLayer"]
 offset_left = 857.0
 offset_top = 569.0
 offset_right = 1097.0
@@ -262,10 +262,10 @@ theme = ExtResource("2_7bai4")
 text = "设置"
 
 [node name="Button3" type="LineEdit" parent="CanvasLayer"]
-offset_left = 173.0
-offset_top = 583.0
-offset_right = 405.0
-offset_bottom = 623.0
+offset_left = 438.0
+offset_top = 596.0
+offset_right = 670.0
+offset_bottom = 636.0
 theme = ExtResource("2_7bai4")
 placeholder_text = "地图种子"
 alignment = 1
@@ -286,6 +286,22 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_elu3v")
 icon = ExtResource("7_r2m61")
 flat = true
 script = SubResource("GDScript_2ecwj")
+
+[node name="Label" type="Label" parent="CanvasLayer/LanguageButton"]
+layout_mode = 0
+offset_left = 106.0
+offset_top = 4.0
+offset_right = 320.0
+offset_bottom = 61.0
+text = "测试文字"
+
+[node name="Label2" type="Label" parent="CanvasLayer/LanguageButton"]
+layout_mode = 0
+offset_left = 253.0
+offset_top = 4.0
+offset_right = 432.0
+offset_bottom = 46.0
+text = "<tinyland>"
 
 [node name="Button5" type="Button" parent="CanvasLayer"]
 offset_left = 1153.0

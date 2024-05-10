@@ -5,4 +5,3 @@
 
 [node name="Plant" instance=ExtResource("1_2gmnr")]
 sprite_texture = ExtResource("2_6cayf")
-tile_name = "berry_bush"

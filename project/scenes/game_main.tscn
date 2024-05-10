@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4i274kh3fecs"]
+[gd_scene load_steps=18 format=3 uid="uid://c4i274kh3fecs"]
 
 [ext_resource type="Theme" uid="uid://b1f5fso0ajmoi" path="res://interface/theme.tres" id="2_u15gb"]
 [ext_resource type="PackedScene" uid="uid://bcm0so3k83m3a" path="res://object/sub_viewport.tscn" id="3_g4y6i"]
@@ -58,6 +58,16 @@ func _pressed():
 	Global.save_pack(\"res://data/player_data.tres\")
 "
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uk4oj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5h1wm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dxrjt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_imedr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3fp4j"]
+
 [sub_resource type="GDScript" id="GDScript_g14l6"]
 script/source = "
 extends Button
@@ -99,7 +109,6 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer" instance=ExtResource("3_g4y6i")]
-size = Vector2i(2, 2)
 
 [node name="TilesBar" parent="CanvasLayer/HSplitContainer/Control" instance=ExtResource("12_ewp7h")]
 texture_filter = 1
@@ -110,8 +119,8 @@ offset_bottom = -1.0
 
 [node name="BuildingCleaner" type="MarginContainer" parent="CanvasLayer/HSplitContainer/Control"]
 layout_mode = 1
-offset_right = 217.0
-offset_bottom = 164.0
+offset_right = 96.0
+offset_bottom = 169.0
 mouse_filter = 0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
@@ -125,7 +134,6 @@ theme_override_constants/separation = 9
 [node name="Tile" parent="CanvasLayer/HSplitContainer/Control/BuildingCleaner/VBoxContainer" instance=ExtResource("13_si5w3")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Building Cleaner"
 alignment = 2
 tile_name = "building_air"
 tile_texture = ExtResource("6_cpxek")
@@ -133,17 +141,20 @@ tile_texture = ExtResource("6_cpxek")
 [node name="Tile2" parent="CanvasLayer/HSplitContainer/Control/BuildingCleaner/VBoxContainer" instance=ExtResource("13_si5w3")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Ground Cleaner"
 alignment = 2
 tile_name = "air"
 tile_texture = ExtResource("7_bfv6n")
 
 [node name="Button" type="Button" parent="CanvasLayer"]
 texture_filter = 1
-offset_left = 1223.0
-offset_top = 58.0
-offset_right = 1259.0
-offset_bottom = 94.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 70.0
+offset_right = -24.0
+offset_bottom = 106.0
+grow_horizontal = 0
 theme = ExtResource("2_u15gb")
 theme_override_font_sizes/font_size = 16
 icon = ExtResource("7_be41r")
@@ -154,11 +165,20 @@ script = SubResource("GDScript_snj8j")
 
 [node name="Button2" type="Button" parent="CanvasLayer"]
 texture_filter = 1
-offset_left = 1204.0
-offset_top = 16.0
-offset_right = 1261.0
-offset_bottom = 49.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -75.0
+offset_top = 21.0
+offset_right = -18.0
+offset_bottom = 54.0
+grow_horizontal = 0
 theme = ExtResource("2_u15gb")
 theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_uk4oj")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5h1wm")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_dxrjt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_imedr")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3fp4j")
 text = "主菜单"
 script = SubResource("GDScript_g14l6")

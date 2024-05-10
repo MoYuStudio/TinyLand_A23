@@ -9,28 +9,17 @@ extends Node2D
 @onready var sprite = $Sprite
 @onready var animation_player = $AnimationPlayer
 
-@export var player_data : MoYuPlayerData = preload(\"res://data/player_data.tres\")
-
 @export var sprite_texture : Texture2D
 
-@export var tile_name : String
-
-var tile_data
-
 func _ready():
-	tile_data = load(\"res://tile/data/\" + tile_name + \".tres\")
-			
 	sprite.texture = sprite_texture
 	animation_player.play(\"animation\")
 
 func _on_growing_timer_timeout():
-	if sprite.frame < sprite.hframes:
-		sprite.frame += 1
-	else:
+	if sprite.frame >= sprite.hframes-1:
 		sprite.frame = 0
-	pass
-	#for resource in tile_data.manufacture:
-	#	player_data.price[resource] += tile_data.manufacture[resource]
+	else:
+		sprite.frame += 1
 
 "
 

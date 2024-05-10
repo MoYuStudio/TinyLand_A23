@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cida5jg5b83bl"]
 
-[ext_resource type="Texture2D" uid="uid://dinygts854qui" path="res://tile/png/dirt_capture_net.png" id="1_sbveb"]
+[ext_resource type="Texture2D" uid="uid://d2byi7aemp051" path="res://tile/png/dirt_capture_net_animation.png" id="1_873en"]
 [ext_resource type="Texture2D" uid="uid://c0opaixgch2oc" path="res://interface/light.png" id="2_g5wph"]
 
 [sub_resource type="GDScript" id="GDScript_aqvtr"]
@@ -12,16 +12,17 @@ extends Node2D
 
 @export var player_data : MoYuPlayerData = preload(\"res://data/player_data.tres\")
 
-@export var price = 10
 @export var sprite_texture : Texture2D
-
-@export var reap = 0.6
 
 func _ready():
 	animation_player.play(\"animation\")
 
 func _on_growing_timer_timeout():
-	player_data.price[\"wood\"] += reap
+	if sprite.frame >= sprite.hframes-1:
+		sprite.frame = 0
+	else:
+		sprite.frame += 1
+		
 
 "
 
@@ -65,7 +66,8 @@ script = SubResource("GDScript_aqvtr")
 [node name="Sprite" type="Sprite2D" parent="."]
 y_sort_enabled = true
 texture_filter = 1
-texture = ExtResource("1_sbveb")
+texture = ExtResource("1_873en")
+hframes = 6
 
 [node name="GrowingTimer" type="Timer" parent="."]
 autostart = true
@@ -77,7 +79,7 @@ libraries = {
 
 [node name="PointLight" type="PointLight2D" parent="."]
 position = Vector2(0, -6)
-energy = 0.25
+energy = 0.1
 texture = ExtResource("2_g5wph")
 
 [connection signal="timeout" from="GrowingTimer" to="." method="_on_growing_timer_timeout"]
