@@ -24,6 +24,7 @@ Global="*res://utility/global.gd"
 GlobalSteam="*res://utility/steam.gd"
 RuningData="*res://utility/runing_data.gd"
 SceneTransition="*res://utility/scene_transition.tscn"
+MusicPlayer="*res://utility/music_player.tscn"
 
 [display]
 

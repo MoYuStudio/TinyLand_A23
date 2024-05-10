@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://lmcecpxdp633"]
+
+[ext_resource type="AudioStream" uid="uid://cga7jqiiyvt88" path="res://music/[AI] Pixelated Echoes.mp3" id="1_bwylk"]
+
+[node name="Music" type="Node"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_bwylk")
+bus = &"BGM"

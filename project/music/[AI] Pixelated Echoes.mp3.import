@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cga7jqiiyvt88"
+path="res://.godot/imported/[AI] Pixelated Echoes.mp3-d5f6c3b238f82a54f052da23b889618f.mp3str"
+
+[deps]
+
+source_file="res://music/[AI] Pixelated Echoes.mp3"
+dest_files=["res://.godot/imported/[AI] Pixelated Echoes.mp3-d5f6c3b238f82a54f052da23b889618f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

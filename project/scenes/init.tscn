@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8ab4x0xjqnhi"]
+[gd_scene load_steps=11 format=3 uid="uid://b8ab4x0xjqnhi"]
 
 [ext_resource type="Texture2D" uid="uid://cun4yqiofjfg8" path="res://icon/logo.png" id="1_sl5b1"]
+[ext_resource type="AudioStream" uid="uid://dm760qmrka1sw" path="res://sound/Arpent.mp3" id="2_tp0c4"]
 
 [sub_resource type="GDScript" id="GDScript_6o0tv"]
 script/source = "
@@ -10,7 +11,8 @@ func _ready():
 	# $Audio/AnimationPlayer.play('init')
 	$Logo/AnimationPlayer.play('init')
 	$Mask/AnimationPlayer.play('init')
-	await $Mask/AnimationPlayer.animation_finished
+	$Audio/AnimationPlayer.play('init')
+	await $Audio/AnimationPlayer.animation_finished
 	# get_tree().change_scene_to_file('res://source/scene/menu_main.tscn')
 	SceneTransition.change_scene('black','res://scenes/menu_main.tscn')
 	
@@ -82,6 +84,27 @@ _data = {
 "init": SubResource("Animation_8b5b2")
 }
 
+[sub_resource type="Animation" id="Animation_aku7i"]
+resource_name = "init"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-5.0, -5.0, -80.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0pwm8"]
+_data = {
+"init": SubResource("Animation_aku7i")
+}
+
 [node name="Init" type="Node2D"]
 script = SubResource("GDScript_6o0tv")
 
@@ -98,7 +121,6 @@ libraries = {
 }
 
 [node name="Mask" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
 offset_left = -10189.0
 offset_top = -5237.0
 offset_right = 13970.0
@@ -111,5 +133,11 @@ libraries = {
 }
 
 [node name="Audio" type="AudioStreamPlayer" parent="."]
-volume_db = 6.4
+stream = ExtResource("2_tp0c4")
 autoplay = true
+bus = &"VFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Audio"]
+libraries = {
+"": SubResource("AnimationLibrary_0pwm8")
+}
