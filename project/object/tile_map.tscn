@@ -13,6 +13,8 @@ extends TileMap
 @onready var preview = $PreView
 @onready var building_effect = $BuildingEffect
 
+@onready var tileset = preload(\"res://tile/tile_set.tres\")
+
 var tile_to_build
 
 # Layers IDs
@@ -21,13 +23,16 @@ var building_layer = 1
 
 var mouse_pos = get_global_mouse_position()
 
+var yield_tile_list = [\"berry_bush\" # 浆果
+						,\"wheat_field\" # 小麦
+						]
+
 func _ready():
 	# 存档恢复
 	for data in player_data.map_data:
 		set_cell(data[0], data[1], data[2], data[3], data[4])
 	
 func _process(delta):
-	
 	mouse_pos = get_global_mouse_position()
 	mouse_pos.y -= 4
 	var land_pos = local_to_map(mouse_pos)
@@ -129,6 +134,14 @@ func get_surrounding_tiles(current_tile):
 			surrounding_tiles.append(target_tile)
 	return surrounding_tiles
 
+# 地图生产更新 1s
+func _on_yield_timer_timeout():
+	for tile_name in yield_tile_list:
+		var tile_data = load(\"res://tile/data/\"+tile_name+\".tres\")
+		var built_num = len(get_used_cells_by_id(tile_data.building_level,tile_data.tile_id))
+		for resource in tile_data.manufacture:
+			player_data.price[resource] += built_num * tile_data.manufacture[resource]
+	
 "
 
 [node name="TileMap" type="TileMap"]
@@ -141,7 +154,7 @@ layer_0/y_sort_enabled = true
 layer_0/tile_data = PackedInt32Array(65535, 1, 0, 131070, 1, 0, -1, 1, 0, 0, 1, 0, 65536, 1, 0, 131071, 1, 0, 131072, 1, 0, 196607, 1, 0, 262143, 1, 0)
 layer_1/name = "Building"
 layer_1/y_sort_enabled = true
-layer_1/z_index = 1
+layer_1/z_index = 2
 layer_1/tile_data = PackedInt32Array()
 script = SubResource("GDScript_i2d70")
 
@@ -153,3 +166,8 @@ texture_filter = 1
 texture = ExtResource("2_er7pl")
 
 [node name="BuildingEffect" parent="." instance=ExtResource("3_86wo8")]
+
+[node name="YieldTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="YieldTimer" to="." method="_on_yield_timer_timeout"]

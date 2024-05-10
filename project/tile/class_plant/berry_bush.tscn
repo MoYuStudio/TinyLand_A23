@@ -1,8 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://bybu8kuglchdk"]
 
 [ext_resource type="PackedScene" uid="uid://b4vqoso35s6ir" path="res://tile/class/plant.tscn" id="1_2gmnr"]
-[ext_resource type="Texture2D" uid="uid://b54grhc7lb1dv" path="res://tile/png/berry_bush.png" id="2_kf1bm"]
+[ext_resource type="Texture2D" uid="uid://28vamhysdsb6" path="res://tile/png/berry_bush_animation.png" id="2_6cayf"]
 
 [node name="Plant" instance=ExtResource("1_2gmnr")]
-sprite_texture = ExtResource("2_kf1bm")
+sprite_texture = ExtResource("2_6cayf")
 tile_name = "berry_bush"

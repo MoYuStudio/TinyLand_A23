@@ -13,7 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://df5gos6ixiu2d" path="res://tile/png/aircraft_carrier_decoration.png" id="11_lm2xw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nn43b"]
+resource_name = "air"
 texture = ExtResource("1_x8gxj")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rw2b5"]
 texture = ExtResource("2_humnf")
@@ -30,7 +34,7 @@ texture = ExtResource("3_j57iq")
 0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:1/0/physics_layer_0/angular_velocity = 0.0
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_4dmvm"]
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_1hwht"]
 scenes/0/scene = ExtResource("4_p3lb6")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_hjayu"]
@@ -75,9 +79,6 @@ texture = ExtResource("11_lm2xw")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
-0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
 
 [resource]
 tile_shape = 1
@@ -89,8 +90,8 @@ sources/2 = SubResource("TileSetAtlasSource_nv0ff")
 sources/5 = SubResource("TileSetAtlasSource_op77s")
 sources/7 = SubResource("TileSetAtlasSource_05rjl")
 sources/6 = SubResource("TileSetAtlasSource_yb83x")
-sources/2001 = SubResource("TileSetScenesCollectionSource_4dmvm")
 sources/2002 = SubResource("TileSetScenesCollectionSource_hjayu")
 sources/6001 = SubResource("TileSetScenesCollectionSource_kg6fq")
 sources/3001 = SubResource("TileSetScenesCollectionSource_ifbvy")
 sources/7001 = SubResource("TileSetAtlasSource_3y8b6")
+sources/2001 = SubResource("TileSetScenesCollectionSource_1hwht")

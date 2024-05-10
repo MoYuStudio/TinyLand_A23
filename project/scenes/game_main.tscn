@@ -99,6 +99,7 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" parent="CanvasLayer/HSplitContainer/Control/SubViewportContainer" instance=ExtResource("3_g4y6i")]
+size = Vector2i(2, 2)
 
 [node name="TilesBar" parent="CanvasLayer/HSplitContainer/Control" instance=ExtResource("12_ewp7h")]
 texture_filter = 1
